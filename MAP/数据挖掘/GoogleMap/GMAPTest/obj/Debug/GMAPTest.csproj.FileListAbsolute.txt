@@ -15,3 +15,14 @@ D:\MapGIS\MAP\数据挖掘\GoogleMap\GMAPTest\obj\Debug\GMAPTest.pdb
 D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\GMAPTest.exe.config
 D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\obj\Debug\GMAPTest.exe
 D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\obj\Debug\GMAPTest.pdb
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\GMAPTest.exe
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\GMAPTest.pdb
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\BSE.Windows.Forms.dll
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\GMap.NET.Core.dll
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\GMap.NET.WindowsForms.dll
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\GMap.NET.Core.xml
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\GMap.NET.WindowsForms.xml
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\obj\Debug\GMAPTest.csprojResolveAssemblyReference.cache
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\obj\Debug\GMAPTest.Form1.resources
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\obj\Debug\GMAPTest.Properties.Resources.resources
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\obj\Debug\GMAPTest.csproj.GenerateResource.Cache
