@@ -1,0 +1,14 @@
+D:\MapGIS\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\GMAPTest.exe.config
+D:\MapGIS\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\GMAPTest.exe
+D:\MapGIS\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\GMAPTest.pdb
+D:\MapGIS\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\BSE.Windows.Forms.dll
+D:\MapGIS\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\GMap.NET.Core.dll
+D:\MapGIS\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\GMap.NET.WindowsForms.dll
+D:\MapGIS\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\GMap.NET.Core.xml
+D:\MapGIS\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\GMap.NET.WindowsForms.xml
+D:\MapGIS\MAP\数据挖掘\GoogleMap\GMAPTest\obj\Debug\GMAPTest.csprojResolveAssemblyReference.cache
+D:\MapGIS\MAP\数据挖掘\GoogleMap\GMAPTest\obj\Debug\GMAPTest.Form1.resources
+D:\MapGIS\MAP\数据挖掘\GoogleMap\GMAPTest\obj\Debug\GMAPTest.Properties.Resources.resources
+D:\MapGIS\MAP\数据挖掘\GoogleMap\GMAPTest\obj\Debug\GMAPTest.csproj.GenerateResource.Cache
+D:\MapGIS\MAP\数据挖掘\GoogleMap\GMAPTest\obj\Debug\GMAPTest.exe
+D:\MapGIS\MAP\数据挖掘\GoogleMap\GMAPTest\obj\Debug\GMAPTest.pdb
