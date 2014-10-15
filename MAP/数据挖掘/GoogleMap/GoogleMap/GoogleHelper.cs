@@ -25,7 +25,7 @@ namespace GoogleMap
                 2.388657133, 1.194328567, 0.597164283};
 
             var schema = new TileSchema();//瓦片框架
-            schema.Name = "OpenStreetMap";
+            schema.Name = "GoogleMap";
             for (int i = 0; i < resolutions.Length; i++)
             {
                 var res = resolutions[i];
@@ -45,13 +45,14 @@ namespace GoogleMap
 
         public static TileLayer AddLayer()
         {
-            //BruTile.Web.BingRequest request = new BingRequest();
-            //WebTileProvider provider = new WebTileProvider(request);
-            ////var tiles = provider.GetTile(new TileInfo() { Extent = new Extent(100, 30, 102, 31), Index = new TileIndex(1, 2, 5) });
+            BruTile.Web.ArcGisTileRequest request = new ArcGisTileRequest();
+            BruTile.Web.BingRequest request = new BingRequest();
+            WebTileProvider provider = new WebTileProvider(request);
+            //var tiles = provider.GetTile(new TileInfo() { Extent = new Extent(100, 30, 102, 31), Index = new TileIndex(1, 2, 5) });
 
-            //ITileSource tileSource = new TileSource(provider, CreateTileSchema());
-            //SharpMap.Layers.TileLayer layer = new SharpMap.Layers.TileLayer(tileSource, "OSM");
-            //return layer;
+            ITileSource tileSource = new TileSource(provider, CreateTileSchema());
+            SharpMap.Layers.TileLayer layer = new SharpMap.Layers.TileLayer(tileSource, "OSM");
+            return layer;
         }
     }
 }
