@@ -32,8 +32,8 @@
             this.gMapControl1 = new GMap.NET.WindowsForms.GMapControl();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lb_Londis = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lb_Lon = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lb_Lat = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
@@ -63,6 +63,7 @@
             this.gMapControl1.Size = new System.Drawing.Size(573, 367);
             this.gMapControl1.TabIndex = 0;
             this.gMapControl1.Zoom = 0D;
+            this.gMapControl1.Click += new System.EventHandler(this.gMapControl1_Click);
             this.gMapControl1.DoubleClick += new System.EventHandler(this.gMapControl1_DoubleClick);
             this.gMapControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl1_MouseClick);
             this.gMapControl1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gMapControl1_MouseMove);
@@ -86,16 +87,16 @@
             this.lb_Londis.Size = new System.Drawing.Size(32, 17);
             this.lb_Londis.Text = "经度";
             // 
+            // lb_Lon
+            // 
+            this.lb_Lon.Name = "lb_Lon";
+            this.lb_Lon.Size = new System.Drawing.Size(0, 17);
+            // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(32, 17);
             this.toolStripStatusLabel1.Text = "维度";
-            // 
-            // lb_Lon
-            // 
-            this.lb_Lon.Name = "lb_Lon";
-            this.lb_Lon.Size = new System.Drawing.Size(0, 17);
             // 
             // lb_Lat
             // 

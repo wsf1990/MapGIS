@@ -12,12 +12,33 @@ using GMap.NET.WindowsForms.Markers;
 
 namespace GMAPTest
 {
-    public class GMAPHelper
+    /// <summary>
+    /// GMap帮助类
+    /// </summary>
+    public class GMapHelper
     {
-        public static void InitMapBox(GMapControl control, GMapProvider provider)
+        /// <summary>
+        /// 第一层用于显示标记
+        /// </summary>
+        GMapOverlay Top_Marker;
+        /// <summary>
+        /// 显示控件
+        /// </summary>
+        GMapControl Control;
+
+        public GMapHelper(GMapControl con)
         {
-            control.BackColor = Color.CadetBlue;
-            control.Position = new PointLatLng(30.981178, 105.351914);
+            this.Control = con;
+        }
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <param name="control"></param>
+        /// <param name="provider"></param>
+        public void InitMapBox(GMapProvider provider)
+        {
+            Control.BackColor = Color.CadetBlue;
+            Control.Position = new PointLatLng(30.981178, 105.351914);
 
             //gMapControl1.MapProvider.Area = new RectLatLng(30.981178, 105.351914, 2.765142, 4.120995);
             //gMapControl1.BoundsOfMap = new RectLatLng(30.981178, 105.351914, 2.765142, 4.120995);
@@ -26,24 +47,34 @@ namespace GMAPTest
 
             //gMapControl1.MapProvider = GMap.NET.MapProviders.BingMapProvider.Instance;
             //control.MapProvider = GMapProviders.GoogleChinaMap;
-            control.MapProvider = provider;
-            control.DragButton = MouseButtons.Left;
+            Control.MapProvider = provider;
+            Control.DragButton = MouseButtons.Left;
 
-            control.MinZoom = 1;
-            control.MaxZoom = 24;
-            control.Zoom = 13;
+            Control.MinZoom = 1;
+            Control.MaxZoom = 24;
+            Control.Zoom = 13;
 
-            var routes = new GMapOverlay(control, "routes");
-            control.Overlays.Add(routes);
+            //var routes = new GMapOverlay(control, "routes");
+            //control.Overlays.Add(routes);
 
             //添加标记
-            var top = new GMapOverlay(control, "top");
-            control.Overlays.Add(top);
-            var currentMarker = new GMapMarkerGoogleRed(control.Position);
-            top.Markers.Add(currentMarker);
-            var center = new GMapMarkerCross(control.Position);
-            top.Markers.Add(center);
+            Top_Marker = new GMapOverlay(Control, "top");
+            Control.Overlays.Add(Top_Marker);
+           
 
+        }
+        /// <summary>
+        /// 添加标记
+        /// </summary>
+        /// <returns></returns>
+        public GMapMarker AddMarker(PointLatLng markerPosition)
+        {
+            Top_Marker.Markers.Clear();
+            var currentMarker = new GMapMarkerGoogleRed(markerPosition);//Google红点
+            Top_Marker.Markers.Add(currentMarker);
+            var center = new GMapMarkerCross(markerPosition);//十字叉丝
+            Top_Marker.Markers.Add(center);
+            return currentMarker;
         }
     }
 }

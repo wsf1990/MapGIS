@@ -15,6 +15,9 @@ namespace GMAPTest
 {
     public partial class Form1 : Form
     {
+        GMapHelper helper;
+
+        GMapMarker marker;
         public Form1()
         {
             InitializeComponent();
@@ -22,12 +25,16 @@ namespace GMAPTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            GMAPHelper.InitMapBox(gMapControl1, GMapProviders.GoogleTerrainMap);//GMapProviders.GoogleTerrainMap);
+            helper = new GMapHelper(gMapControl1);
+            helper.InitMapBox(GMapProviders.GoogleTerrainMap);//GMapProviders.GoogleTerrainMap);
         }
 
         private void gMapControl1_MouseClick(object sender, MouseEventArgs e)
         {
-            
+            if (e.Clicks == 2)
+                return;
+            if (e.Clicks == 1 && e.Button == System.Windows.Forms.MouseButtons.Left)
+                helper.AddMarker(gMapControl1.FromLocalToLatLng(e.X, e.Y));
         }
 
         private void gMapControl1_MouseMove(object sender, MouseEventArgs e)
@@ -48,6 +55,11 @@ namespace GMAPTest
         {
             using (var image = gMapControl1.ToImage())
                 image.Save("jt.png");
+        }
+
+        private void gMapControl1_Click(object sender, EventArgs e)
+        {
+            int a = 1;
         }
     }
 }
