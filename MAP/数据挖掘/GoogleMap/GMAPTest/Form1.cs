@@ -17,7 +17,10 @@ namespace GMAPTest
     {
         GMapHelper helper;
 
-        GMapMarker marker;
+        PointLatLng startPos = new PointLatLng(0, 0);
+        PointLatLng endPos = new PointLatLng(0, 0);
+
+        bool isDrawLine = false;
         public Form1()
         {
             InitializeComponent();
@@ -26,12 +29,21 @@ namespace GMAPTest
         private void Form1_Load(object sender, EventArgs e)
         {
             helper = new GMapHelper(gMapControl1);
-            helper.InitMapBox(GMapProviders.GoogleTerrainMap);//GMapProviders.GoogleTerrainMap);
+            helper.InitMapBox(BaiduMapProvider.Instance);//GMapProviders.GoogleTerrainMap);
             
         }
 
         private void gMapControl1_MouseClick(object sender, MouseEventArgs e)
         {
+            if (isDrawLine && startPos == new PointLatLng(0, 0))
+                startPos = gMapControl1.FromLocalToLatLng(e.X, e.Y);
+            else if (startPos != new PointLatLng(0, 0))
+            {
+                endPos = gMapControl1.FromLocalToLatLng(e.X, e.Y);
+                helper.DrawLine(startPos, endPos);
+                startPos = new PointLatLng(0, 0);
+                endPos = new PointLatLng(0, 0);
+            }
             if (e.Clicks == 2)
                 return;
             if (e.Clicks == 1 && e.Button == System.Windows.Forms.MouseButtons.Left)
@@ -44,6 +56,7 @@ namespace GMAPTest
             var latlon = gMapControl1.FromLocalToLatLng(e.X, e.Y);
             lb_Lon.Text = latlon.Lng.ToString();
             lb_Lat.Text = latlon.Lat.ToString();
+            
         }
 
         private void gMapControl1_DoubleClick(object sender, EventArgs e)
@@ -61,6 +74,20 @@ namespace GMAPTest
         private void gMapControl1_Click(object sender, EventArgs e)
         {
             int a = 1;
+        }
+
+        private void btn_DrawLine_Click(object sender, EventArgs e)
+        {
+            isDrawLine = !isDrawLine;
+        }
+
+        private void txt_Address_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                var list = helper.SearchAddress(txt_City.Text, txt_Address.Text);
+                
+            }
         }
     }
 }
