@@ -28,7 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.gMapControl1 = new GMap.NET.WindowsForms.GMapControl();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lb_Londis = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lb_Lon = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lb_Lat = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.btn_SaveImage = new System.Windows.Forms.ToolStripButton();
+            this.statusStrip1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // gMapControl1
@@ -52,23 +63,106 @@
             this.gMapControl1.Size = new System.Drawing.Size(573, 367);
             this.gMapControl1.TabIndex = 0;
             this.gMapControl1.Zoom = 0D;
+            this.gMapControl1.DoubleClick += new System.EventHandler(this.gMapControl1_DoubleClick);
+            this.gMapControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl1_MouseClick);
+            this.gMapControl1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gMapControl1_MouseMove);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lb_Londis,
+            this.lb_Lon,
+            this.toolStripStatusLabel1,
+            this.lb_Lat});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 345);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(573, 22);
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // lb_Londis
+            // 
+            this.lb_Londis.Name = "lb_Londis";
+            this.lb_Londis.Size = new System.Drawing.Size(32, 17);
+            this.lb_Londis.Text = "经度";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(32, 17);
+            this.toolStripStatusLabel1.Text = "维度";
+            // 
+            // lb_Lon
+            // 
+            this.lb_Lon.Name = "lb_Lon";
+            this.lb_Lon.Size = new System.Drawing.Size(0, 17);
+            // 
+            // lb_Lat
+            // 
+            this.lb_Lat.Name = "lb_Lat";
+            this.lb_Lat.Size = new System.Drawing.Size(0, 17);
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1,
+            this.btn_SaveImage});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(573, 25);
+            this.toolStrip1.TabIndex = 2;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton1.Text = "toolStripButton1";
+            // 
+            // btn_SaveImage
+            // 
+            this.btn_SaveImage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_SaveImage.Image = ((System.Drawing.Image)(resources.GetObject("btn_SaveImage.Image")));
+            this.btn_SaveImage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_SaveImage.Name = "btn_SaveImage";
+            this.btn_SaveImage.Size = new System.Drawing.Size(23, 22);
+            this.btn_SaveImage.Text = "截图";
+            this.btn_SaveImage.Click += new System.EventHandler(this.btn_SaveImage_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(573, 367);
+            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.gMapControl1);
             this.Name = "Form1";
             this.Text = "GIS - 魏守峰 - 2.0";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private GMap.NET.WindowsForms.GMapControl gMapControl1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel lb_Londis;
+        private System.Windows.Forms.ToolStripStatusLabel lb_Lon;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel lb_Lat;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton btn_SaveImage;
     }
 }
 

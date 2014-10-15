@@ -36,7 +36,6 @@ namespace GMAPTest
 
         string MakeTileImageUrl(GPoint pos, int zoom, string language)
         {
-            //zoom = 13;
             zoom = zoom - 1;
             var offsetX = Math.Pow(2, zoom);
             var offsetY = offsetX - 1;
@@ -45,7 +44,7 @@ namespace GMAPTest
             var numY = -pos.Y + offsetY;
 
             zoom = zoom + 1;
-            var num = (pos.X + pos.Y) % 8 + 1;
+            var num = (pos.X + pos.Y) % 4 + 1;
             var x = numX.ToString().Replace("-", "M");
             var y = numY.ToString().Replace("-", "M");
 

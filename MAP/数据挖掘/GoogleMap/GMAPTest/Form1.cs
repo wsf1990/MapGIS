@@ -22,21 +22,32 @@ namespace GMAPTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            gMapControl1.BackColor = Color.CadetBlue;
-            gMapControl1.Position = new PointLatLng(30.981178, 105.351914);
+            GMAPHelper.InitMapBox(gMapControl1, GMapProviders.GoogleTerrainMap);//GMapProviders.GoogleTerrainMap);
+        }
 
-            //gMapControl1.MapProvider.Area = new RectLatLng(30.981178, 105.351914, 2.765142, 4.120995);
-            //gMapControl1.BoundsOfMap = new RectLatLng(30.981178, 105.351914, 2.765142, 4.120995);
-            //gMapControl1.Manager.Mode = AccessMode.CacheOnly;
-            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
-            gMapControl1.Zoom = 13;
-
-            //gMapControl1.MapProvider = GMap.NET.MapProviders.BingMapProvider.Instance;
-            gMapControl1.MapProvider = GMapProviders.GoogleChinaMap;
-            gMapControl1.DragButton = MouseButtons.Left;
+        private void gMapControl1_MouseClick(object sender, MouseEventArgs e)
+        {
             
-            gMapControl1.MinZoom = 1;
-            gMapControl1.MaxZoom = 24;
+        }
+
+        private void gMapControl1_MouseMove(object sender, MouseEventArgs e)
+        {
+            //鼠标移动 显示当前位置经纬度
+            var latlon = gMapControl1.FromLocalToLatLng(e.X, e.Y);
+            lb_Lon.Text = latlon.Lng.ToString();
+            lb_Lat.Text = latlon.Lat.ToString();
+        }
+
+        private void gMapControl1_DoubleClick(object sender, EventArgs e)
+        {
+            gMapControl1.Zoom++;
+            //MessageBox.Show(gMapControl1.Zoom.ToString());
+        }
+
+        private void btn_SaveImage_Click(object sender, EventArgs e)
+        {
+            using (var image = gMapControl1.ToImage())
+                image.Save("jt.png");
         }
     }
 }
