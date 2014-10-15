@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
+using GMap.NET.WindowsForms.Markers;
 
 namespace GMAPTest
 {
@@ -31,6 +32,18 @@ namespace GMAPTest
             control.MinZoom = 1;
             control.MaxZoom = 24;
             control.Zoom = 13;
+
+            var routes = new GMapOverlay(control, "routes");
+            control.Overlays.Add(routes);
+
+            //添加标记
+            var top = new GMapOverlay(control, "top");
+            control.Overlays.Add(top);
+            var currentMarker = new GMapMarkerGoogleRed(control.Position);
+            top.Markers.Add(currentMarker);
+            var center = new GMapMarkerCross(control.Position);
+            top.Markers.Add(center);
+
         }
     }
 }
