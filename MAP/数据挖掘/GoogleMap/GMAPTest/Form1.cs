@@ -32,7 +32,7 @@ namespace GMAPTest
             gMapControl1.Zoom = 13;
 
             //gMapControl1.MapProvider = GMap.NET.MapProviders.BingMapProvider.Instance;
-            gMapControl1.MapProvider = BaiduMapProvider.Instance;
+            gMapControl1.MapProvider = GMapProviders.GoogleChinaMap;
             gMapControl1.DragButton = MouseButtons.Left;
             
             gMapControl1.MinZoom = 1;
