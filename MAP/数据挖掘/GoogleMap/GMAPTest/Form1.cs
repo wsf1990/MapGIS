@@ -27,6 +27,7 @@ namespace GMAPTest
         {
             helper = new GMapHelper(gMapControl1);
             helper.InitMapBox(GMapProviders.GoogleTerrainMap);//GMapProviders.GoogleTerrainMap);
+            
         }
 
         private void gMapControl1_MouseClick(object sender, MouseEventArgs e)

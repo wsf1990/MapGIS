@@ -70,7 +70,9 @@ namespace GMAPTest
         public GMapMarker AddMarker(PointLatLng markerPosition)
         {
             Top_Marker.Markers.Clear();
-            var currentMarker = new GMapMarkerGoogleRed(markerPosition);//Google红点
+            //var currentMarker = new GMapMarkerGoogleRed(markerPosition);//Google红点
+
+            var currentMarker = new MyHomeMarker(markerPosition);
             Top_Marker.Markers.Add(currentMarker);
             var center = new GMapMarkerCross(markerPosition);//十字叉丝
             Top_Marker.Markers.Add(center);
