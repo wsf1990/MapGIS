@@ -11,6 +11,7 @@ namespace GMAPTest
 {
     public class BaiduMapProvider : GMapProvider
     {
+        public static readonly BaiduMapProvider Instance;
         
         public BaiduMapProvider()
         {
@@ -18,18 +19,24 @@ namespace GMAPTest
             RefererUrl = "http://map.baidu.com";
             Copyright = string.Format("C{0} Baidu Corporation, C{0} NAVTEQ, C{0} Image courtesy of NASA",
                                       DateTime.Today.Year);
-            this.Area = new RectLatLng(30.981178, 105.351914, 2.765142, 4.120995);
+            //this.Area = new RectLatLng(30.981178, 105.351914, 2.765142, 4.120995);
+        }
+
+        static BaiduMapProvider()
+        {
+            Instance = new BaiduMapProvider();
         }
 
         public override GMap.NET.PureImage GetTileImage(GMap.NET.GPoint pos, int zoom)
         {
             string url = MakeTileImageUrl(pos, zoom, LanguageStr);
-
+            //url = "http://online3.map.bdimg.com/tile/?qt=tile&x=1425&y=521&z=13&styles=pl&udt=20141013";
             return GetTileImageUsingHttp(url);
         }
 
         string MakeTileImageUrl(GPoint pos, int zoom, string language)
         {
+            //zoom = 13;
             zoom = zoom - 1;
             var offsetX = Math.Pow(2, zoom);
             var offsetY = offsetX - 1;
@@ -62,7 +69,7 @@ namespace GMAPTest
 
         public override string Name
         {
-            get { return "baidu"; }
+            get { return "BaiDuMap"; }
         }
 
         private GMapProvider[] overlays;

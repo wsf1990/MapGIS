@@ -22,21 +22,21 @@ namespace GMAPTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            GMapControl mapControl = new GMapControl();
-            mapControl.BackColor = Color.CadetBlue;
-            mapControl.Dock = DockStyle.Fill;
-            this.Controls.Add(mapControl);
+            gMapControl1.BackColor = Color.CadetBlue;
+            gMapControl1.Position = new PointLatLng(30.981178, 105.351914);
 
-            mapControl.Position = new PointLatLng(30.981178, 105.351914);
+            //gMapControl1.MapProvider.Area = new RectLatLng(30.981178, 105.351914, 2.765142, 4.120995);
+            //gMapControl1.BoundsOfMap = new RectLatLng(30.981178, 105.351914, 2.765142, 4.120995);
+            //gMapControl1.Manager.Mode = AccessMode.CacheOnly;
+            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
+            gMapControl1.Zoom = 13;
 
-            mapControl.MapProvider.Area = new RectLatLng(30.981178, 105.351914, 2.765142, 4.120995);
-            mapControl.BoundsOfMap = new RectLatLng(30.981178, 105.351914, 2.765142, 4.120995);
-            mapControl.Manager.Mode = AccessMode.CacheOnly;
-            mapControl.MapProvider = new BaiduMapProvider();
-            mapControl.DragButton = MouseButtons.Left;
-            mapControl.Zoom = 13;
-            mapControl.MinZoom = 8;
-            mapControl.MaxZoom = 24;
+            //gMapControl1.MapProvider = GMap.NET.MapProviders.BingMapProvider.Instance;
+            gMapControl1.MapProvider = BaiduMapProvider.Instance;
+            gMapControl1.DragButton = MouseButtons.Left;
+            
+            gMapControl1.MinZoom = 1;
+            gMapControl1.MaxZoom = 24;
         }
     }
 }

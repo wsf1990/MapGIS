@@ -62,3 +62,9 @@ D:\MapGIS\MAP\数据挖掘\GoogleMap\GoogleMap\obj\Debug\GoogleMap.csprojResolve
 D:\MapGIS\MAP\数据挖掘\GoogleMap\GoogleMap\obj\Debug\GoogleMap.Frm_MapTest.resources
 D:\MapGIS\MAP\数据挖掘\GoogleMap\GoogleMap\obj\Debug\GoogleMap.Properties.Resources.resources
 D:\MapGIS\MAP\数据挖掘\GoogleMap\GoogleMap\obj\Debug\GoogleMap.csproj.GenerateResource.Cache
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GoogleMap\bin\Debug\GoogleMap.exe.config
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GoogleMap\obj\Debug\GoogleMap.exe
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GoogleMap\obj\Debug\GoogleMap.csprojResolveAssemblyReference.cache
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GoogleMap\obj\Debug\GoogleMap.Frm_MapTest.resources
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GoogleMap\obj\Debug\GoogleMap.Properties.Resources.resources
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GoogleMap\obj\Debug\GoogleMap.csproj.GenerateResource.Cache
