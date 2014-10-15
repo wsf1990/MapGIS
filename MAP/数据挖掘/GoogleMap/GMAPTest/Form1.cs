@@ -27,7 +27,7 @@ namespace GMAPTest
             mapControl.Dock = DockStyle.Fill;
             this.Controls.Add(mapControl);
 
-            mapControl.Position = new PointLatLng(30, 120);
+            mapControl.Position = new PointLatLng(30.981178, 105.351914);
 
             mapControl.MapProvider.Area = new RectLatLng(30.981178, 105.351914, 2.765142, 4.120995);
             mapControl.BoundsOfMap = new RectLatLng(30.981178, 105.351914, 2.765142, 4.120995);
