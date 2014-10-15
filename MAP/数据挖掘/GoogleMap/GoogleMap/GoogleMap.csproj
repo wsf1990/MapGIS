@@ -63,13 +63,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonHelper.cs" />
-    <Compile Include="enum\MapTypeEnum.cs" />
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Frm_MapTest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,25 +70,12 @@
       <DependentUpon>Frm_MapTest.cs</DependentUpon>
     </Compile>
     <Compile Include="GoogleHelper.cs" />
-    <Compile Include="Location.cs" />
     <Compile Include="MapHelper.cs" />
-    <Compile Include="MyWebBrowser.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="MyWebBrowser.Designer.cs">
-      <DependentUpon>MyWebBrowser.cs</DependentUpon>
-    </Compile>
     <Compile Include="OSMHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Frm_MapTest.resx">
       <DependentUpon>Frm_MapTest.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MyWebBrowser.resx">
-      <DependentUpon>MyWebBrowser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -138,6 +118,9 @@
     <Content Include="lib\SharpMap.UI.pdb" />
     <Content Include="lib\SharpMap.UI.XML" />
     <Content Include="lib\SharpMap.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="enum\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
