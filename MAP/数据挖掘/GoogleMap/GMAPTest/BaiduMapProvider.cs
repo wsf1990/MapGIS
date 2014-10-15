@@ -62,7 +62,7 @@ namespace GMAPTest
 
         public override string Name
         {
-            get { return "baidu"; }
+            get { return "baiduMap"; }
         }
 
         private GMapProvider[] overlays;
