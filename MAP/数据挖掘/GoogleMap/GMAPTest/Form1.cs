@@ -45,14 +45,17 @@ namespace GMAPTest
             {
                 endPos = pos;
                 //helper.DrawLine(startPos, endPos);
-                helper.FindRoute(startPos, endPos);
+                //helper.FindRoute(startPos, endPos);
+
+                helper.DrawBox(startPos, endPos);
                 startPos = new PointLatLng(0, 0);
                 endPos = new PointLatLng(0, 0);
             }
             if (e.Clicks == 2)
                 return;
-            //if (e.Clicks == 1 && e.Button == System.Windows.Forms.MouseButtons.Left)
-            //    helper.AddMarker(pos);
+            if (e.Clicks == 1 && e.Button == System.Windows.Forms.MouseButtons.Left)
+                //helper.AddMarker(pos);
+                helper.DrawCircle(pos);
         }
 
         private void gMapControl1_MouseMove(object sender, MouseEventArgs e)

@@ -36,7 +36,7 @@ namespace GMAPTest
         {
             this.Control = con;
         }
-        #region 初始化
+        #region 1. 初始化
         /// <summary>
         /// 初始化
         /// </summary>
@@ -66,8 +66,18 @@ namespace GMAPTest
             Control.Overlays.Add(Route);
 
             //添加标记层
-            Top_Marker = new GMapOverlay("top");
-            Control.Overlays.Add(Top_Marker);
+            //Top_Marker = new GMapOverlay("top");
+            //Control.Overlays.Add(Top_Marker);
+
+            //注册Marker事件
+            Control.OnMarkerClick += (s1, s2) =>
+                {
+                    s1.ToolTipText = "Click";
+                };
+            Control.OnPolygonEnter += (s1) =>
+                {
+                    s1.Fill = new SolidBrush(Color.Red);
+                };
         } 
         #endregion
 
@@ -132,6 +142,39 @@ namespace GMAPTest
                 ang += 360;
             return ang;
         } 
+        /// <summary>
+        /// 画多边形
+        /// </summary>
+        /// <param name="points"></param>
+        public void DrawPolygn(params PointLatLng[] points)
+        {
+            var list = points.ToList();
+            var mapPolygn = new GMapPolygon(list, "polygn");
+            Route.Polygons.Add(mapPolygn);
+        }
+        /// <summary>
+        /// 画四边形
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        public void DrawBox(PointLatLng start, PointLatLng end)
+        {
+            var p2 = new PointLatLng() {Lat = start.Lat, Lng = end.Lng};
+            var p4 = new PointLatLng() {Lat = end.Lat, Lng = start.Lng};
+            DrawPolygn(start, p2, end, p4);
+        }
+        /// <summary>
+        /// 绘制圆，未实现
+        /// </summary>
+        /// <param name="point"></param>
+        public void DrawCircle(PointLatLng point)
+        {
+            var circle = new GMarkerGoogle(point, GMarkerGoogleType.pink_dot);
+            circle.ToolTipText = "wsf";
+            circle.ToolTipPosition.Offset(new Point(10, 20));
+            circle.ToolTipMode = MarkerTooltipMode.Always;
+            //Top_Marker.Markers.Add(circle);
+        }
         #endregion
 
         #region 地名解析
@@ -163,13 +206,19 @@ namespace GMAPTest
             var list = SearchAddress(address);
             DrawAddress(list);
         }
-
+        /// <summary>
+        /// 绘制地址
+        /// </summary>
+        /// <param name="pos"></param>
         public void DrawAddress(PointLatLng pos)
         {
             Control.Zoom = 15;
             AddMarker(pos);
         }
-
+        /// <summary>
+        /// 绘制地址
+        /// </summary>
+        /// <param name="list"></param>
         public void DrawAddress(List<PointLatLng> list)
         {
             foreach (var pos in list)
