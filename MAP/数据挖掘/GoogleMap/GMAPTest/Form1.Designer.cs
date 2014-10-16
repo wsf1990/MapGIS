@@ -205,7 +205,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.gMapControl1);
             this.Name = "Form1";
-            this.Text = "GIS - 魏守峰 - 2.0";
+            this.Text = "GIS - 魏守峰 - 3.0";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

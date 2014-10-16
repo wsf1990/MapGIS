@@ -66,13 +66,13 @@ namespace GMAPTest
             Control.Overlays.Add(Route);
 
             //添加标记层
-            //Top_Marker = new GMapOverlay("top");
-            //Control.Overlays.Add(Top_Marker);
+            Top_Marker = new GMapOverlay("top");
+            Control.Overlays.Add(Top_Marker);
 
             //注册Marker事件
             Control.OnMarkerClick += (s1, s2) =>
                 {
-                    s1.ToolTipText = "Click";
+                    s1.ToolTipText = "lm";
                 };
             Control.OnPolygonEnter += (s1) =>
                 {
@@ -169,11 +169,12 @@ namespace GMAPTest
         /// <param name="point"></param>
         public void DrawCircle(PointLatLng point)
         {
-            var circle = new GMarkerGoogle(point, GMarkerGoogleType.pink_dot);
+            var circle = new CircleMarker(point);
+            //var circle = new GMarkerGoogle(point, GMarkerGoogleType.pink_pushpin);
             circle.ToolTipText = "wsf";
             circle.ToolTipPosition.Offset(new Point(10, 20));
             circle.ToolTipMode = MarkerTooltipMode.Always;
-            //Top_Marker.Markers.Add(circle);
+            Top_Marker.Markers.Add(circle);
         }
         #endregion
 

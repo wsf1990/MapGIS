@@ -61,6 +61,7 @@
     </Compile>
     <Compile Include="GMapHelper.cs" />
     <Compile Include="MapProvider\GDMapProvider.cs" />
+    <Compile Include="Marker\CircleMarker.cs" />
     <Compile Include="Marker\MyHomeMarker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
