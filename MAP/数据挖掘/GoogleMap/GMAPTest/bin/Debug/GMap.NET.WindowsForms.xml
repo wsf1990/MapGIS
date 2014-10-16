@@ -14,6 +14,14 @@
             can receive input
             </summary>
         </member>
+        <member name="M:GMap.NET.WindowsForms.GMapPolygon.IsInsideLocal(System.Int32,System.Int32)">
+            <summary>
+            Indicates whether the specified point is contained within this System.Drawing.Drawing2D.GraphicsPath
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
         <member name="F:GMap.NET.WindowsForms.GMapPolygon.Stroke">
             <summary>
             specifies how the outline is painted
@@ -277,12 +285,12 @@
             is overlay visible
             </summary>
         </member>
-        <member name="T:GMap.NET.WindowsForms.WindowsFormsImage">
+        <member name="T:GMap.NET.WindowsForms.GMapImage">
             <summary>
             image abstraction
             </summary>
         </member>
-        <member name="T:GMap.NET.WindowsForms.WindowsFormsImageProxy">
+        <member name="T:GMap.NET.WindowsForms.GMapImageProxy">
             <summary>
             image abstraction proxy
             </summary>
@@ -579,7 +587,7 @@
             </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "M:GMap.NET.WindowsForms.GMapControl.ReloadMap" -->
-        <member name="M:GMap.NET.WindowsForms.GMapControl.SetCurrentPositionByKeywords(System.String)">
+        <member name="M:GMap.NET.WindowsForms.GMapControl.SetPositionByKeywords(System.String)">
             <summary>
             set current position using keywords
             </summary>
