@@ -38,13 +38,14 @@ namespace GMAPTest
         private void gMapControl1_MouseClick(object sender, MouseEventArgs e)
         {
             PointLatLng pos = gMapControl1.FromLocalToLatLng(e.X, e.Y);
-            MessageBox.Show(helper.GetPlaceName(pos));
+            //MessageBox.Show(helper.GetPlaceName(pos));
             if (isDrawLine && startPos == new PointLatLng(0, 0))
                 startPos = pos;
             else if (startPos != new PointLatLng(0, 0))
             {
                 endPos = pos;
-                helper.DrawLine(startPos, endPos);
+                //helper.DrawLine(startPos, endPos);
+                helper.FindRoute(startPos, endPos);
                 startPos = new PointLatLng(0, 0);
                 endPos = new PointLatLng(0, 0);
             }
@@ -83,6 +84,8 @@ namespace GMAPTest
         private void btn_DrawLine_Click(object sender, EventArgs e)
         {
             isDrawLine = !isDrawLine;
+            if (isDrawLine)
+                lb_Status.Text = "路径查找";
         }
 
         private void txt_Address_KeyDown(object sender, KeyEventArgs e)

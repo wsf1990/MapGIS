@@ -136,7 +136,7 @@ namespace GMAPTest
                 var provider = Control.MapProvider as GeocodingProvider;
                 provider = provider ?? GMapProviders.OpenStreetMap as GeocodingProvider;//如果为空就使用OSM
                 code = provider.GetPoints(address, out list);
-                Control.Zoom = 12;
+                Control.Zoom = 15;
             }
             return list;
         }
@@ -157,6 +157,17 @@ namespace GMAPTest
                 return mark.Value.Address;
             return "";
         } 
+        #endregion
+
+        #region 路线规划
+        public void FindRoute(PointLatLng start, PointLatLng end)
+        {
+            RoutingProvider rp = Control.MapProvider as RoutingProvider;
+            rp = rp ?? OpenStreetMapProvider.Instance as RoutingProvider;
+            MapRoute route = rp.GetRoute(start, end, false, true, (int)Control.Zoom);
+            GMapRoute mapRoute = new GMapRoute(route.Points, route.Name);
+            Route.Routes.Add(mapRoute);
+        }
         #endregion
     }
 }

@@ -40,6 +40,7 @@
             this.btn_SaveImage = new System.Windows.Forms.ToolStripButton();
             this.txt_Address = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.lb_Status = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -80,7 +81,8 @@
             this.lb_Londis,
             this.lb_Lon,
             this.toolStripStatusLabel1,
-            this.lb_Lat});
+            this.lb_Lat,
+            this.lb_Status});
             this.statusStrip1.Location = new System.Drawing.Point(0, 345);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(573, 22);
@@ -154,6 +156,11 @@
             this.toolStripLabel1.Size = new System.Drawing.Size(92, 22);
             this.toolStripLabel1.Text = "要查询的地名：";
             // 
+            // lb_Status
+            // 
+            this.lb_Status.Name = "lb_Status";
+            this.lb_Status.Size = new System.Drawing.Size(0, 17);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -187,6 +194,7 @@
         private System.Windows.Forms.ToolStripButton btn_SaveImage;
         private System.Windows.Forms.ToolStripTextBox txt_Address;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel lb_Status;
     }
 }
 
