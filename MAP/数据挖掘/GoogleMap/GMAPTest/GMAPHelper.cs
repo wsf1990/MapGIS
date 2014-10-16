@@ -46,6 +46,7 @@ namespace GMAPTest
             Control.BackColor = Color.CadetBlue;
             Control.Position = new PointLatLng(30.981178, 105.351914);
 
+            Singleton<GMaps>.Instance.ShuffleTilesOnLoad = true;
             //gMapControl1.MapProvider.Area = new RectLatLng(30.981178, 105.351914, 2.765142, 4.120995);
             //gMapControl1.BoundsOfMap = new RectLatLng(30.981178, 105.351914, 2.765142, 4.120995);
             //gMapControl1.Manager.Mode = AccessMode.CacheOnly;
@@ -119,17 +120,27 @@ namespace GMAPTest
         public List<PointLatLng> SearchAddress(string city, string address)
         {
             //string search = string.Format("{0},{1}", city, address);
-            GeoCoderStatusCode code = Control.SetCurrentPositionByKeywords(address);
+            //GeoCoderStatusCode code = Control.SetCurrentPositionByKeywords(address);
             List<PointLatLng> list = null;
-
-            if (code == GeoCoderStatusCode.G_GEO_SUCCESS)
+            GeocodingProvider pro = new BaiduMapProvider() as GeocodingProvider;
+            //if (code == GeoCoderStatusCode.G_GEO_SUCCESS)
             {
+                
                 var provider = Control.MapProvider as GeocodingProvider;
                 provider = provider ?? GMapProviders.OpenStreetMap as GeocodingProvider;//如果为空就使用OSM
                 provider.GetPoints(address, out list);
             }
 
             return list;
+        }
+
+        public string GetPlaceName(PointLatLng place)
+        {
+            var provider = Control.MapProvider as GeocodingProvider;
+            provider = provider ?? GMapProviders.OpenStreetMap as GeocodingProvider;//如果为空就使用OSM
+            GeoCoderStatusCode code = GeoCoderStatusCode.Unknow;
+            var mark = provider.GetPlacemark(place, out code);
+            return mark.Address;
         }
     }
 }

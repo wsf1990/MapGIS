@@ -57,7 +57,7 @@ namespace GMAPTest
 
         static readonly string UrlFormat = "http://online{0}.map.bdimg.com/tile/?qt=tile&x={1}&y={2}&z={3}&styles=pl&udt=20141013";
 
-        private Guid id = Guid.NewGuid();
+        private Guid id = new Guid("F624DC13-E0BB-47B3-BCD8-335302368011}");
         public override Guid Id
         {
             get

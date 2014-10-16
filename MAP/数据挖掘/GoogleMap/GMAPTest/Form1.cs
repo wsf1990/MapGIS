@@ -21,6 +21,8 @@ namespace GMAPTest
         PointLatLng endPos = new PointLatLng(0, 0);
 
         bool isDrawLine = false;
+
+        BackgroundWorker woeker = new BackgroundWorker();//后台多线程工作
         public Form1()
         {
             InitializeComponent();
@@ -35,11 +37,13 @@ namespace GMAPTest
 
         private void gMapControl1_MouseClick(object sender, MouseEventArgs e)
         {
+            PointLatLng pos = gMapControl1.FromLocalToLatLng(e.X, e.Y);
+            MessageBox.Show(helper.GetPlaceName(pos));
             if (isDrawLine && startPos == new PointLatLng(0, 0))
-                startPos = gMapControl1.FromLocalToLatLng(e.X, e.Y);
+                startPos = pos;
             else if (startPos != new PointLatLng(0, 0))
             {
-                endPos = gMapControl1.FromLocalToLatLng(e.X, e.Y);
+                endPos = pos;
                 helper.DrawLine(startPos, endPos);
                 startPos = new PointLatLng(0, 0);
                 endPos = new PointLatLng(0, 0);
@@ -47,7 +51,7 @@ namespace GMAPTest
             if (e.Clicks == 2)
                 return;
             if (e.Clicks == 1 && e.Button == System.Windows.Forms.MouseButtons.Left)
-                helper.AddMarker(gMapControl1.FromLocalToLatLng(e.X, e.Y));
+                helper.AddMarker(pos);
         }
 
         private void gMapControl1_MouseMove(object sender, MouseEventArgs e)
