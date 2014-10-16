@@ -61,11 +61,11 @@ namespace GMAPTest
             Control.MaxZoom = 24;
             Control.Zoom = 5;
 
-            Route = new GMapOverlay(Control, "routes");
+            Route = new GMapOverlay("routes");
             Control.Overlays.Add(Route);
 
             //添加标记
-            Top_Marker = new GMapOverlay(Control, "top");
+            Top_Marker = new GMapOverlay("top");
             Control.Overlays.Add(Top_Marker);
            
 
@@ -82,7 +82,8 @@ namespace GMAPTest
             var currentMarker = new MyHomeMarker(markerPosition);
 
             Top_Marker.Markers.Add(currentMarker);
-            var center = new GMapMarkerCross(markerPosition);//十字叉丝
+            var center = new GMarkerCross(markerPosition);
+            //var center = new GMapMarker(markerPosition);//十字叉丝
             Top_Marker.Markers.Add(center);
             return currentMarker;
         }
@@ -120,27 +121,30 @@ namespace GMAPTest
         public List<PointLatLng> SearchAddress(string city, string address)
         {
             //string search = string.Format("{0},{1}", city, address);
-            //GeoCoderStatusCode code = Control.SetCurrentPositionByKeywords(address);
+            GeoCoderStatusCode code = Control.SetCurrentPositionByKeywords(address);
             List<PointLatLng> list = null;
-            GeocodingProvider pro = new BaiduMapProvider() as GeocodingProvider;
+            //GeocodingProvider pro = Control.MapProvider as GeocodingProvider;
             //if (code == GeoCoderStatusCode.G_GEO_SUCCESS)
-            {
+            //{
                 
                 var provider = Control.MapProvider as GeocodingProvider;
                 provider = provider ?? GMapProviders.OpenStreetMap as GeocodingProvider;//如果为空就使用OSM
-                provider.GetPoints(address, out list);
-            }
+                code = provider.GetPoints(address, out list);
+            //}
 
             return list;
         }
 
         public string GetPlaceName(PointLatLng place)
         {
+            //GeocodingProvider provider = GoogleChinaMapProvider.Instance;
             var provider = Control.MapProvider as GeocodingProvider;
             provider = provider ?? GMapProviders.OpenStreetMap as GeocodingProvider;//如果为空就使用OSM
             GeoCoderStatusCode code = GeoCoderStatusCode.Unknow;
             var mark = provider.GetPlacemark(place, out code);
-            return mark.Address;
+            if (mark.HasValue)
+                return mark.Value.Address;
+            return "";
         }
     }
 }

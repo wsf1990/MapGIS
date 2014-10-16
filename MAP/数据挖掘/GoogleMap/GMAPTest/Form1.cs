@@ -31,7 +31,7 @@ namespace GMAPTest
         private void Form1_Load(object sender, EventArgs e)
         {
             helper = new GMapHelper(gMapControl1);
-            helper.InitMapBox(BaiduMapProvider.Instance);//GMapProviders.GoogleTerrainMap);
+            helper.InitMapBox(GMapProviders.GoogleMap);//GMapProviders.GoogleTerrainMap);
             
         }
 
