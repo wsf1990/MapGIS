@@ -32,12 +32,14 @@
             this.gMapControl1 = new GMap.NET.WindowsForms.GMapControl();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lb_Londis = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lb_Lon = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lb_Lat = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.btn_DrawLine = new System.Windows.Forms.ToolStripButton();
             this.btn_SaveImage = new System.Windows.Forms.ToolStripButton();
+            this.txt_City = new System.Windows.Forms.ToolStripTextBox();
+            this.txt_Address = new System.Windows.Forms.ToolStripTextBox();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -63,6 +65,7 @@
             this.gMapControl1.Size = new System.Drawing.Size(573, 367);
             this.gMapControl1.TabIndex = 0;
             this.gMapControl1.Zoom = 0D;
+            this.gMapControl1.Click += new System.EventHandler(this.gMapControl1_Click);
             this.gMapControl1.DoubleClick += new System.EventHandler(this.gMapControl1_DoubleClick);
             this.gMapControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl1_MouseClick);
             this.gMapControl1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gMapControl1_MouseMove);
@@ -86,16 +89,16 @@
             this.lb_Londis.Size = new System.Drawing.Size(32, 17);
             this.lb_Londis.Text = "经度";
             // 
+            // lb_Lon
+            // 
+            this.lb_Lon.Name = "lb_Lon";
+            this.lb_Lon.Size = new System.Drawing.Size(0, 17);
+            // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(32, 17);
             this.toolStripStatusLabel1.Text = "维度";
-            // 
-            // lb_Lon
-            // 
-            this.lb_Lon.Name = "lb_Lon";
-            this.lb_Lon.Size = new System.Drawing.Size(0, 17);
             // 
             // lb_Lat
             // 
@@ -105,22 +108,25 @@
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.btn_SaveImage});
+            this.btn_DrawLine,
+            this.btn_SaveImage,
+            this.txt_City,
+            this.txt_Address});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(573, 25);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripButton1
+            // btn_DrawLine
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "toolStripButton1";
+            this.btn_DrawLine.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_DrawLine.Image = ((System.Drawing.Image)(resources.GetObject("btn_DrawLine.Image")));
+            this.btn_DrawLine.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_DrawLine.Name = "btn_DrawLine";
+            this.btn_DrawLine.Size = new System.Drawing.Size(23, 22);
+            this.btn_DrawLine.Text = "画线";
+            this.btn_DrawLine.Click += new System.EventHandler(this.btn_DrawLine_Click);
             // 
             // btn_SaveImage
             // 
@@ -131,6 +137,17 @@
             this.btn_SaveImage.Size = new System.Drawing.Size(23, 22);
             this.btn_SaveImage.Text = "截图";
             this.btn_SaveImage.Click += new System.EventHandler(this.btn_SaveImage_Click);
+            // 
+            // txt_City
+            // 
+            this.txt_City.Name = "txt_City";
+            this.txt_City.Size = new System.Drawing.Size(100, 25);
+            // 
+            // txt_Address
+            // 
+            this.txt_Address.Name = "txt_Address";
+            this.txt_Address.Size = new System.Drawing.Size(100, 25);
+            this.txt_Address.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Address_KeyDown);
             // 
             // Form1
             // 
@@ -161,8 +178,10 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lb_Lat;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton btn_DrawLine;
         private System.Windows.Forms.ToolStripButton btn_SaveImage;
+        private System.Windows.Forms.ToolStripTextBox txt_City;
+        private System.Windows.Forms.ToolStripTextBox txt_Address;
     }
 }
 

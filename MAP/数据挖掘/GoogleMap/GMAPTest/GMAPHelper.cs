@@ -12,13 +12,41 @@ using GMap.NET.WindowsForms.Markers;
 
 namespace GMAPTest
 {
-    public class GMAPHelper
+    /// <summary>
+    /// GMap帮助类
+    /// </summary>
+    public class GMapHelper
     {
-        public static void InitMapBox(GMapControl control, GMapProvider provider)
-        {
-            control.BackColor = Color.CadetBlue;
-            control.Position = new PointLatLng(30.981178, 105.351914);
+        /// <summary>
+        /// 第一层用于显示标记
+        /// </summary>
+        GMapOverlay Top_Marker;
 
+        /// <summary>
+        /// 用于画线的层
+        /// </summary>
+        GMapOverlay Route;
+
+        /// <summary>
+        /// 显示控件
+        /// </summary>
+        GMapControl Control;
+
+        public GMapHelper(GMapControl con)
+        {
+            this.Control = con;
+        }
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <param name="control"></param>
+        /// <param name="provider"></param>
+        public void InitMapBox(GMapProvider provider)
+        {
+            Control.BackColor = Color.CadetBlue;
+            Control.Position = new PointLatLng(30.981178, 105.351914);
+
+            Singleton<GMaps>.Instance.ShuffleTilesOnLoad = true;
             //gMapControl1.MapProvider.Area = new RectLatLng(30.981178, 105.351914, 2.765142, 4.120995);
             //gMapControl1.BoundsOfMap = new RectLatLng(30.981178, 105.351914, 2.765142, 4.120995);
             //gMapControl1.Manager.Mode = AccessMode.CacheOnly;
@@ -26,24 +54,93 @@ namespace GMAPTest
 
             //gMapControl1.MapProvider = GMap.NET.MapProviders.BingMapProvider.Instance;
             //control.MapProvider = GMapProviders.GoogleChinaMap;
-            control.MapProvider = provider;
-            control.DragButton = MouseButtons.Left;
+            Control.MapProvider = provider;
+            Control.DragButton = MouseButtons.Left;
 
-            control.MinZoom = 1;
-            control.MaxZoom = 24;
-            control.Zoom = 13;
+            Control.MinZoom = 1;
+            Control.MaxZoom = 24;
+            Control.Zoom = 5;
 
-            var routes = new GMapOverlay(control, "routes");
-            control.Overlays.Add(routes);
+            Route = new GMapOverlay(Control, "routes");
+            Control.Overlays.Add(Route);
 
             //添加标记
-            var top = new GMapOverlay(control, "top");
-            control.Overlays.Add(top);
-            var currentMarker = new GMapMarkerGoogleRed(control.Position);
-            top.Markers.Add(currentMarker);
-            var center = new GMapMarkerCross(control.Position);
-            top.Markers.Add(center);
+            Top_Marker = new GMapOverlay(Control, "top");
+            Control.Overlays.Add(Top_Marker);
+           
 
+        }
+        /// <summary>
+        /// 添加标记
+        /// </summary>
+        /// <returns></returns>
+        public GMapMarker AddMarker(PointLatLng markerPosition)
+        {
+            Top_Marker.Markers.Clear();
+            //var currentMarker = new GMapMarkerGoogleRed(markerPosition);//Google红点
+
+            var currentMarker = new MyHomeMarker(markerPosition);
+
+            Top_Marker.Markers.Add(currentMarker);
+            var center = new GMapMarkerCross(markerPosition);//十字叉丝
+            Top_Marker.Markers.Add(center);
+            return currentMarker;
+        }
+
+        /// <summary>
+        /// 画线
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        public void DrawLine(PointLatLng start, PointLatLng end)
+        {
+            Route.Routes.Clear();
+            List<PointLatLng> list = new List<PointLatLng>() { start, end };
+            GMapRoute route = new GMapRoute(list, "road");
+            Pen stroke = new Pen(Color.Red, 5);
+            route.Stroke = stroke;
+            Route.Routes.Add(route);
+        }
+        /// <summary>
+        /// 返回a和b之间的角度
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public int GetAngle(PointLatLng a, PointLatLng b)
+        {
+            int ang = (int)(Math.Atan((b.Lng - a.Lng) / (b.Lat - a.Lat)) * 180 / Math.PI);
+            if (ang > 360)
+                ang -= 360;
+            if (ang < 0)
+                ang += 360;
+            return ang;
+        }
+
+        public List<PointLatLng> SearchAddress(string city, string address)
+        {
+            //string search = string.Format("{0},{1}", city, address);
+            //GeoCoderStatusCode code = Control.SetCurrentPositionByKeywords(address);
+            List<PointLatLng> list = null;
+            GeocodingProvider pro = new BaiduMapProvider() as GeocodingProvider;
+            //if (code == GeoCoderStatusCode.G_GEO_SUCCESS)
+            {
+                
+                var provider = Control.MapProvider as GeocodingProvider;
+                provider = provider ?? GMapProviders.OpenStreetMap as GeocodingProvider;//如果为空就使用OSM
+                provider.GetPoints(address, out list);
+            }
+
+            return list;
+        }
+
+        public string GetPlaceName(PointLatLng place)
+        {
+            var provider = Control.MapProvider as GeocodingProvider;
+            provider = provider ?? GMapProviders.OpenStreetMap as GeocodingProvider;//如果为空就使用OSM
+            GeoCoderStatusCode code = GeoCoderStatusCode.Unknow;
+            var mark = provider.GetPlacemark(place, out code);
+            return mark.Address;
         }
     }
 }
