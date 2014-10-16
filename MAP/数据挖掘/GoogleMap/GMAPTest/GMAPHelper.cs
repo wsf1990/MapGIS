@@ -118,23 +118,34 @@ namespace GMAPTest
             return ang;
         }
 
-        public List<PointLatLng> SearchAddress(string city, string address)
+        #region 地名解析
+        /// <summary>
+        /// 根据地址查询位置
+        /// </summary>
+        /// <param name="city"></param>
+        /// <param name="address"></param>
+        /// <returns></returns>
+        public List<PointLatLng> SearchAddress(string address)
         {
             //string search = string.Format("{0},{1}", city, address);
-            GeoCoderStatusCode code = Control.SetCurrentPositionByKeywords(address);
+            GeoCoderStatusCode code = Control.SetPositionByKeywords(address);
             List<PointLatLng> list = null;
-            //GeocodingProvider pro = Control.MapProvider as GeocodingProvider;
-            //if (code == GeoCoderStatusCode.G_GEO_SUCCESS)
-            //{
-                
+            if (code == GeoCoderStatusCode.G_GEO_SUCCESS)
+            {
+
                 var provider = Control.MapProvider as GeocodingProvider;
                 provider = provider ?? GMapProviders.OpenStreetMap as GeocodingProvider;//如果为空就使用OSM
                 code = provider.GetPoints(address, out list);
-            //}
-
+                Control.Zoom = 12;
+            }
             return list;
         }
 
+        /// <summary>
+        /// 根据坐标查询地址
+        /// </summary>
+        /// <param name="place"></param>
+        /// <returns></returns>
         public string GetPlaceName(PointLatLng place)
         {
             //GeocodingProvider provider = GoogleChinaMapProvider.Instance;
@@ -145,6 +156,7 @@ namespace GMAPTest
             if (mark.HasValue)
                 return mark.Value.Address;
             return "";
-        }
+        } 
+        #endregion
     }
 }

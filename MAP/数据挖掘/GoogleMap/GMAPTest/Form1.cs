@@ -31,7 +31,7 @@ namespace GMAPTest
         private void Form1_Load(object sender, EventArgs e)
         {
             helper = new GMapHelper(gMapControl1);
-            helper.InitMapBox(GMapProviders.GoogleMap);//GMapProviders.GoogleTerrainMap);
+            helper.InitMapBox(GDMapProvider.Instance);//GMapProviders.GoogleTerrainMap);
             
         }
 
@@ -89,7 +89,7 @@ namespace GMAPTest
         {
             if(e.KeyCode == Keys.Enter)
             {
-                var list = helper.SearchAddress(txt_City.Text, txt_Address.Text);
+                var list = helper.SearchAddress(txt_Address.Text);
                 
             }
         }

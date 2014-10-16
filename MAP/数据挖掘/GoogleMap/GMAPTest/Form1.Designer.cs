@@ -38,8 +38,8 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btn_DrawLine = new System.Windows.Forms.ToolStripButton();
             this.btn_SaveImage = new System.Windows.Forms.ToolStripButton();
-            this.txt_City = new System.Windows.Forms.ToolStripTextBox();
             this.txt_Address = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -49,7 +49,9 @@
             this.gMapControl1.Bearing = 0F;
             this.gMapControl1.CanDragMap = true;
             this.gMapControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gMapControl1.EmptyTileColor = System.Drawing.Color.Navy;
             this.gMapControl1.GrayScaleMode = false;
+            this.gMapControl1.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
             this.gMapControl1.LevelsKeepInMemmory = 5;
             this.gMapControl1.Location = new System.Drawing.Point(0, 0);
             this.gMapControl1.MarkersEnabled = true;
@@ -61,6 +63,8 @@
             this.gMapControl1.PolygonsEnabled = true;
             this.gMapControl1.RetryLoadTile = 0;
             this.gMapControl1.RoutesEnabled = true;
+            this.gMapControl1.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
+            this.gMapControl1.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.gMapControl1.ShowTileGridLines = true;
             this.gMapControl1.Size = new System.Drawing.Size(573, 367);
             this.gMapControl1.TabIndex = 0;
@@ -110,7 +114,7 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btn_DrawLine,
             this.btn_SaveImage,
-            this.txt_City,
+            this.toolStripLabel1,
             this.txt_Address});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -138,16 +142,17 @@
             this.btn_SaveImage.Text = "截图";
             this.btn_SaveImage.Click += new System.EventHandler(this.btn_SaveImage_Click);
             // 
-            // txt_City
-            // 
-            this.txt_City.Name = "txt_City";
-            this.txt_City.Size = new System.Drawing.Size(100, 25);
-            // 
             // txt_Address
             // 
             this.txt_Address.Name = "txt_Address";
             this.txt_Address.Size = new System.Drawing.Size(100, 25);
             this.txt_Address.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Address_KeyDown);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(92, 22);
+            this.toolStripLabel1.Text = "要查询的地名：";
             // 
             // Form1
             // 
@@ -180,8 +185,8 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btn_DrawLine;
         private System.Windows.Forms.ToolStripButton btn_SaveImage;
-        private System.Windows.Forms.ToolStripTextBox txt_City;
         private System.Windows.Forms.ToolStripTextBox txt_Address;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
     }
 }
 
