@@ -140,22 +140,19 @@
             // 
             // btn_DrawLine
             // 
-            this.btn_DrawLine.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btn_DrawLine.Image = ((System.Drawing.Image)(resources.GetObject("btn_DrawLine.Image")));
             this.btn_DrawLine.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btn_DrawLine.Name = "btn_DrawLine";
-            this.btn_DrawLine.Size = new System.Drawing.Size(23, 22);
+            this.btn_DrawLine.Size = new System.Drawing.Size(76, 22);
             this.btn_DrawLine.Text = "路径查找";
-            this.btn_DrawLine.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.btn_DrawLine.Click += new System.EventHandler(this.btn_DrawLine_Click);
             // 
             // btn_SaveImage
             // 
-            this.btn_SaveImage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btn_SaveImage.Image = ((System.Drawing.Image)(resources.GetObject("btn_SaveImage.Image")));
             this.btn_SaveImage.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btn_SaveImage.Name = "btn_SaveImage";
-            this.btn_SaveImage.Size = new System.Drawing.Size(23, 22);
+            this.btn_SaveImage.Size = new System.Drawing.Size(52, 22);
             this.btn_SaveImage.Text = "截图";
             this.btn_SaveImage.Click += new System.EventHandler(this.btn_SaveImage_Click);
             // 
@@ -192,7 +189,7 @@
             // txt_End
             // 
             this.txt_End.Name = "txt_End";
-            this.txt_End.Size = new System.Drawing.Size(100, 25);
+            this.txt_End.Size = new System.Drawing.Size(100, 23);
             this.txt_End.Text = "北京,国家大剧院";
             this.txt_End.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_End_KeyDown);
             // 

@@ -59,7 +59,7 @@ namespace GMAPTest
             Control.DragButton = MouseButtons.Left;
 
             Control.MinZoom = 1;
-            Control.MaxZoom = 24;
+            Control.MaxZoom = 19;
             Control.Zoom = 5;
             //添加路径层
             Route = new GMapOverlay("routes");
