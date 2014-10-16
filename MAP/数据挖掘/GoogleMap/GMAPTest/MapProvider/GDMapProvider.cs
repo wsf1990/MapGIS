@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GMap.NET.WindowsForms;
 
 namespace GMAPTest
 {
@@ -61,8 +62,16 @@ namespace GMAPTest
 
         public override GMap.NET.PureImage GetTileImage(GMap.NET.GPoint pos, int zoom)
         {
-            string url = GetUrl(pos, zoom);
-            return GetTileImageUsingHttp(url);
+            try
+            {
+                string url = GetUrl(pos, zoom);
+                return GetTileImageUsingHttp(url);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            
         }
 
         string GetUrl(GPoint pos, int zoom)

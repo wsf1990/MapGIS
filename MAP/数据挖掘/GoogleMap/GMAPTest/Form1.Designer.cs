@@ -35,12 +35,16 @@
             this.lb_Lon = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lb_Lat = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lb_Status = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btn_DrawLine = new System.Windows.Forms.ToolStripButton();
             this.btn_SaveImage = new System.Windows.Forms.ToolStripButton();
-            this.txt_Address = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.lb_Status = new System.Windows.Forms.ToolStripStatusLabel();
+            this.txt_Address = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.txt_Start = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.txt_End = new System.Windows.Forms.ToolStripTextBox();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -111,13 +115,23 @@
             this.lb_Lat.Name = "lb_Lat";
             this.lb_Lat.Size = new System.Drawing.Size(0, 17);
             // 
+            // lb_Status
+            // 
+            this.lb_Status.Name = "lb_Status";
+            this.lb_Status.Size = new System.Drawing.Size(52, 17);
+            this.lb_Status.Text = "Normal";
+            // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btn_DrawLine,
             this.btn_SaveImage,
             this.toolStripLabel1,
-            this.txt_Address});
+            this.txt_Address,
+            this.toolStripLabel2,
+            this.txt_Start,
+            this.toolStripLabel3,
+            this.txt_End});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(573, 25);
@@ -131,7 +145,8 @@
             this.btn_DrawLine.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btn_DrawLine.Name = "btn_DrawLine";
             this.btn_DrawLine.Size = new System.Drawing.Size(23, 22);
-            this.btn_DrawLine.Text = "画线";
+            this.btn_DrawLine.Text = "路径查找";
+            this.btn_DrawLine.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.btn_DrawLine.Click += new System.EventHandler(this.btn_DrawLine_Click);
             // 
             // btn_SaveImage
@@ -144,22 +159,42 @@
             this.btn_SaveImage.Text = "截图";
             this.btn_SaveImage.Click += new System.EventHandler(this.btn_SaveImage_Click);
             // 
-            // txt_Address
-            // 
-            this.txt_Address.Name = "txt_Address";
-            this.txt_Address.Size = new System.Drawing.Size(100, 25);
-            this.txt_Address.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Address_KeyDown);
-            // 
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
             this.toolStripLabel1.Size = new System.Drawing.Size(92, 22);
             this.toolStripLabel1.Text = "要查询的地名：";
             // 
-            // lb_Status
+            // txt_Address
             // 
-            this.lb_Status.Name = "lb_Status";
-            this.lb_Status.Size = new System.Drawing.Size(0, 17);
+            this.txt_Address.Name = "txt_Address";
+            this.txt_Address.Size = new System.Drawing.Size(100, 25);
+            this.txt_Address.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Address_KeyDown);
+            // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(32, 22);
+            this.toolStripLabel2.Text = "从：";
+            // 
+            // txt_Start
+            // 
+            this.txt_Start.Name = "txt_Start";
+            this.txt_Start.Size = new System.Drawing.Size(100, 25);
+            this.txt_Start.Text = "北京,天安门";
+            // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(20, 22);
+            this.toolStripLabel3.Text = "至";
+            // 
+            // txt_End
+            // 
+            this.txt_End.Name = "txt_End";
+            this.txt_End.Size = new System.Drawing.Size(100, 25);
+            this.txt_End.Text = "北京,国家大剧院";
+            this.txt_End.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_End_KeyDown);
             // 
             // Form1
             // 
@@ -195,6 +230,10 @@
         private System.Windows.Forms.ToolStripTextBox txt_Address;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lb_Status;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
+        private System.Windows.Forms.ToolStripTextBox txt_Start;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel3;
+        private System.Windows.Forms.ToolStripTextBox txt_End;
     }
 }
 

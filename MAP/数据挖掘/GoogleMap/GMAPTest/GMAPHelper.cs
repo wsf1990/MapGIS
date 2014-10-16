@@ -36,6 +36,7 @@ namespace GMAPTest
         {
             this.Control = con;
         }
+        #region 初始化
         /// <summary>
         /// 初始化
         /// </summary>
@@ -60,16 +61,17 @@ namespace GMAPTest
             Control.MinZoom = 1;
             Control.MaxZoom = 24;
             Control.Zoom = 5;
-
+            //添加路径层
             Route = new GMapOverlay("routes");
             Control.Overlays.Add(Route);
 
-            //添加标记
+            //添加标记层
             Top_Marker = new GMapOverlay("top");
             Control.Overlays.Add(Top_Marker);
-           
+        } 
+        #endregion
 
-        }
+        #region 添加标记、线、矩形等
         /// <summary>
         /// 添加标记
         /// </summary>
@@ -86,6 +88,19 @@ namespace GMAPTest
             //var center = new GMapMarker(markerPosition);//十字叉丝
             Top_Marker.Markers.Add(center);
             return currentMarker;
+        }
+        /// <summary>
+        /// 画出所有点
+        /// </summary>
+        /// <param name="list"></param>
+        public void AddMarker(List<PointLatLng> list)
+        {
+            //Top_Marker.Markers.Clear();
+            foreach (var pointLatLng in list)
+            {
+                var currentMarker = new GMarkerGoogle(pointLatLng, GMarkerGoogleType.red);//Google红点
+                Top_Marker.Markers.Add(currentMarker);
+            }
         }
 
         /// <summary>
@@ -116,7 +131,8 @@ namespace GMAPTest
             if (ang < 0)
                 ang += 360;
             return ang;
-        }
+        } 
+        #endregion
 
         #region 地名解析
         /// <summary>
@@ -132,13 +148,34 @@ namespace GMAPTest
             List<PointLatLng> list = null;
             if (code == GeoCoderStatusCode.G_GEO_SUCCESS)
             {
-
                 var provider = Control.MapProvider as GeocodingProvider;
                 provider = provider ?? GMapProviders.OpenStreetMap as GeocodingProvider;//如果为空就使用OSM
                 code = provider.GetPoints(address, out list);
-                Control.Zoom = 15;
             }
             return list;
+        }
+        /// <summary>
+        /// 绘制地址
+        /// </summary>
+        /// <param name="address"></param>
+        public void DrawAddress(string address)
+        {
+            var list = SearchAddress(address);
+            DrawAddress(list);
+        }
+
+        public void DrawAddress(PointLatLng pos)
+        {
+            Control.Zoom = 15;
+            AddMarker(pos);
+        }
+
+        public void DrawAddress(List<PointLatLng> list)
+        {
+            foreach (var pos in list)
+            {
+                DrawAddress(pos);
+            }
         }
 
         /// <summary>
@@ -160,11 +197,47 @@ namespace GMAPTest
         #endregion
 
         #region 路线规划
-        public void FindRoute(PointLatLng start, PointLatLng end)
+        /// <summary>
+        /// 查找路径
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        public MapRoute FindRoute(PointLatLng start, PointLatLng end)
         {
             RoutingProvider rp = Control.MapProvider as RoutingProvider;
             rp = rp ?? OpenStreetMapProvider.Instance as RoutingProvider;
             MapRoute route = rp.GetRoute(start, end, false, true, (int)Control.Zoom);
+            if (route.Distance < 10)//小于10km放到18级继续算，其他可以以此类推
+            {
+                Control.Zoom = 18;
+                route = rp.GetRoute(start, end, false, true, (int)Control.Zoom);
+            }
+            return route;
+        }
+        /// <summary>
+        /// 根据地址查找路径
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        public MapRoute FindRoute(string start, string end)
+        {
+            //此法有Bug  ,采用求出坐标的方式代替之
+            /*RoutingProvider rp = Control.MapProvider as RoutingProvider;
+            rp = rp ?? OpenStreetMapProvider.Instance as RoutingProvider;
+            MapRoute route = rp.GetRoute(start, end, false, true, (int)Control.Zoom);
+            GMapRoute mapRoute = new GMapRoute(route.Points, route.Name);
+            Route.Routes.Add(mapRoute);*/
+
+            return FindRoute(SearchAddress(start).FirstOrDefault(), SearchAddress(end).FirstOrDefault());
+        }
+        /// <summary>
+        /// 绘制路径
+        /// </summary>
+        /// <param name="route"></param>
+        public void DrawRoute(MapRoute route)
+        {
             GMapRoute mapRoute = new GMapRoute(route.Points, route.Name);
             Route.Routes.Add(mapRoute);
         }

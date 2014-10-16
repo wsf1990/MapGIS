@@ -51,8 +51,8 @@ namespace GMAPTest
             }
             if (e.Clicks == 2)
                 return;
-            if (e.Clicks == 1 && e.Button == System.Windows.Forms.MouseButtons.Left)
-                helper.AddMarker(pos);
+            //if (e.Clicks == 1 && e.Button == System.Windows.Forms.MouseButtons.Left)
+            //    helper.AddMarker(pos);
         }
 
         private void gMapControl1_MouseMove(object sender, MouseEventArgs e)
@@ -86,6 +86,10 @@ namespace GMAPTest
             isDrawLine = !isDrawLine;
             if (isDrawLine)
                 lb_Status.Text = "路径查找";
+            else
+            {
+                lb_Status.Text = "Normal";
+            }
         }
 
         private void txt_Address_KeyDown(object sender, KeyEventArgs e)
@@ -93,7 +97,15 @@ namespace GMAPTest
             if(e.KeyCode == Keys.Enter)
             {
                 var list = helper.SearchAddress(txt_Address.Text);
-                
+            }
+        }
+
+        private void txt_End_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                var route = helper.FindRoute(txt_Start.Text, txt_End.Text);
+                helper.DrawRoute(route);
             }
         }
     }
