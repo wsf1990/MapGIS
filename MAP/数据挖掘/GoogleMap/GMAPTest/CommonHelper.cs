@@ -11,7 +11,7 @@ namespace GMAPTest
     {
         public static string GetMd5(string str)
         {
-            MD5CryptoServiceProvider.Create(str).Hash();
+            MD5CryptoServiceProvider
         }
     }
 }
