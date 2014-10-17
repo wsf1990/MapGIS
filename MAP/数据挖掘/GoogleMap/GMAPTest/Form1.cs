@@ -48,6 +48,8 @@ namespace GMAPTest
                 //helper.FindRoute(startPos, endPos);
 
                 helper.DrawBox(startPos, endPos);
+                var dis = Utility.GetDistance(startPos, endPos);
+                MessageBox.Show(dis.ToString());
                 startPos = new PointLatLng(0, 0);
                 endPos = new PointLatLng(0, 0);
             }

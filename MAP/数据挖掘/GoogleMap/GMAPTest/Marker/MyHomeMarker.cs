@@ -146,5 +146,12 @@ namespace GMAPTest
             return rotatedBmp;
         }
 
+        public override void Dispose()
+        {
+            if (Image != null)
+                Image.Dispose();
+            base.Dispose();
+        }
+
     }
 }

@@ -72,9 +72,10 @@ namespace GMAPTest
             //注册Marker事件
             Control.OnMarkerClick += (s1, s2) =>
                 {
-                    s1.ToolTipText = "lm";
+                    //s1.ToolTipText = "lm";
+                    RemoveMarker(s1);
                 };
-            Control.OnPolygonEnter += (s1) =>
+            Control.OnPolygonClick += (s1, s2) =>
                 {
                     s1.Fill = new SolidBrush(Color.Red);
                 };
@@ -111,6 +112,14 @@ namespace GMAPTest
                 var currentMarker = new GMarkerGoogle(pointLatLng, GMarkerGoogleType.red);//Google红点
                 Top_Marker.Markers.Add(currentMarker);
             }
+        }
+        /// <summary>
+        /// 移除Marker
+        /// </summary>
+        /// <param name="marker"></param>
+        public void RemoveMarker(GMapMarker marker)
+        {
+            Top_Marker.Markers.Remove(marker);
         }
 
         /// <summary>
@@ -169,8 +178,11 @@ namespace GMAPTest
         /// <param name="point"></param>
         public void DrawCircle(PointLatLng point)
         {
+            //var circle = new GMarkerCross(point);
             var circle = new CircleMarker(point);
             //var circle = new GMarkerGoogle(point, GMarkerGoogleType.pink_pushpin);
+            //var circle = new GMarkerGoogle(point, new Bitmap("Snow.png"));//使用自定义图标完成Mark
+            //var circle = new MyHomeMarker(point);
             circle.ToolTipText = "wsf";
             circle.ToolTipPosition.Offset(new Point(10, 20));
             circle.ToolTipMode = MarkerTooltipMode.Always;
