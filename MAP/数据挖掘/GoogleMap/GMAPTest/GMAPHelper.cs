@@ -58,9 +58,9 @@ namespace GMAPTest
             Control.MapProvider = provider;
             Control.DragButton = MouseButtons.Left;
 
-            Control.MinZoom = 1;
+            Control.MinZoom = 4;//百度最低level为4
             Control.MaxZoom = 19;
-            Control.Zoom = 11;
+            Control.Zoom = 4;
             //添加路径层
             Route = new GMapOverlay("routes");
             Control.Overlays.Add(Route);

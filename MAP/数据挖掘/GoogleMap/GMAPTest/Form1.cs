@@ -32,7 +32,7 @@ namespace GMAPTest
         private void Form1_Load(object sender, EventArgs e)
         {
             helper = new GMapHelper(gMapControl1);
-            helper.InitMapBox(BaiduMapProvider.Instance);//GMapProviders.GoogleTerrainMap);
+            helper.InitMapBox(GDMapProvider.Instance);//GMapProviders.GoogleTerrainMap);
             var point = helper.GetAddressPoint("天安门");
             if (point.HasValue)
             {
@@ -72,7 +72,7 @@ namespace GMAPTest
             var latlon = gMapControl1.FromLocalToLatLng(e.X, e.Y);
             lb_Lon.Text = latlon.Lng.ToString();
             lb_Lat.Text = latlon.Lat.ToString();
-            
+            lb_Zoom.Text = gMapControl1.Zoom.ToString();
         }
 
         private void gMapControl1_DoubleClick(object sender, EventArgs e)

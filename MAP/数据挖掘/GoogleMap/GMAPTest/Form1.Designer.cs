@@ -45,6 +45,7 @@
             this.txt_Start = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             this.txt_End = new System.Windows.Forms.ToolStripTextBox();
+            this.lb_Zoom = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -86,7 +87,8 @@
             this.lb_Lon,
             this.toolStripStatusLabel1,
             this.lb_Lat,
-            this.lb_Status});
+            this.lb_Status,
+            this.lb_Zoom});
             this.statusStrip1.Location = new System.Drawing.Point(0, 345);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(573, 22);
@@ -193,6 +195,11 @@
             this.txt_End.Text = "北京,国家大剧院";
             this.txt_End.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_End_KeyDown);
             // 
+            // lb_Zoom
+            // 
+            this.lb_Zoom.Name = "lb_Zoom";
+            this.lb_Zoom.Size = new System.Drawing.Size(0, 17);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -231,6 +238,7 @@
         private System.Windows.Forms.ToolStripTextBox txt_Start;
         private System.Windows.Forms.ToolStripLabel toolStripLabel3;
         private System.Windows.Forms.ToolStripTextBox txt_End;
+        private System.Windows.Forms.ToolStripStatusLabel lb_Zoom;
     }
 }
 
