@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
+using GMAPTest.MapProvider.Baidu;
 
 namespace GMAPTest
 {
@@ -26,6 +27,7 @@ namespace GMAPTest
         public Form1()
         {
             InitializeComponent();
+            var str = BaiduHelper.GetLocation("天安门");
         }
 
         private void Form1_Load(object sender, EventArgs e)

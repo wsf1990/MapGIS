@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.Projections;
+using GMAPTest.MapProvider.Baidu;
 
 namespace GMAPTest
 {
     /// <summary>
     /// 百度瓦片基类
     /// </summary>
-    public abstract class BaiduMapProviderBase : GMapProvider
+    public abstract class BaiduMapProviderBase : GMapProvider, GeocodingProvider
     {
         public BaiduMapProviderBase()
         {
@@ -59,6 +60,38 @@ namespace GMAPTest
             x = numX.ToString().Replace("-", "M");
             y = numY.ToString().Replace("-", "M");
         }
+        #region 百度地名解析
+
+        public Placemark? GetPlacemark(PointLatLng location, out GeoCoderStatusCode status)
+        {
+            throw new NotImplementedException();
+        }
+
+        public GeoCoderStatusCode GetPlacemarks(PointLatLng location, out List<Placemark> placemarkList)
+        {
+            throw new NotImplementedException();
+        }
+
+        public PointLatLng? GetPoint(Placemark placemark, out GeoCoderStatusCode status)
+        {
+            return GetPoint(placemark.Address, out status);
+        }
+
+        public PointLatLng? GetPoint(string keywords, out GeoCoderStatusCode status)
+        {
+            return BaiduHelper.GetLocation(keywords);
+        }
+
+        public GeoCoderStatusCode GetPoints(Placemark placemark, out List<PointLatLng> pointList)
+        {
+            throw new NotImplementedException();
+        }
+
+        public GeoCoderStatusCode GetPoints(string keywords, out List<PointLatLng> pointList)
+        {
+            throw new NotImplementedException();
+        } 
+        #endregion
     }
 
     /// <summary>

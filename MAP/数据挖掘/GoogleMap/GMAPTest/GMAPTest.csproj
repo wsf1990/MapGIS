@@ -40,6 +40,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\GMap.NET.WindowsForms.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -63,6 +67,7 @@
     </Compile>
     <Compile Include="GMapHelper.cs" />
     <Compile Include="MapProvider\Baidu\AKSNCaculater.cs" />
+    <Compile Include="MapProvider\Baidu\BaiduHelper.cs" />
     <Compile Include="MapProvider\GDMapProvider.cs" />
     <Compile Include="Marker\CircleMarker.cs" />
     <Compile Include="Marker\MyHomeMarker.cs" />
@@ -100,6 +105,9 @@
     <Content Include="lib\GMap.NET.Core.xml" />
     <Content Include="lib\GMap.NET.WindowsForms.dll" />
     <Content Include="lib\GMap.NET.WindowsForms.xml" />
+    <Content Include="lib\Newtonsoft.Json.dll" />
+    <Content Include="lib\Newtonsoft.Json.pdb" />
+    <Content Include="lib\Newtonsoft.Json.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

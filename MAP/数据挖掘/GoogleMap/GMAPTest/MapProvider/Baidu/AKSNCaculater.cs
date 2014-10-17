@@ -1,32 +1,16 @@
-﻿using System;
+﻿using GMAPTest;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-
+/// <summary>
+/// 百度SN计算方法
+/// </summary>
 public class AKSNCaculater
 {
-    private static string MD5(string password)
-    {
-        byte[] textBytes = System.Text.Encoding.UTF8.GetBytes(password);
-        try
-        {
-            System.Security.Cryptography.MD5CryptoServiceProvider cryptHandler;
-            cryptHandler = new System.Security.Cryptography.MD5CryptoServiceProvider();
-            byte[] hash = cryptHandler.ComputeHash(textBytes);
-            string ret = "";
-            foreach (byte a in hash)
-            {
-                ret += a.ToString("x");
-            }
-            return ret;
-        }
-        catch
-        {
-            throw;
-        }
-    }
-
+    public static string ak = "Dg13FsaBgcF67w40utVswRRV";
+    private static string sk = "pLV6EneRMRFPDmAG26FoyfaS4wjWBbE9";
     private static string UrlEncode(string str)
     {
         str = System.Web.HttpUtility.UrlEncode(str);
@@ -55,13 +39,18 @@ public class AKSNCaculater
         sb.Remove(sb.Length - 1, 1);
         return sb.ToString();
     }
-
-    public static string CaculateAKSN(string ak, string sk, string url, IDictionary<string, string> querystring_arrays)
+    /// <summary>
+    /// 计算SN
+    /// </summary>
+    /// <param name="url"></param>
+    /// <param name="querystring_arrays"></param>
+    /// <returns></returns>
+    public static string CaculateAKSN(string url, IDictionary<string, string> querystring_arrays)
     {
         var queryString = HttpBuildQuery(querystring_arrays);
 
         var str = UrlEncode(url + "?" + queryString + sk);
 
-        return MD5(str);
+        return CommonHelper.MD5(str);
     }
 }
