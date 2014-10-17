@@ -42,6 +42,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonHelper.cs" />
     <Compile Include="MapProvider\BaiduMapProvider.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -60,6 +62,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="GMapHelper.cs" />
+    <Compile Include="MapProvider\Baidu\AKSNCaculater.cs" />
     <Compile Include="MapProvider\GDMapProvider.cs" />
     <Compile Include="Marker\CircleMarker.cs" />
     <Compile Include="Marker\MyHomeMarker.cs" />
