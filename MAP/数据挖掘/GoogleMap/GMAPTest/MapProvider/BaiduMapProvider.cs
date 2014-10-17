@@ -40,6 +40,7 @@ namespace GMAPTest
         }
         /// <summary>
         /// 获取瓦片xyz
+        /// 此处要先看源码分析其GPoint pos实如何算出的，在此基础上继续进行xyz的计算。
         /// </summary>
         /// <param name="zoom"></param>
         /// <param name="pos"></param>
@@ -64,7 +65,8 @@ namespace GMAPTest
 
         public Placemark? GetPlacemark(PointLatLng location, out GeoCoderStatusCode status)
         {
-            throw new NotImplementedException();
+            var address = BaiduHelper.GetAddress(location, out status);
+            return address;
         }
 
         public GeoCoderStatusCode GetPlacemarks(PointLatLng location, out List<Placemark> placemarkList)
@@ -79,7 +81,7 @@ namespace GMAPTest
 
         public PointLatLng? GetPoint(string keywords, out GeoCoderStatusCode status)
         {
-            return BaiduHelper.GetLocation(keywords);
+            return BaiduHelper.GetLocation(keywords, out status);
         }
 
         public GeoCoderStatusCode GetPoints(Placemark placemark, out List<PointLatLng> pointList)
@@ -114,7 +116,6 @@ namespace GMAPTest
         }
         string MakeTileImageUrl(GPoint pos, int zoom, string language)
         {
-
             int num;
             string x, y;
             GetTilePos(zoom, pos, out num, out x, out y);

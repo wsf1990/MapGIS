@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Globalization;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +7,9 @@ using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace GMAPTest
 {
@@ -94,6 +97,15 @@ namespace GMAPTest
 
         #region JSON处理
         /// <summary>
+        /// 获取返回JSON中的result
+        /// </summary>
+        /// <returns></returns>
+        public static string GetResultJson(string json)
+        {
+            json = json.Substring(json.IndexOf("{")).Trim(')');
+            return JObject.Parse(json).Properties().Select(s => s.Value.ToString()).ToArray()[1];
+        }
+        /// <summary>
         /// 根据Dictionary获取JSON数据
         /// </summary>
         /// <param name="dict"></param>
@@ -150,6 +162,42 @@ namespace GMAPTest
             StringWriter sw = new StringWriter(sb);
             JsonWriter jw = new JsonTextWriter(sw);
             js.Serialize(jw, t);
+            return sb.ToString();
+        }
+        #endregion
+
+        #region Unicode处理
+        /// <summary>
+        /// 获取Unicode
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string GetUnicode(string str)
+        {
+            byte[] bts = Encoding.Unicode.GetBytes(str);
+            string r = "";
+            for (int i = 0; i < bts.Length; i += 2)
+                r += "\\u" + bts[i + 1].ToString("x").PadLeft(2, '0') + bts[i].ToString("x").PadLeft(2, '0');
+            return r;
+        }
+
+        /// <summary>
+        /// 获取字符串
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public static string GetStr(string code)
+        {
+            //\u9910
+            MatchCollection mc = Regex.Matches(code, @"\\u([\w]{2}([\w]{2}))", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            var bytes = new byte[2];
+            var sb = new StringBuilder();
+            foreach (Match match in mc)
+            {
+                bytes[0] = (byte)int.Parse(match.Groups[2].Value, NumberStyles.HexNumber);
+                bytes[1] = (byte)int.Parse(match.Groups[1].Value, NumberStyles.HexNumber);
+                sb.Append(Encoding.Unicode.GetString(bytes));
+            }
             return sb.ToString();
         }
         #endregion
