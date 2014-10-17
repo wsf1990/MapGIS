@@ -27,14 +27,18 @@ namespace GMAPTest
         public Form1()
         {
             InitializeComponent();
-            var str = BaiduHelper.GetLocation("天安门");
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             helper = new GMapHelper(gMapControl1);
             helper.InitMapBox(BaiduMapProvider.Instance);//GMapProviders.GoogleTerrainMap);
-            
+            var point = helper.GetAddressPoint("天安门");
+            if (point.HasValue)
+            {
+                helper.DrawAddress(point.Value);
+                helper.GetPlaceName(point.Value);
+            }
         }
 
         private void gMapControl1_MouseClick(object sender, MouseEventArgs e)

@@ -45,8 +45,8 @@ namespace GMAPTest
         public void InitMapBox(GMapProvider provider)
         {
             Control.BackColor = Color.CadetBlue;
-            Control.Position = new PointLatLng(30.981178, 105.351914);
-
+            Control.Position = new PointLatLng(39.9, 116.4);
+            //Control
             Singleton<GMaps>.Instance.ShuffleTilesOnLoad = true;
             //gMapControl1.MapProvider.Area = new RectLatLng(30.981178, 105.351914, 2.765142, 4.120995);
             //gMapControl1.BoundsOfMap = new RectLatLng(30.981178, 105.351914, 2.765142, 4.120995);
@@ -60,7 +60,7 @@ namespace GMAPTest
 
             Control.MinZoom = 1;
             Control.MaxZoom = 19;
-            Control.Zoom = 5;
+            Control.Zoom = 11;
             //添加路径层
             Route = new GMapOverlay("routes");
             Control.Overlays.Add(Route);
@@ -191,6 +191,14 @@ namespace GMAPTest
         #endregion
 
         #region 地名解析
+        public PointLatLng? GetAddressPoint(string address)
+        {
+            GeoCoderStatusCode code = GeoCoderStatusCode.Unknow;
+            var provider = Control.MapProvider as GeocodingProvider;
+            provider = provider ?? GMapProviders.OpenStreetMap as GeocodingProvider;//如果为空就使用OSM
+            var point = provider.GetPoint(address, out code);
+            return point;
+        }
         /// <summary>
         /// 根据地址查询位置
         /// </summary>

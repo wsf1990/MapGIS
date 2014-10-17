@@ -68,6 +68,7 @@
     <Compile Include="GMapHelper.cs" />
     <Compile Include="MapProvider\Baidu\AKSNCaculater.cs" />
     <Compile Include="MapProvider\Baidu\BaiduHelper.cs" />
+    <Compile Include="MapProvider\Baidu\BaiduPosition.cs" />
     <Compile Include="MapProvider\GDMapProvider.cs" />
     <Compile Include="Marker\CircleMarker.cs" />
     <Compile Include="Marker\MyHomeMarker.cs" />
