@@ -32,8 +32,8 @@ namespace GMAPTest
         private void Form1_Load(object sender, EventArgs e)
         {
             helper = new GMapHelper(gMapControl1);
-            helper.InitMapBox(GDMapProvider.Instance);//GMapProviders.GoogleTerrainMap);
-            var point = helper.GetAddressPoint("天安门");
+            helper.InitMapBox(TencentMapProvider.Instance);//GMapProviders.GoogleTerrainMap);
+            var point = helper.GetAddressPoint("天安门,北京");
             if (point.HasValue)
             {
                 helper.DrawAddress(point.Value);
@@ -44,7 +44,7 @@ namespace GMAPTest
         private void gMapControl1_MouseClick(object sender, MouseEventArgs e)
         {
             PointLatLng pos = gMapControl1.FromLocalToLatLng(e.X, e.Y);
-            //MessageBox.Show(helper.GetPlaceName(pos));
+            var add = helper.GetPlaceName(pos);
             if (isDrawLine && startPos == new PointLatLng(0, 0))
                 startPos = pos;
             else if (startPos != new PointLatLng(0, 0))
@@ -63,7 +63,7 @@ namespace GMAPTest
                 return;
             if (e.Clicks == 1 && e.Button == System.Windows.Forms.MouseButtons.Left)
                 //helper.AddMarker(pos);
-                helper.DrawCircle(pos);
+                helper.DrawCircle(pos, add);
         }
 
         private void gMapControl1_MouseMove(object sender, MouseEventArgs e)

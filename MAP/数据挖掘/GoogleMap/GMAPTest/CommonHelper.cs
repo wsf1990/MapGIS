@@ -100,10 +100,20 @@ namespace GMAPTest
         /// 获取返回JSON中的result
         /// </summary>
         /// <returns></returns>
-        public static string GetResultJson(string json)
+        public static string GetResultJsonBaidu(string json)
+        {
+            return GetResultJson(json, 1);
+        }
+
+        public static string GetResultJsonTencent(string json)
+        {
+            return GetResultJson(json, 2);
+        }
+
+        public static string GetResultJson(string json, int index)
         {
             json = json.Substring(json.IndexOf("{")).Trim(')');
-            return JObject.Parse(json).Properties().Select(s => s.Value.ToString()).ToArray()[1];
+            return JObject.Parse(json).Properties().Select(s => s.Value.ToString()).ToArray()[index];
         }
         /// <summary>
         /// 根据Dictionary获取JSON数据

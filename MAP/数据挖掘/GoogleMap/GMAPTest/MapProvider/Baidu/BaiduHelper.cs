@@ -29,7 +29,7 @@ namespace GMAPTest.MapProvider.Baidu
             if (json.Contains("\"status\":0"))
             {
                 status = GeoCoderStatusCode.G_GEO_SUCCESS;
-                var str = CommonHelper.GetResultJson(json);
+                var str = CommonHelper.GetResultJsonBaidu(json);
                 var pos = CommonHelper.GetObjectByJson<BaiduPosition>(str);
                 return pos.location;
             }
@@ -45,7 +45,7 @@ namespace GMAPTest.MapProvider.Baidu
             string url = "http://api.map.baidu.com/geocoder/v2/?ak=" + AKSNCaculater.ak + "&callback=renderReverse&location=" + point.Lat + "," + point.Lng + "&output=json&pois=0&coordtype=" + coordtype;
             string json = CommonHelper.GetUrl("GET", url);
             status = GeoCoderStatusCode.G_GEO_SUCCESS;
-            var str = CommonHelper.GetResultJson(json);
+            var str = CommonHelper.GetResultJsonBaidu(json);
             var address = CommonHelper.GetObjectByJson<BaiduAddress>(str);
             Placemark placemark = new Placemark();
             placemark.LocalityName = address.formatted_address;

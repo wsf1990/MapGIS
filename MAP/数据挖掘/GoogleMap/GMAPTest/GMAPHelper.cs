@@ -176,14 +176,14 @@ namespace GMAPTest
         /// 绘制圆，未实现
         /// </summary>
         /// <param name="point"></param>
-        public void DrawCircle(PointLatLng point)
+        public void DrawCircle(PointLatLng point, params string[] addressName)
         {
             //var circle = new GMarkerCross(point);
             var circle = new CircleMarker(point);
             //var circle = new GMarkerGoogle(point, GMarkerGoogleType.pink_pushpin);
             //var circle = new GMarkerGoogle(point, new Bitmap("Snow.png"));//使用自定义图标完成Mark
             //var circle = new MyHomeMarker(point);
-            circle.ToolTipText = "wsf";
+            circle.ToolTipText = addressName[0] ?? "wsf";
             circle.ToolTipPosition.Offset(new Point(10, 20));
             circle.ToolTipMode = MarkerTooltipMode.Always;
             Top_Marker.Markers.Add(circle);
@@ -261,7 +261,7 @@ namespace GMAPTest
             GeoCoderStatusCode code = GeoCoderStatusCode.Unknow;
             var mark = provider.GetPlacemark(place, out code);
             if (mark.HasValue)
-                return mark.Value.Address;
+                return mark.Value.HouseNo;
             return "";
         } 
         #endregion

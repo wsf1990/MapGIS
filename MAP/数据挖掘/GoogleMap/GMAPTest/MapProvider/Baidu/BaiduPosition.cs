@@ -38,7 +38,11 @@ namespace GMAPTest.MapProvider.Baidu
 
     public class AddressComponent
     {
+        public string nation { get; set; }
         public string city { get; set; }
+        /// <summary>
+        /// 区
+        /// </summary>
 		public string district { get; set; }
 		public string province { get; set; }
 		public string street { get; set; }

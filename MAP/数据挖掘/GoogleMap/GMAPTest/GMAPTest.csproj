@@ -70,6 +70,10 @@
     <Compile Include="MapProvider\Baidu\BaiduHelper.cs" />
     <Compile Include="MapProvider\Baidu\BaiduPosition.cs" />
     <Compile Include="MapProvider\GDMapProvider.cs" />
+    <Compile Include="MapProvider\IMapHelper.cs" />
+    <Compile Include="MapProvider\Tencent\TencentHelper.cs" />
+    <Compile Include="MapProvider\Tencent\TencentMapProvider.cs" />
+    <Compile Include="MapProvider\Tencent\TencentPosition.cs" />
     <Compile Include="Marker\CircleMarker.cs" />
     <Compile Include="Marker\MyHomeMarker.cs" />
     <Compile Include="Program.cs" />
