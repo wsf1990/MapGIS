@@ -1,4 +1,5 @@
 ﻿using GMap.NET;
+using GMap.NET.MapProviders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,14 +18,15 @@ namespace GMAPTest
        /// <returns></returns>
        public static double GetDistance(PointLatLng a, PointLatLng b)
        {
-           double lat = Rad(Math.Abs(a.Lat - b.Lat));
-           double lng = Rad(Math.Abs(a.Lng - b.Lng));
-           double s = 2 * Math.Asin(Math.Sqrt(Math.Pow(Math.Sin(lat / 2), 2) +
-             Math.Cos(Rad(a.Lat)) * Math.Cos(Rad(b.Lat)) * Math.Pow(Math.Sin(lng / 2), 2)));
-           var gs = GaussSphere.Xian80;
-           s = s * (gs == GaussSphere.WGS84 ? 6378137.0 : (gs == GaussSphere.Xian80 ? 6378140.0 : 6378245.0));
-           s = Math.Round(s * 10000) / 10000;
-           return s;
+           return GMapProviders.EmptyProvider.Projection.GetDistance(a, b);
+           //double lat = Rad(Math.Abs(a.Lat - b.Lat));
+           //double lng = Rad(Math.Abs(a.Lng - b.Lng));
+           //double s = 2 * Math.Asin(Math.Sqrt(Math.Pow(Math.Sin(lat / 2), 2) +
+           //  Math.Cos(Rad(a.Lat)) * Math.Cos(Rad(b.Lat)) * Math.Pow(Math.Sin(lng / 2), 2)));
+           //var gs = GaussSphere.Xian80;
+           //s = s * (gs == GaussSphere.WGS84 ? 6378137.0 : (gs == GaussSphere.Xian80 ? 6378140.0 : 6378245.0));
+           //s = Math.Round(s * 10000) / 10000;
+           //return s;
        }
        /// <summary>
        /// 弧度

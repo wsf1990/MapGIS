@@ -207,13 +207,16 @@
             // 
             // map_Eagle
             // 
+            this.map_Eagle.BackColor = System.Drawing.Color.DarkRed;
             this.map_Eagle.Bearing = 0F;
+            this.map_Eagle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.map_Eagle.CanDragMap = true;
             this.map_Eagle.EmptyTileColor = System.Drawing.Color.Navy;
             this.map_Eagle.GrayScaleMode = false;
             this.map_Eagle.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
             this.map_Eagle.LevelsKeepInMemmory = 5;
             this.map_Eagle.Location = new System.Drawing.Point(324, 188);
+            this.map_Eagle.Margin = new System.Windows.Forms.Padding(8);
             this.map_Eagle.MarkersEnabled = true;
             this.map_Eagle.MaxZoom = 2;
             this.map_Eagle.MinZoom = 2;
@@ -229,6 +232,7 @@
             this.map_Eagle.Size = new System.Drawing.Size(257, 187);
             this.map_Eagle.TabIndex = 3;
             this.map_Eagle.Zoom = 0D;
+            this.map_Eagle.OnPositionChanged += new GMap.NET.PositionChanged(this.map_Eagle_OnPositionChanged);
             this.map_Eagle.OnMapZoomChanged += new GMap.NET.MapZoomChanged(this.map_Eagle_OnMapZoomChanged);
             // 
             // Form1
@@ -236,13 +240,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(573, 367);
-            this.Controls.Add(this.map_Eagle);
             this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.map_Eagle);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.gMapControl1);
             this.Name = "Form1";
             this.Text = "GIS - 魏守峰 - 3.0";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);

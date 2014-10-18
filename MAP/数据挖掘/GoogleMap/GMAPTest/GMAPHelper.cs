@@ -9,6 +9,7 @@ using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
+using GMAPTest.Marker.ToolTip;
 
 namespace GMAPTest
 {
@@ -63,6 +64,7 @@ namespace GMAPTest
 
             Control.MinZoom = 4;//百度最低level为4
             Eagel.MinZoom = 4;
+            Eagel.MaxZoom = 14;
             Control.MaxZoom = 19;
             Control.Zoom = 4;
             Eagel.Zoom = 4;
@@ -101,7 +103,7 @@ namespace GMAPTest
             //var currentMarker = new GMapMarkerGoogleRed(markerPosition);//Google红点
 
             var currentMarker = new MyHomeMarker(markerPosition);
-
+            currentMarker.ToolTip = new MyToolTip(currentMarker);
             Top_Marker.Markers.Add(currentMarker);
             var center = new GMarkerCross(markerPosition);
             //var center = new GMapMarker(markerPosition);//十字叉丝
@@ -192,6 +194,7 @@ namespace GMAPTest
             //var circle = new GMarkerGoogle(point, new Bitmap("Snow.png"));//使用自定义图标完成Mark
             //var circle = new MyHomeMarker(point);
             circle.ToolTipText = addressName[0] ?? "wsf";
+            circle.ToolTip = new MyToolTip(circle);
             circle.ToolTipPosition.Offset(new Point(10, 20));
             circle.ToolTipMode = MarkerTooltipMode.Always;
             Top_Marker.Markers.Add(circle);

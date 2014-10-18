@@ -32,7 +32,7 @@ namespace GMAPTest
         private void Form1_Load(object sender, EventArgs e)
         {
             helper = new GMapHelper(gMapControl1, map_Eagle);
-            helper.InitMapBox(TencentImageTransProvider.Instance);//GMapProviders.GoogleTerrainMap);
+            helper.InitMapBox(TencentMapProvider.Instance);//GMapProviders.GoogleTerrainMap);
             var point = helper.GetAddressPoint("天安门,北京");
             if (point.HasValue)
             {
@@ -132,8 +132,15 @@ namespace GMAPTest
 
         private void gMapControl1_OnPositionChanged(PointLatLng point)
         {
-            if (IsLeftDown)
-                map_Eagle.Position = point;
+            try
+            {
+                if (IsLeftDown && !point.IsEmpty)
+                    map_Eagle.Position = point;
+            }
+            catch(StackOverflowException ex)
+            {
+                
+            }
         }
 
         private void gMapControl1_OnMapZoomChanged()
@@ -142,12 +149,24 @@ namespace GMAPTest
             if (zoom < 4)
                 zoom = 4;
             map_Eagle.Zoom = zoom;
-            map_Eagle.MinZoom = 4;
+            map_Eagle.Position = gMapControl1.Position;
         }
 
         private void map_Eagle_OnMapZoomChanged()
         {
-            MessageBox.Show(map_Eagle.Zoom.ToString());
+            //MessageBox.Show(map_Eagle.Zoom.ToString());
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            map_Eagle.Top = this.Height - map_Eagle.Height - 20;
+            map_Eagle.Left = this.Width - map_Eagle.Width;
+        }
+
+        private void map_Eagle_OnPositionChanged(PointLatLng point)
+        {
+            if (!IsLeftDown)//防止出现循环变化
+                gMapControl1.Position = map_Eagle.Position;
         }
     }
 }
