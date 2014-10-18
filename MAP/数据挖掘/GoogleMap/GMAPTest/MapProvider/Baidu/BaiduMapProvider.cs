@@ -67,7 +67,7 @@ namespace GMAPTest
 
         public Placemark? GetPlacemark(PointLatLng location, out GeoCoderStatusCode status)
         {
-            var address = BaiduHelper.GetAddress(location, out status);
+            var address = new BaiduHelper().GetAddress(location, out status);
             return address;
         }
 
@@ -83,7 +83,7 @@ namespace GMAPTest
 
         public PointLatLng? GetPoint(string keywords, out GeoCoderStatusCode status)
         {
-            return BaiduHelper.GetLocation(keywords, out status);
+            return new BaiduHelper().GetLocation(keywords, out status);
         }
 
         public GeoCoderStatusCode GetPoints(Placemark placemark, out List<PointLatLng> pointList)
