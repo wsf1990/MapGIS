@@ -31,6 +31,7 @@ namespace GMAPTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            new SHP.SHPHelper().ImportShapeFileData();
             helper = new GMapHelper(gMapControl1, map_Eagle);
             helper.InitMapBox(TencentTransptationProvider.Instance);//GMapProviders.GoogleTerrainMap);
             var point = helper.GetAddressPoint("天安门,北京");
