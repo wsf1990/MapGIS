@@ -32,7 +32,7 @@ namespace GMAPTest
         private void Form1_Load(object sender, EventArgs e)
         {
             helper = new GMapHelper(gMapControl1, map_Eagle);
-            helper.InitMapBox(TencentMapProvider.Instance);//GMapProviders.GoogleTerrainMap);
+            helper.InitMapBox(TencentTransptationProvider.Instance);//GMapProviders.GoogleTerrainMap);
             var point = helper.GetAddressPoint("天安门,北京");
             if (point.HasValue)
             {

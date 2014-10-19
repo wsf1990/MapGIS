@@ -1,4 +1,5 @@
 ﻿using GMap.NET;
+using GMap.NET.CacheProviders;
 using GMap.NET.MapProviders;
 using GMap.NET.Projections;
 using System;
@@ -230,6 +231,7 @@ namespace GMAPTest
         {
             string urlFormat = "http://p{5}.map.gtimg.com/sateTranTilesv3/{0}/{1}/{2}/{3}_{4}.png";
             var url = GetUrl(urlFormat, pos, zoom);
+            //return new MsSQLPureImageCache().GetImageFromCache(0, pos, zoom);
             return GetTileImageUsingHttp(url);
         }
 

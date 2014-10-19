@@ -207,7 +207,7 @@
             // 
             // map_Eagle
             // 
-            this.map_Eagle.BackColor = System.Drawing.Color.DarkRed;
+            this.map_Eagle.BackColor = System.Drawing.Color.Transparent;
             this.map_Eagle.Bearing = 0F;
             this.map_Eagle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.map_Eagle.CanDragMap = true;

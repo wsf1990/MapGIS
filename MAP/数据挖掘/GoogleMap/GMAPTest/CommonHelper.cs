@@ -10,11 +10,13 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using System.Drawing;
 
 namespace GMAPTest
 {
     public class CommonHelper
     {
+        #region 1. MD5
         /// <summary>
         /// MD5
         /// </summary>
@@ -39,8 +41,10 @@ namespace GMAPTest
             {
                 throw;
             }
-        }
+        } 
+        #endregion
 
+        #region 2. URL读取内容
         /// <summary>
         /// 获取URL地址网页数据
         /// </summary>
@@ -93,9 +97,10 @@ namespace GMAPTest
                 string err = ex.Message;
                 return string.Empty;
             }
-        }
+        } 
+        #endregion
 
-        #region JSON处理
+        #region 3. JSON处理
         /// <summary>
         /// 获取返回JSON中的result
         /// </summary>
@@ -176,7 +181,7 @@ namespace GMAPTest
         }
         #endregion
 
-        #region Unicode处理
+        #region 4. Unicode处理
         /// <summary>
         /// 获取Unicode
         /// </summary>
@@ -209,6 +214,36 @@ namespace GMAPTest
                 sb.Append(Encoding.Unicode.GetString(bytes));
             }
             return sb.ToString();
+        }
+        #endregion
+
+        #region 5. 图像处理
+        /// <summary>
+        /// 图像转换为字节数组
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <param name="zoom"></param>
+        /// <returns></returns>
+        public static byte[] GetBytesFormBM(string fileName)
+        {
+            using (Bitmap bm = new Bitmap(fileName))
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    bm.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    return ms.ToArray();
+                }
+            }
+        }
+        /// <summary>
+        /// 得到瓦片存放路径
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <param name="zoom"></param>
+        /// <returns></returns>
+        public static string GetImgFileName(GMap.NET.GPoint pos, int zoom)
+        {
+            return Path.Combine("root", zoom.ToString(), pos.X.ToString(), pos.Y + ".png");
         }
         #endregion
     }
