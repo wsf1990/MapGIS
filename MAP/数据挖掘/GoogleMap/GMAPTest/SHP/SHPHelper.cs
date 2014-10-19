@@ -22,9 +22,9 @@ namespace GMAPTest.SHP
                 {
                     var head = GetHead(br);//读取头
                     //读取正文
-                    var record = ChangeOrder(br.ReadInt32());//第一个记录  记录号
+                    var record = CommonHelper.ChangeOrder(br.ReadInt32());//第一个记录  记录号
 
-                    var contentLength = ChangeOrder(br.ReadInt32());//记录长度
+                    var contentLength = CommonHelper.ChangeOrder(br.ReadInt32());//记录长度
 
                     var shapeType = br.ReadInt32();//几何类型
 
@@ -32,11 +32,16 @@ namespace GMAPTest.SHP
                     {
                         var con1 = GetPolyLine(br);
                     }
+
+                    if(br.BaseStream.Position == br.BaseStream.Length)
+                    {
+                        return;
+                    }
                 }
             }
         }
         /// <summary>
-        /// 读取头
+        /// 读取shp头
         /// </summary>
         /// <param name="br"></param>
         /// <returns></returns>
@@ -44,7 +49,7 @@ namespace GMAPTest.SHP
         {
             ShpHead head = new ShpHead();
             var read = br.ReadInt32();//读取FileCode  
-            head.FileCode = ChangeOrder(read);
+            head.FileCode = CommonHelper.ChangeOrder(read);
             //var str = Encoding.Default.GetString(bytes);
             //System.Windows.Forms.MessageBox.Show(str);
 
@@ -53,7 +58,7 @@ namespace GMAPTest.SHP
                 br.ReadInt32();
             }
             read = br.ReadInt32();
-            head.FileLength = ChangeOrder(read);//文件长度
+            head.FileLength = CommonHelper.ChangeOrder(read);//文件长度
 
             head.Version = br.ReadInt32();//版本号
 
@@ -104,31 +109,6 @@ namespace GMAPTest.SHP
             }
             return line;
         }
-        /// <summary>
-        /// 位序转换
-        /// </summary>
-        /// <param name="lbt"></param>
-        /// <returns></returns>
-        int ChangeOrder(byte[] lbt)
-        {
-            //int a = 9994;
-            //byte[] lbt = BitConverter.GetBytes(a);  //将int转变为byte
-            byte[] bbt = new byte[4];             //用于存放big byte，维数为4
-            bbt[0] = lbt[3];                       //0
-            bbt[1] = lbt[2];                       //0
-            bbt[2] = lbt[1];                       //39
-            bbt[3] = lbt[0];                       //10
-            int a = BitConverter.ToInt32(bbt, 0);
-            return a;
-        }
-        /// <summary>
-        /// 位序转换
-        /// </summary>
-        /// <param name="b"></param>
-        /// <returns></returns>
-        int ChangeOrder(int b)
-        {
-            return ChangeOrder(BitConverter.GetBytes(b));
-        }
+        
     }
 }

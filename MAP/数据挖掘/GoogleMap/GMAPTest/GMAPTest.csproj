@@ -57,7 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommonHelper.cs" />
+    <Compile Include="Common\CommonHelper.cs" />
     <Compile Include="ImageCache\MyTileImageProxy.cs" />
     <Compile Include="MapProvider\Baidu\BaiduMapProvider.cs" />
     <Compile Include="Form1.cs">
@@ -85,7 +85,7 @@
     <Compile Include="SHP\ShpContent.cs" />
     <Compile Include="SHP\ShpHead.cs" />
     <Compile Include="SHP\SHPHelper.cs" />
-    <Compile Include="Utility.cs" />
+    <Compile Include="Common\Utility.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

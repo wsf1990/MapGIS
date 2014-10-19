@@ -246,5 +246,34 @@ namespace GMAPTest
             return Path.Combine("root", zoom.ToString(), pos.X.ToString(), pos.Y + ".png");
         }
         #endregion
+
+        #region 6. 字节转换
+        /// <summary>
+        /// 位序转换
+        /// </summary>
+        /// <param name="lbt"></param>
+        /// <returns></returns>
+        public static int ChangeOrder(byte[] lbt)
+        {
+            //int a = 9994;
+            //byte[] lbt = BitConverter.GetBytes(a);  //将int转变为byte
+            byte[] bbt = new byte[4];             //用于存放big byte，维数为4
+            bbt[0] = lbt[3];                       //0
+            bbt[1] = lbt[2];                       //0
+            bbt[2] = lbt[1];                       //39
+            bbt[3] = lbt[0];                       //10
+            int a = BitConverter.ToInt32(bbt, 0);
+            return a;
+        }
+        /// <summary>
+        /// 位序转换
+        /// </summary>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static int ChangeOrder(int b)
+        {
+            return ChangeOrder(BitConverter.GetBytes(b));
+        }
+        #endregion
     }
 }
