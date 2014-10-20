@@ -38,10 +38,7 @@ namespace GMAPTest.SHP
 
                     var bj = br.ReadByte();//dBASE IV编密码标记。
 
-                    for (int i = 0; i < 12; i++)//保留字节，用于多用户处理时使用。
-                    {
-                        br.ReadByte();
-                    }
+                    br.ReadBytes(12);//保留字节，用于多用户处理时使用。
 
                     var mdx = br.ReadByte();//DBF文件的MDX标识
 
@@ -49,10 +46,32 @@ namespace GMAPTest.SHP
 
                     br.ReadInt16();
 
-                    int FieldCount = (headcount - 33) / 8;//字段个数
+                    int FieldCount = (headcount - 33) / 32;//字段个数
+                    List<DBFField> Fields = new List<DBFField>();
                     for (int i = 0; i < FieldCount; i++)//开始读取字段信息
                     {
-                        
+                        DBFField field = new DBFField();
+                        var bytes = br.ReadBytes(11);
+                        field.FieldName = Encoding.ASCII.GetString(bytes); //字段名称
+                        field.FieldType = Encoding.ASCII.GetString(new byte[] { br.ReadByte() });//字段类型
+                        br.ReadBytes(4);
+                        field.FieldLength = br.ReadByte();//长度
+                        field.FieldPricision = br.ReadByte();//精度
+                        br.ReadBytes(2);
+                        field.FieldID = br.ReadByte();//工作区ID
+                        br.ReadBytes(10);
+                        field.FieldMdx = br.ReadByte();
+                        Fields.Add(field);
+                    }
+                    //读取记录
+                    while (br.BaseStream.Position != br.BaseStream.Length)
+                    {
+                        for (int i = 0; i < Fields.Count; i++)
+                        {
+                            var field = Fields[i];
+                            var con = br.ReadBytes(field.FieldLength);
+                            var str = Encoding.ASCII.GetString(con);
+                        }
                     }
                 }
             }
