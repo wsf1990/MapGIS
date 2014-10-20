@@ -29,4 +29,3 @@ D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\Newtons
 D:\MapGIS\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\Newtonsoft.Json.dll
 D:\MapGIS\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\Newtonsoft.Json.pdb
 D:\MapGIS\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\Newtonsoft.Json.xml
-D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\obj\Debug\GMAPTest.csprojResolveAssemblyReference.cache

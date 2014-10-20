@@ -13,17 +13,21 @@ namespace GMAPTest.SHP
     /// </summary>
     public class SHPHelper
     {
-        public void ImportShapeFileData()
+        /// <summary>
+        /// 读取SHP文件
+        /// </summary>
+        public ShpFileContent ImportShapeFileData(string fileName)
         {
             //读Shp文件头开始  
-            using (Stream stream = File.OpenRead("shp/bou2_4l.shp"))
+            using (Stream stream = File.OpenRead(fileName))
             {
                 using (BinaryReader br = new BinaryReader(stream))
                 {
-                    var head = GetHead(br);//读取头
+                    ShpFileContent Content = new ShpFileContent();
+                    Content.Head = GetHead(br);//读取头
                     //读取正文
 
-                    List<PolyLine> polyLine = new List<PolyLine>();
+                    Content.PolyLines = new List<PolyLine>();
                     //循环读取记录  
                     while (br.BaseStream.Position != br.BaseStream.Length)
                     {
@@ -35,17 +39,14 @@ namespace GMAPTest.SHP
                         {
                             case 3:
                                 var line = GetPolyLine(br);
-                                polyLine.Add(line);
+                                Content.PolyLines.Add(line);
                                 break;
                             default:
                                 Console.WriteLine("未知类型");
                                 break;
                         }
                     }
-                    if(br.BaseStream.Position == br.BaseStream.Length)
-                    {
-                        return;
-                    }
+                    return Content;
                 }
             }
         }

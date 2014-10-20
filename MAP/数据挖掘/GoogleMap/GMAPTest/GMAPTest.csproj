@@ -82,7 +82,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SHP\PolyLine.cs" />
-    <Compile Include="SHP\ShpContent.cs" />
+    <Compile Include="SHP\ShpFileContent.cs" />
     <Compile Include="SHP\ShpHead.cs" />
     <Compile Include="SHP\SHPHelper.cs" />
     <Compile Include="Common\Utility.cs" />

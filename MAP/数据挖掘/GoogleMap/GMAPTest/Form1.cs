@@ -11,6 +11,7 @@ using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
 using GMAPTest.MapProvider.Baidu;
+using GMAPTest.SHP;
 
 namespace GMAPTest
 {
@@ -31,7 +32,8 @@ namespace GMAPTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            new SHP.SHPHelper().ImportShapeFileData();
+            ShpFileContent Con = new ShpFileContent("shp/bou2_4l.shp");
+            var lines = Con.PolyLines;
             helper = new GMapHelper(gMapControl1, map_Eagle);
             helper.InitMapBox(TencentTransptationProvider.Instance);//GMapProviders.GoogleTerrainMap);
             var point = helper.GetAddressPoint("天安门,北京");
