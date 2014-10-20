@@ -22,17 +22,26 @@ namespace GMAPTest.SHP
                 {
                     var head = GetHead(br);//读取头
                     //读取正文
-                    var record = CommonHelper.ChangeOrder(br.ReadInt32());//第一个记录  记录号
 
-                    var contentLength = CommonHelper.ChangeOrder(br.ReadInt32());//记录长度
-
-                    var shapeType = br.ReadInt32();//几何类型
-
-                    if (shapeType == 3)
+                    List<PolyLine> polyLine = new List<PolyLine>();
+                    //循环读取记录  
+                    while (br.BaseStream.Position != br.BaseStream.Length)
                     {
-                        var con1 = GetPolyLine(br);
-                    }
+                        var record = CommonHelper.ChangeOrder(br.ReadInt32());//记录号
 
+                        var contentLength = CommonHelper.ChangeOrder(br.ReadInt32());//记录长度
+                        var shapeType = br.ReadInt32();//几何类型
+                        switch (shapeType)//根据不同几何类型进行处理
+                        {
+                            case 3:
+                                var line = GetPolyLine(br);
+                                polyLine.Add(line);
+                                break;
+                            default:
+                                Console.WriteLine("未知类型");
+                                break;
+                        }
+                    }
                     if(br.BaseStream.Position == br.BaseStream.Length)
                     {
                         return;
