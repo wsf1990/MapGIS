@@ -43,6 +43,8 @@ namespace GMAPTest.SHP
             var con = SHPHelper.ImportShapeFileData(fileName);
             this.Head = con.Head;
             this.PolyLines = con.PolyLines;
+            this.Polygons = con.Polygons;
+            this.Points = con.Points;
         } 
         #endregion
 
