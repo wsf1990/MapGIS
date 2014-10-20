@@ -32,8 +32,9 @@ namespace GMAPTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            ShpFileContent Con = new ShpFileContent("shp/bou2_4p.shp");
-            var lines = Con.PolyLines;
+            //ShpFileContent Con = new ShpFileContent("shp/bou2_4p.shp");
+            //var lines = Con.PolyLines;
+            DBFHelper.ImportDBFFromFile();
             helper = new GMapHelper(gMapControl1, map_Eagle);
             helper.InitMapBox(TencentTransptationProvider.Instance);//GMapProviders.GoogleTerrainMap);
             var point = helper.GetAddressPoint("天安门,北京");
