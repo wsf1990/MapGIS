@@ -49,17 +49,20 @@ namespace GMAPTest
         /// <param name="y"></param>
         public void GetTilePos(int zoom, GPoint pos, out int num, out string x, out string y)
         {
-            zoom = zoom - 1;
-            var offsetX = Math.Pow(2, zoom);
-            var offsetY = offsetX - 1;
+            //zoom = zoom - 1;
+            //var offsetX = Math.Pow(2, zoom);
+            //var offsetY = offsetX - 1;
 
-            var numX = pos.X - offsetX;
-            var numY = -pos.Y + offsetY;
+            //var numX = pos.X - offsetX;
+            //var numY = -pos.Y + offsetY;
 
-            zoom = zoom + 1;
+            //zoom = zoom + 1;
+            //num = (int)(pos.X + pos.Y) % 4 + 1;
+            //x = numX.ToString().Replace("-", "M");
+            //y = numY.ToString().Replace("-", "M");
+            x = pos.X.ToString();
+            y = pos.Y.ToString();
             num = (int)(pos.X + pos.Y) % 4 + 1;
-            x = numX.ToString().Replace("-", "M");
-            y = numY.ToString().Replace("-", "M");
         }
         #region 百度地名解析
 
