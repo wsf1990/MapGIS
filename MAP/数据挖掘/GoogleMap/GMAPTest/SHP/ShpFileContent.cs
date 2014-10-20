@@ -19,7 +19,18 @@ namespace GMAPTest.SHP
         /// <summary>
         /// 直线内容
         /// </summary>
-        public List<PolyLine> PolyLines { get; set; } 
+        public List<ShpPolyLine> PolyLines { get; set; }
+
+        /// <summary>
+        /// 点状内容
+        /// </summary>
+        public List<ShpPoint> Points { get; set; }
+
+        /// <summary>
+        /// 面状内容
+        /// </summary>
+        public List<ShpPolygon> Polygons { get; set; }
+
         #endregion
 
         #region 2. Construct
@@ -29,7 +40,9 @@ namespace GMAPTest.SHP
         }
         public ShpFileContent(string fileName)
         {
-
+            var con = SHPHelper.ImportShapeFileData(fileName);
+            this.Head = con.Head;
+            this.PolyLines = con.PolyLines;
         } 
         #endregion
 

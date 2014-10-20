@@ -66,11 +66,11 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="GMapHelper.cs" />
+    <Compile Include="Common\GMapHelper.cs" />
     <Compile Include="MapProvider\Baidu\AKSNCaculater.cs" />
     <Compile Include="MapProvider\Baidu\BaiduHelper.cs" />
     <Compile Include="MapProvider\Baidu\BaiduPosition.cs" />
-    <Compile Include="MapProvider\GDMapProvider.cs" />
+    <Compile Include="MapProvider\GaoDe\GDMapProvider.cs" />
     <Compile Include="MapProvider\IMapHelper.cs" />
     <Compile Include="MapProvider\Tencent\TencentHelper.cs" />
     <Compile Include="MapProvider\Tencent\TencentMapProvider.cs" />
@@ -81,7 +81,9 @@
     <Compile Include="ImageCache\MyImageCache.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SHP\PolyLine.cs" />
+    <Compile Include="SHP\ShpPoint.cs" />
+    <Compile Include="SHP\ShpPolygon.cs" />
+    <Compile Include="SHP\ShpPolyLine.cs" />
     <Compile Include="SHP\ShpFileContent.cs" />
     <Compile Include="SHP\ShpHead.cs" />
     <Compile Include="SHP\SHPHelper.cs" />

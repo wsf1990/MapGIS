@@ -16,7 +16,7 @@ namespace GMAPTest.SHP
         /// <summary>
         /// 读取SHP文件
         /// </summary>
-        public ShpFileContent ImportShapeFileData(string fileName)
+        public static ShpFileContent ImportShapeFileData(string fileName)
         {
             //读Shp文件头开始  
             using (Stream stream = File.OpenRead(fileName))
@@ -27,7 +27,9 @@ namespace GMAPTest.SHP
                     Content.Head = GetHead(br);//读取头
                     //读取正文
 
-                    Content.PolyLines = new List<PolyLine>();
+                    Content.PolyLines = new List<ShpPolyLine>();
+                    Content.Points = new List<ShpPoint>();
+                    Content.Polygons = new List<ShpPolygon>();
                     //循环读取记录  
                     while (br.BaseStream.Position != br.BaseStream.Length)
                     {
@@ -37,9 +39,17 @@ namespace GMAPTest.SHP
                         var shapeType = br.ReadInt32();//几何类型
                         switch (shapeType)//根据不同几何类型进行处理
                         {
+                            case  1:
+                                var point = GetPoint(br, record);
+                                Content.Points.Add(point);
+                                break;
                             case 3:
-                                var line = GetPolyLine(br);
+                                var line = GetPolyLine(br, record);
                                 Content.PolyLines.Add(line);
+                                break;
+                            case 5:
+                                var polygon = GetPolygon(br, record);
+                                Content.Polygons.Add(polygon);
                                 break;
                             default:
                                 Console.WriteLine("未知类型");
@@ -50,12 +60,13 @@ namespace GMAPTest.SHP
                 }
             }
         }
+
         /// <summary>
         /// 读取shp头
         /// </summary>
         /// <param name="br"></param>
         /// <returns></returns>
-        ShpHead GetHead(BinaryReader br)
+        static ShpHead GetHead(BinaryReader br)
         {
             ShpHead head = new ShpHead();
             var read = br.ReadInt32();//读取FileCode  
@@ -84,14 +95,34 @@ namespace GMAPTest.SHP
             head.Mmax = br.ReadDouble();
             return head;
         }
+
+        /// <summary>
+        /// 读取点状目标
+        /// </summary>
+        /// <param name="br"></param>
+        /// <param name="record"></param>
+        /// <returns></returns>
+        static ShpPoint GetPoint(BinaryReader br, int record)
+        {
+            ShpPoint point = new ShpPoint();
+            point.RecordNumber = record;
+            PointLatLng p = new PointLatLng();
+            p.Lng = br.ReadDouble();
+            p.Lat = br.ReadDouble();
+            point.Point = p;
+            return point;
+        }
+
         /// <summary>
         /// 读取一个记录项  直线
         /// </summary>
         /// <param name="br"></param>
+        /// <param name="record"></param>
         /// <returns></returns>
-        PolyLine GetPolyLine(BinaryReader br)
+        static ShpPolyLine GetPolyLine(BinaryReader br, int record)
         {
-            PolyLine line = new PolyLine();
+            ShpPolyLine line = new ShpPolyLine();
+            line.RecordNumber = record;//保存记录号
             line.Box = new double[4];
             line.Box[0] = br.ReadDouble();
             line.Box[1] = br.ReadDouble();
@@ -119,6 +150,42 @@ namespace GMAPTest.SHP
             }
             return line;
         }
-        
+        /// <summary>
+        /// 读取一个记录项  直线
+        /// </summary>
+        /// <param name="br"></param>
+        /// <param name="record"></param>
+        /// <returns></returns>
+        static ShpPolygon GetPolygon(BinaryReader br, int record)
+        {
+            var polygon = new ShpPolygon();
+            polygon.RecordNumber = record;//保存记录号
+            polygon.Box = new double[4];
+            polygon.Box[0] = br.ReadDouble();
+            polygon.Box[1] = br.ReadDouble();
+            polygon.Box[2] = br.ReadDouble();
+            polygon.Box[3] = br.ReadDouble();
+
+            polygon.NumParts = br.ReadInt32();
+            
+            polygon.NumPoints = br.ReadInt32();
+
+            polygon.Parts = new int[polygon.NumParts];
+            int l = 0;
+            while (l < polygon.NumParts)
+            {
+                polygon.Parts[l++] = br.ReadInt32();
+            }
+            l = 0;
+            polygon.Points = new PointLatLng[polygon.NumPoints];
+            while (polygon.NumPoints > l)
+            {
+                var point = new PointLatLng();
+                point.Lng = br.ReadDouble();
+                point.Lat = br.ReadDouble();
+                polygon.Points[l++] = point;
+            }
+            return polygon;
+        }
     }
 }

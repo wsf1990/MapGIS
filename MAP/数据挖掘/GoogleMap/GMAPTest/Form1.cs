@@ -32,7 +32,7 @@ namespace GMAPTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            ShpFileContent Con = new ShpFileContent("shp/bou2_4l.shp");
+            ShpFileContent Con = new ShpFileContent("shp/bou2_4p.shp");
             var lines = Con.PolyLines;
             helper = new GMapHelper(gMapControl1, map_Eagle);
             helper.InitMapBox(TencentTransptationProvider.Instance);//GMapProviders.GoogleTerrainMap);

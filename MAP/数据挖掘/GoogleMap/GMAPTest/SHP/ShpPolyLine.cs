@@ -7,8 +7,13 @@ using System.Threading.Tasks;
 
 namespace GMAPTest.SHP
 {
-    public class PolyLine
+    public class ShpPolyLine
     {
+        /// <summary>
+        /// 文件中的记录号
+        /// </summary>
+        public int RecordNumber { get; set; }
+
         /// <summary>
         /// 坐标范围
         /// </summary>
