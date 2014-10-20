@@ -10,11 +10,13 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using System.Drawing;
 
 namespace GMAPTest
 {
     public class CommonHelper
     {
+        #region 1. MD5
         /// <summary>
         /// MD5
         /// </summary>
@@ -39,8 +41,10 @@ namespace GMAPTest
             {
                 throw;
             }
-        }
+        } 
+        #endregion
 
+        #region 2. URL读取内容
         /// <summary>
         /// 获取URL地址网页数据
         /// </summary>
@@ -93,17 +97,28 @@ namespace GMAPTest
                 string err = ex.Message;
                 return string.Empty;
             }
-        }
+        } 
+        #endregion
 
-        #region JSON处理
+        #region 3. JSON处理
         /// <summary>
         /// 获取返回JSON中的result
         /// </summary>
         /// <returns></returns>
-        public static string GetResultJson(string json)
+        public static string GetResultJsonBaidu(string json)
+        {
+            return GetResultJson(json, 1);
+        }
+
+        public static string GetResultJsonTencent(string json)
+        {
+            return GetResultJson(json, 2);
+        }
+
+        public static string GetResultJson(string json, int index)
         {
             json = json.Substring(json.IndexOf("{")).Trim(')');
-            return JObject.Parse(json).Properties().Select(s => s.Value.ToString()).ToArray()[1];
+            return JObject.Parse(json).Properties().Select(s => s.Value.ToString()).ToArray()[index];
         }
         /// <summary>
         /// 根据Dictionary获取JSON数据
@@ -166,7 +181,7 @@ namespace GMAPTest
         }
         #endregion
 
-        #region Unicode处理
+        #region 4. Unicode处理
         /// <summary>
         /// 获取Unicode
         /// </summary>
@@ -199,6 +214,65 @@ namespace GMAPTest
                 sb.Append(Encoding.Unicode.GetString(bytes));
             }
             return sb.ToString();
+        }
+        #endregion
+
+        #region 5. 图像处理
+        /// <summary>
+        /// 图像转换为字节数组
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <param name="zoom"></param>
+        /// <returns></returns>
+        public static byte[] GetBytesFormBM(string fileName)
+        {
+            using (Bitmap bm = new Bitmap(fileName))
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    bm.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    return ms.ToArray();
+                }
+            }
+        }
+        /// <summary>
+        /// 得到瓦片存放路径
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <param name="zoom"></param>
+        /// <returns></returns>
+        public static string GetImgFileName(GMap.NET.GPoint pos, int zoom)
+        {
+            return Path.Combine("root", zoom.ToString(), pos.X.ToString(), pos.Y + ".png");
+        }
+        #endregion
+
+        #region 6. 字节转换
+        /// <summary>
+        /// 位序转换
+        /// </summary>
+        /// <param name="lbt"></param>
+        /// <returns></returns>
+        public static int ChangeOrder(byte[] lbt)
+        {
+            //int a = 9994;
+            //byte[] lbt = BitConverter.GetBytes(a);  //将int转变为byte
+            byte[] bbt = new byte[4];             //用于存放big byte，维数为4
+            bbt[0] = lbt[3];                       //0
+            bbt[1] = lbt[2];                       //0
+            bbt[2] = lbt[1];                       //39
+            bbt[3] = lbt[0];                       //10
+            int a = BitConverter.ToInt32(bbt, 0);
+            return a;
+        }
+        /// <summary>
+        /// 位序转换
+        /// </summary>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static int ChangeOrder(int b)
+        {
+            return ChangeOrder(BitConverter.GetBytes(b));
         }
         #endregion
     }

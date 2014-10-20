@@ -36,6 +36,7 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lb_Lat = new System.Windows.Forms.ToolStripStatusLabel();
             this.lb_Status = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lb_Zoom = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btn_DrawLine = new System.Windows.Forms.ToolStripButton();
             this.btn_SaveImage = new System.Windows.Forms.ToolStripButton();
@@ -45,6 +46,7 @@
             this.txt_Start = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             this.txt_End = new System.Windows.Forms.ToolStripTextBox();
+            this.map_Eagle = new GMap.NET.WindowsForms.GMapControl();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -74,10 +76,14 @@
             this.gMapControl1.Size = new System.Drawing.Size(573, 367);
             this.gMapControl1.TabIndex = 0;
             this.gMapControl1.Zoom = 0D;
+            this.gMapControl1.OnPositionChanged += new GMap.NET.PositionChanged(this.gMapControl1_OnPositionChanged);
+            this.gMapControl1.OnMapZoomChanged += new GMap.NET.MapZoomChanged(this.gMapControl1_OnMapZoomChanged);
             this.gMapControl1.Click += new System.EventHandler(this.gMapControl1_Click);
             this.gMapControl1.DoubleClick += new System.EventHandler(this.gMapControl1_DoubleClick);
             this.gMapControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl1_MouseClick);
+            this.gMapControl1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gMapControl1_MouseDown);
             this.gMapControl1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gMapControl1_MouseMove);
+            this.gMapControl1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gMapControl1_MouseUp);
             // 
             // statusStrip1
             // 
@@ -86,7 +92,8 @@
             this.lb_Lon,
             this.toolStripStatusLabel1,
             this.lb_Lat,
-            this.lb_Status});
+            this.lb_Status,
+            this.lb_Zoom});
             this.statusStrip1.Location = new System.Drawing.Point(0, 345);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(573, 22);
@@ -120,6 +127,11 @@
             this.lb_Status.Name = "lb_Status";
             this.lb_Status.Size = new System.Drawing.Size(52, 17);
             this.lb_Status.Text = "Normal";
+            // 
+            // lb_Zoom
+            // 
+            this.lb_Zoom.Name = "lb_Zoom";
+            this.lb_Zoom.Size = new System.Drawing.Size(0, 17);
             // 
             // toolStrip1
             // 
@@ -193,17 +205,49 @@
             this.txt_End.Text = "北京,国家大剧院";
             this.txt_End.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_End_KeyDown);
             // 
+            // map_Eagle
+            // 
+            this.map_Eagle.BackColor = System.Drawing.Color.Transparent;
+            this.map_Eagle.Bearing = 0F;
+            this.map_Eagle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.map_Eagle.CanDragMap = true;
+            this.map_Eagle.EmptyTileColor = System.Drawing.Color.Navy;
+            this.map_Eagle.GrayScaleMode = false;
+            this.map_Eagle.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
+            this.map_Eagle.LevelsKeepInMemmory = 5;
+            this.map_Eagle.Location = new System.Drawing.Point(324, 188);
+            this.map_Eagle.Margin = new System.Windows.Forms.Padding(8);
+            this.map_Eagle.MarkersEnabled = true;
+            this.map_Eagle.MaxZoom = 2;
+            this.map_Eagle.MinZoom = 2;
+            this.map_Eagle.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
+            this.map_Eagle.Name = "map_Eagle";
+            this.map_Eagle.NegativeMode = false;
+            this.map_Eagle.PolygonsEnabled = true;
+            this.map_Eagle.RetryLoadTile = 0;
+            this.map_Eagle.RoutesEnabled = true;
+            this.map_Eagle.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
+            this.map_Eagle.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
+            this.map_Eagle.ShowTileGridLines = true;
+            this.map_Eagle.Size = new System.Drawing.Size(257, 187);
+            this.map_Eagle.TabIndex = 3;
+            this.map_Eagle.Zoom = 0D;
+            this.map_Eagle.OnPositionChanged += new GMap.NET.PositionChanged(this.map_Eagle_OnPositionChanged);
+            this.map_Eagle.OnMapZoomChanged += new GMap.NET.MapZoomChanged(this.map_Eagle_OnMapZoomChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(573, 367);
-            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.map_Eagle);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.gMapControl1);
             this.Name = "Form1";
             this.Text = "GIS - 魏守峰 - 3.0";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
@@ -231,6 +275,8 @@
         private System.Windows.Forms.ToolStripTextBox txt_Start;
         private System.Windows.Forms.ToolStripLabel toolStripLabel3;
         private System.Windows.Forms.ToolStripTextBox txt_End;
+        private System.Windows.Forms.ToolStripStatusLabel lb_Zoom;
+        private GMap.NET.WindowsForms.GMapControl map_Eagle;
     }
 }
 

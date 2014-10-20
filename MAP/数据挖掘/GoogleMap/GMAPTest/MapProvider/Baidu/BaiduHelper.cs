@@ -8,7 +8,7 @@ using Newtonsoft.Json.Linq;
 
 namespace GMAPTest.MapProvider.Baidu
 {
-    public class BaiduHelper
+    public class BaiduHelper : IMapHelper
     {
         /// <summary>
         /// 地名解析为经纬度
@@ -16,7 +16,7 @@ namespace GMAPTest.MapProvider.Baidu
         /// <param name="address"></param>
         /// <param name="status"></param>
         /// <returns></returns>
-        public static PointLatLng GetLocation(string address, out GeoCoderStatusCode status)
+        public PointLatLng GetLocation(string address, out GeoCoderStatusCode status)
         {
             //Dictionary<string, string> dict = new Dictionary<string,string>();
             //dict.Add("address", address);
@@ -29,7 +29,7 @@ namespace GMAPTest.MapProvider.Baidu
             if (json.Contains("\"status\":0"))
             {
                 status = GeoCoderStatusCode.G_GEO_SUCCESS;
-                var str = CommonHelper.GetResultJson(json);
+                var str = CommonHelper.GetResultJsonBaidu(json);
                 var pos = CommonHelper.GetObjectByJson<BaiduPosition>(str);
                 return pos.location;
             }
@@ -38,14 +38,14 @@ namespace GMAPTest.MapProvider.Baidu
 
         }
 
-        public static Placemark GetAddress(PointLatLng point, out GeoCoderStatusCode status)
+        public Placemark GetAddress(PointLatLng point, out GeoCoderStatusCode status)
         {
             //坐标的类型，目前支持的坐标类型包括：bd09ll（百度经纬度坐标）、gcj02ll（国测局经纬度坐标）、wgs84ll（ GPS经纬度）
             string coordtype = "bd09ll";
             string url = "http://api.map.baidu.com/geocoder/v2/?ak=" + AKSNCaculater.ak + "&callback=renderReverse&location=" + point.Lat + "," + point.Lng + "&output=json&pois=0&coordtype=" + coordtype;
             string json = CommonHelper.GetUrl("GET", url);
             status = GeoCoderStatusCode.G_GEO_SUCCESS;
-            var str = CommonHelper.GetResultJson(json);
+            var str = CommonHelper.GetResultJsonBaidu(json);
             var address = CommonHelper.GetObjectByJson<BaiduAddress>(str);
             Placemark placemark = new Placemark();
             placemark.LocalityName = address.formatted_address;

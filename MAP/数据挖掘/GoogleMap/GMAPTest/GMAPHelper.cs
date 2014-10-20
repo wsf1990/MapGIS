@@ -9,6 +9,7 @@ using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
+using GMAPTest.Marker.ToolTip;
 
 namespace GMAPTest
 {
@@ -30,11 +31,12 @@ namespace GMAPTest
         /// <summary>
         /// 显示控件
         /// </summary>
-        GMapControl Control;
+        GMapControl Control, Eagel;
 
-        public GMapHelper(GMapControl con)
+        public GMapHelper(GMapControl con, GMapControl eagle)
         {
             this.Control = con;
+            this.Eagel = eagle;
         }
         #region 1. 初始化
         /// <summary>
@@ -56,11 +58,19 @@ namespace GMAPTest
             //gMapControl1.MapProvider = GMap.NET.MapProviders.BingMapProvider.Instance;
             //control.MapProvider = GMapProviders.GoogleChinaMap;
             Control.MapProvider = provider;
+            Eagel.MapProvider = provider;
+            Eagel.DragButton = MouseButtons.Left;
             Control.DragButton = MouseButtons.Left;
 
-            Control.MinZoom = 1;
+            Control.MinZoom = 4;//百度最低level为4
+            Eagel.MinZoom = 4;
+            Eagel.MaxZoom = 14;
             Control.MaxZoom = 19;
-            Control.Zoom = 11;
+            Control.Zoom = 4;
+            Eagel.Zoom = 4;
+            //添加第二图层
+            //GMapOverlay overlay = new GMapOverlay("second");
+            //overlay.
             //添加路径层
             Route = new GMapOverlay("routes");
             Control.Overlays.Add(Route);
@@ -93,7 +103,7 @@ namespace GMAPTest
             //var currentMarker = new GMapMarkerGoogleRed(markerPosition);//Google红点
 
             var currentMarker = new MyHomeMarker(markerPosition);
-
+            currentMarker.ToolTip = new MyToolTip(currentMarker);
             Top_Marker.Markers.Add(currentMarker);
             var center = new GMarkerCross(markerPosition);
             //var center = new GMapMarker(markerPosition);//十字叉丝
@@ -176,14 +186,15 @@ namespace GMAPTest
         /// 绘制圆，未实现
         /// </summary>
         /// <param name="point"></param>
-        public void DrawCircle(PointLatLng point)
+        public void DrawCircle(PointLatLng point, params string[] addressName)
         {
             //var circle = new GMarkerCross(point);
             var circle = new CircleMarker(point);
             //var circle = new GMarkerGoogle(point, GMarkerGoogleType.pink_pushpin);
             //var circle = new GMarkerGoogle(point, new Bitmap("Snow.png"));//使用自定义图标完成Mark
             //var circle = new MyHomeMarker(point);
-            circle.ToolTipText = "wsf";
+            circle.ToolTipText = addressName[0] ?? "wsf";
+            circle.ToolTip = new MyToolTip(circle);
             circle.ToolTipPosition.Offset(new Point(10, 20));
             circle.ToolTipMode = MarkerTooltipMode.Always;
             Top_Marker.Markers.Add(circle);
@@ -261,7 +272,7 @@ namespace GMAPTest
             GeoCoderStatusCode code = GeoCoderStatusCode.Unknow;
             var mark = provider.GetPlacemark(place, out code);
             if (mark.HasValue)
-                return mark.Value.Address;
+                return mark.Value.HouseNo;
             return "";
         } 
         #endregion

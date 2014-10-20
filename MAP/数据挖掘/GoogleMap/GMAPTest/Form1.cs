@@ -11,6 +11,7 @@ using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
 using GMAPTest.MapProvider.Baidu;
+using GMAPTest.SHP;
 
 namespace GMAPTest
 {
@@ -31,9 +32,11 @@ namespace GMAPTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            helper = new GMapHelper(gMapControl1);
-            helper.InitMapBox(BaiduMapProvider.Instance);//GMapProviders.GoogleTerrainMap);
-            var point = helper.GetAddressPoint("天安门");
+            ShpFileContent Con = new ShpFileContent("shp/bou2_4l.shp");
+            var lines = Con.PolyLines;
+            helper = new GMapHelper(gMapControl1, map_Eagle);
+            helper.InitMapBox(TencentTransptationProvider.Instance);//GMapProviders.GoogleTerrainMap);
+            var point = helper.GetAddressPoint("天安门,北京");
             if (point.HasValue)
             {
                 helper.DrawAddress(point.Value);
@@ -44,7 +47,7 @@ namespace GMAPTest
         private void gMapControl1_MouseClick(object sender, MouseEventArgs e)
         {
             PointLatLng pos = gMapControl1.FromLocalToLatLng(e.X, e.Y);
-            //MessageBox.Show(helper.GetPlaceName(pos));
+            var add = helper.GetPlaceName(pos);
             if (isDrawLine && startPos == new PointLatLng(0, 0))
                 startPos = pos;
             else if (startPos != new PointLatLng(0, 0))
@@ -63,7 +66,7 @@ namespace GMAPTest
                 return;
             if (e.Clicks == 1 && e.Button == System.Windows.Forms.MouseButtons.Left)
                 //helper.AddMarker(pos);
-                helper.DrawCircle(pos);
+                helper.DrawCircle(pos, add);
         }
 
         private void gMapControl1_MouseMove(object sender, MouseEventArgs e)
@@ -72,7 +75,7 @@ namespace GMAPTest
             var latlon = gMapControl1.FromLocalToLatLng(e.X, e.Y);
             lb_Lon.Text = latlon.Lng.ToString();
             lb_Lat.Text = latlon.Lat.ToString();
-            
+            lb_Zoom.Text = gMapControl1.Zoom.ToString();
         }
 
         private void gMapControl1_DoubleClick(object sender, EventArgs e)
@@ -118,6 +121,55 @@ namespace GMAPTest
                 var route = helper.FindRoute(txt_Start.Text, txt_End.Text);
                 helper.DrawRoute(route);
             }
+        }
+        bool IsLeftDown = false;
+        private void gMapControl1_MouseUp(object sender, MouseEventArgs e)
+        {
+            IsLeftDown = false;
+        }
+
+        private void gMapControl1_MouseDown(object sender, MouseEventArgs e)
+        {
+            IsLeftDown = true;
+        }
+
+        private void gMapControl1_OnPositionChanged(PointLatLng point)
+        {
+            try
+            {
+                if (IsLeftDown && !point.IsEmpty)
+                    map_Eagle.Position = point;
+            }
+            catch(StackOverflowException ex)
+            {
+                
+            }
+        }
+
+        private void gMapControl1_OnMapZoomChanged()
+        {
+            var zoom = gMapControl1.Zoom - 5;
+            if (zoom < 4)
+                zoom = 4;
+            map_Eagle.Zoom = zoom;
+            map_Eagle.Position = gMapControl1.Position;
+        }
+
+        private void map_Eagle_OnMapZoomChanged()
+        {
+            //MessageBox.Show(map_Eagle.Zoom.ToString());
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            map_Eagle.Top = this.Height - map_Eagle.Height - 20;
+            map_Eagle.Left = this.Width - map_Eagle.Width;
+        }
+
+        private void map_Eagle_OnPositionChanged(PointLatLng point)
+        {
+            if (!IsLeftDown)//防止出现循环变化
+                gMapControl1.Position = map_Eagle.Position;
         }
     }
 }

@@ -49,26 +49,25 @@ namespace GMAPTest
         /// <param name="y"></param>
         public void GetTilePos(int zoom, GPoint pos, out int num, out string x, out string y)
         {
-            //zoom = zoom - 1;
-            //var offsetX = Math.Pow(2, zoom);
-            //var offsetY = offsetX - 1;
+            //北纬39°26'至41°03'，东经115°25'
+            //398 146
+            var level = zoom - 1;
+            var offset = (int)Math.Pow(2, level);
+            //var offsetY = offsetX / 2 - 1;
 
-            //var numX = pos.X - offsetX;
-            //var numY = -pos.Y + offsetY;
-
-            //zoom = zoom + 1;
-            //num = (int)(pos.X + pos.Y) % 4 + 1;
-            //x = numX.ToString().Replace("-", "M");
-            //y = numY.ToString().Replace("-", "M");
-            x = pos.X.ToString();
-            y = pos.Y.ToString();
-            num = (int)(pos.X + pos.Y) % 4 + 1;
+            var numX = pos.X - offset - (int)Math.Pow(2, level - 2);
+            var numY = -pos.Y + offset - (int)(7 * Math.Pow(2, level - 6));
+            //if (zoom <= 6)
+            //    numY -= 2;
+            num = GetServerNum(pos, 5);// (int)(pos.X + pos.Y) % 4 + 1;
+            x = numX.ToString().Replace("-", "M");
+            y = numY.ToString().Replace("-", "M");
         }
         #region 百度地名解析
 
         public Placemark? GetPlacemark(PointLatLng location, out GeoCoderStatusCode status)
         {
-            var address = BaiduHelper.GetAddress(location, out status);
+            var address = new BaiduHelper().GetAddress(location, out status);
             return address;
         }
 
@@ -84,7 +83,7 @@ namespace GMAPTest
 
         public PointLatLng? GetPoint(string keywords, out GeoCoderStatusCode status)
         {
-            return BaiduHelper.GetLocation(keywords, out status);
+            return new BaiduHelper().GetLocation(keywords, out status);
         }
 
         public GeoCoderStatusCode GetPoints(Placemark placemark, out List<PointLatLng> pointList)
