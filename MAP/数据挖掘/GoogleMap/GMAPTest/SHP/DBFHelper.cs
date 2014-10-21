@@ -14,7 +14,7 @@ namespace GMAPTest.SHP
     {
         public static void ImportDBFFromFile()
         {
-            using(Stream stream = File.OpenRead("shp/bou2_4l.dbf"))
+            using(Stream stream = File.OpenRead("shp/test.dbf"))
             {
                 using (BinaryReader br = new BinaryReader(stream))
                 {
@@ -63,18 +63,107 @@ namespace GMAPTest.SHP
                         field.FieldMdx = br.ReadByte();
                         Fields.Add(field);
                     }
+                    var last = br.ReadByte();//文件头最后一个字节
                     //读取记录
                     while (br.BaseStream.Position != br.BaseStream.Length)
                     {
+                        br.ReadByte();//第一个字节不读
                         for (int i = 0; i < Fields.Count; i++)
                         {
                             var field = Fields[i];
                             var con = br.ReadBytes(field.FieldLength);
-                            var str = Encoding.ASCII.GetString(con);
+                            var s = Encoding.GetEncoding("gb2312").GetString(con);//读取字段内容，任何格式均可以以此种读法
                         }
                     }
                 }
             }
         }
+
+        public static void WriteDBF()
+        {
+            using(Stream stream = File.OpenWrite("shp/test.dbf"))
+            {
+                using(BinaryWriter bw = new BinaryWriter(stream))
+                {
+                    byte tempByte = 0x03;
+                    byte[] tempBytes;
+                    bw.Write(tempByte);
+
+                    tempBytes = new byte[3];
+                    tempBytes[0] = Convert.ToByte(14);
+                    tempBytes[1] = Convert.ToByte(10);
+                    tempBytes[2] = Convert.ToByte(20);
+                    bw.Write(tempBytes);
+
+                    int rowCount = 2;
+                    bw.Write(rowCount);
+
+                    int tempInt = 33 + 2 * 32;//2列   文件头中的字节数。
+                    bw.Write((Int16)tempInt);
+
+                    List<DBFField> Fields = new List<DBFField>();
+                    Fields.Add(new DBFField() { FieldID = 0, FieldLength = 10, FieldMdx = 0, FieldName = "ID", FieldType = "N", FieldPricision = 0 });
+                    Fields.Add(new DBFField() { FieldID = 0, FieldLength = 8, FieldMdx = 0, FieldName = "Name", FieldType = "C", FieldPricision = 0 });
+                    //一条记录中的字节长度。
+                    int length = 0;
+                    Fields.ForEach(s => length += s.FieldLength);
+                    bw.Write((Int16)length);
+
+                    tempBytes = new byte[20]; 
+                    bw.Write(tempBytes);
+
+                    Fields.ForEach(s =>
+                    {
+                        var bytes = ConvertStringToBytes(s.FieldName, 11);
+                        bw.Write(bytes);
+
+                        bw.Write(ConvertStringToBytes(s.FieldType, 1));
+
+                        bw.Write(new byte[4]);
+
+                        bw.Write(s.FieldLength);
+
+                        bw.Write(s.FieldPricision);
+
+                        bw.Write(new byte[14]);
+                    });
+                    tempByte = 0x0D;
+                    bw.Write(tempByte);
+
+                    //记录
+                    List<Test> list = new List<Test>();
+                    list.Add(new Test(){ ID = 1, Name = "wsf1"});
+                    list.Add(new Test(){ ID = 2, Name = "wsf2"});
+
+                    list.ForEach(s => 
+                        {
+                            bw.Write(tempByte);//记录第一个为空
+                            bw.Write(ConvertStringToBytes(s.ID.ToString(), 10));
+                            bw.Write(ConvertStringToBytes(s.Name, 8));
+                        });
+                    
+                }
+            }
+        }
+        static byte[] ConvertStringToBytes(string str, int length)
+        {
+            var bytes = Encoding.GetEncoding("gb2312").GetBytes(str);
+            if(bytes.Length == length)
+                return bytes;
+            byte[] temp = new byte[length];
+            for (int i = 0; i < length; i++)
+            {
+                temp[i] = i >= bytes.Length ? (byte)0x00 : bytes[i];
+            }
+            return temp;
+        }
+    }
+    /// <summary>
+    /// DBF测试
+    /// </summary>
+    public class Test
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
     }
 }

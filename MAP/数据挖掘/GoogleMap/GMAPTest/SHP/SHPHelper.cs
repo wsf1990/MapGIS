@@ -60,13 +60,32 @@ namespace GMAPTest.SHP
                 }
             }
         }
+        /// <summary>
+        /// 写内容到SHP文件
+        /// </summary>
+        /// <param name="fileName"></param>
+        public static void WriteShapeToFile(ShpFileContent Content, string fileName)
+        {
+            using(Stream stream = File.OpenWrite(fileName))
+            {
+                using(BinaryWriter bw = new BinaryWriter(stream))
+                {
+                    WriteShpHead(Content.Head, bw);
+                    //先插入Point
+                    WriteShpPoint(Content.Points, bw, 0);
+                    WriteShpPolyLine(Content.PolyLines, bw, Content.Points.Count);
+                    WriteShpPolygon(Content.Polygons, bw, Content.Points.Count + Content.PolyLines.Count);
+                }
+            }
+        }
 
+        #region 1. Read Shp
         /// <summary>
         /// 读取shp头
         /// </summary>
         /// <param name="br"></param>
         /// <returns></returns>
-        static ShpHead GetHead(BinaryReader br)
+        public static ShpHead GetHead(BinaryReader br)
         {
             ShpHead head = new ShpHead();
             var read = br.ReadInt32();//读取FileCode  
@@ -135,7 +154,7 @@ namespace GMAPTest.SHP
 
             line.Parts = new int[line.NumParts];
             int l = 0;
-            while(l < line.NumParts)
+            while (l < line.NumParts)
             {
                 line.Parts[l++] = br.ReadInt32();
             }
@@ -167,7 +186,7 @@ namespace GMAPTest.SHP
             polygon.Box[3] = br.ReadDouble();
 
             polygon.NumParts = br.ReadInt32();
-            
+
             polygon.NumPoints = br.ReadInt32();
 
             polygon.Parts = new int[polygon.NumParts];
@@ -186,6 +205,117 @@ namespace GMAPTest.SHP
                 polygon.Points[l++] = point;
             }
             return polygon;
+        } 
+        #endregion
+
+        #region 2. Write Shp
+        /// <summary>
+        /// 写SHP头
+        /// </summary>
+        /// <param name="head"></param>
+        /// <param name="bw"></param>
+        static void WriteShpHead(ShpHead head, BinaryWriter bw)
+        {
+            bw.Write(CommonHelper.ChangeOrder(head.FileCode));
+            bw.Write(0); bw.Write(0); bw.Write(0); bw.Write(0); bw.Write(0);
+            bw.Write(CommonHelper.ChangeOrder(head.FileLength));
+            bw.Write(head.Version);
+            bw.Write(head.ShpType);
+            bw.Write(head.Xmin);
+            bw.Write(head.Ymin);
+            bw.Write(head.Xmax);
+            bw.Write(head.Ymax);
+            bw.Write(head.Zmin);
+            bw.Write(head.Zmax);
+            bw.Write(head.Mmin);
+            bw.Write(head.Xmax);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="points"></param>
+        /// <param name="bw"></param>
+        /// <param name="index">起始记录号</param>
+        static void WriteShpPoint(List<ShpPoint> points, BinaryWriter bw, int index)
+        {
+            for (int i = 0; i < points.Count; i++)
+            {
+                //一条记录
+                bw.Write(CommonHelper.ChangeOrder(index + i));
+                int contentLength = 0;
+                bw.Write(CommonHelper.ChangeOrder(contentLength));
+                bw.Write(1);
+                bw.Write(points[i].Point.Lng);
+                bw.Write(points[i].Point.Lat);
+            }
+        }
+        /// <summary>
+        /// 写PolyLine
+        /// </summary>
+        /// <param name="lines"></param>
+        /// <param name="bw"></param>
+        /// <param name="index"></param>
+        static void WriteShpPolyLine(List<ShpPolyLine> lines, BinaryWriter bw, int index)
+        {
+            for (int i = 0; i < lines.Count; i++)
+            {
+                //一条记录
+                bw.Write(CommonHelper.ChangeOrder(index + i));
+                int contentLength = 0;
+                bw.Write(CommonHelper.ChangeOrder(contentLength));
+                bw.Write(3);
+                var line = lines[i];
+                foreach (var item in line.Box)
+                {
+                    bw.Write(item);
+                }
+                bw.Write(line.NumParts);
+                bw.Write(line.NumPoints);
+                for (int j = 0; j < line.NumParts; j++)
+                {
+                    bw.Write(line.Parts[j]);
+                }
+                for (int j = 0; j < line.Points.Length; j++)
+                {
+                    bw.Write(line.Points[j].Lng);
+                    bw.Write(line.Points[j].Lat);
+                }
+            }
+        }
+        /// <summary>
+        /// 写面状目标
+        /// </summary>
+        /// <param name="polygons"></param>
+        /// <param name="bw"></param>
+        /// <param name="index"></param>
+        static void WriteShpPolygon(List<ShpPolygon> polygons, BinaryWriter bw, int index)
+        {
+            for (int i = 0; i < polygons.Count; i++)
+            {
+                //一条记录
+                bw.Write(CommonHelper.ChangeOrder(index + i));
+                int contentLength = 0;
+                bw.Write(CommonHelper.ChangeOrder(contentLength));
+                bw.Write(5);
+                var polygon = polygons[i];
+                foreach (var item in polygon.Box)
+                {
+                    bw.Write(item);
+                }
+                bw.Write(polygon.NumParts);
+                bw.Write(polygon.NumPoints);
+                for (int j = 0; j < polygon.NumParts; j++)
+                {
+                    bw.Write(polygon.Parts[j]);
+                }
+                for (int j = 0; j < polygon.Points.Length; j++)
+                {
+                    bw.Write(polygon.Points[j].Lng);
+                    bw.Write(polygon.Points[j].Lat);
+                }
+            }
+        }
+
+        #endregion
     }
 }

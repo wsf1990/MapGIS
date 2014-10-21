@@ -90,6 +90,8 @@
     <Compile Include="SHP\ShpHead.cs" />
     <Compile Include="SHP\SHPHelper.cs" />
     <Compile Include="Common\Utility.cs" />
+    <Compile Include="SHP\SHXFileContent.cs" />
+    <Compile Include="SHP\SHXHelper.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
