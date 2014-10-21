@@ -43,16 +43,16 @@ namespace GoogleMap
             return schema;
         }
 
-        public static TileLayer AddLayer()
-        {
-            BruTile.Web.ArcGisTileRequest request = new ArcGisTileRequest();
-            BruTile.Web.BingRequest request = new BingRequest();
-            WebTileProvider provider = new WebTileProvider(request);
-            //var tiles = provider.GetTile(new TileInfo() { Extent = new Extent(100, 30, 102, 31), Index = new TileIndex(1, 2, 5) });
+        //public static TileLayer AddLayer()
+        //{
+        //    //BruTile.Web.ArcGisTileRequest request = new ArcGisTileRequest();
+        //    //BruTile.Web.BingRequest request = new BingRequest();
+        //    //WebTileProvider provider = new WebTileProvider(request);
+        //    ////var tiles = provider.GetTile(new TileInfo() { Extent = new Extent(100, 30, 102, 31), Index = new TileIndex(1, 2, 5) });
 
-            ITileSource tileSource = new TileSource(provider, CreateTileSchema());
-            SharpMap.Layers.TileLayer layer = new SharpMap.Layers.TileLayer(tileSource, "OSM");
-            return layer;
-        }
+        //    //ITileSource tileSource = new TileSource(provider, CreateTileSchema());
+        //    //SharpMap.Layers.TileLayer layer = new SharpMap.Layers.TileLayer(tileSource, "OSM");
+        //    //return layer;
+        //}
     }
 }

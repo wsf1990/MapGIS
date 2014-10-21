@@ -70,11 +70,17 @@ namespace GMAPTest.SHP
             {
                 using(BinaryWriter bw = new BinaryWriter(stream))
                 {
+                    int points = Content.Points == null ? 0 : Content.Points.Count;
+                    int lines = Content.PolyLines == null ? 0 : Content.PolyLines.Count;
+                    int polygons = Content.Polygons == null ? 0 : Content.Polygons.Count;
                     WriteShpHead(Content.Head, bw);
                     //先插入Point
-                    WriteShpPoint(Content.Points, bw, 0);
-                    WriteShpPolyLine(Content.PolyLines, bw, Content.Points.Count);
-                    WriteShpPolygon(Content.Polygons, bw, Content.Points.Count + Content.PolyLines.Count);
+                    if (points > 0)
+                        WriteShpPoint(Content.Points, bw, 0);
+                    if (lines > 0)
+                        WriteShpPolyLine(Content.PolyLines, bw, points);
+                    if (polygons > 0)
+                        WriteShpPolygon(Content.Polygons, bw, points + lines);
                 }
             }
         }
@@ -89,7 +95,7 @@ namespace GMAPTest.SHP
         {
             ShpHead head = new ShpHead();
             var read = br.ReadInt32();//读取FileCode  
-            head.FileCode = CommonHelper.ChangeOrder(read);
+            //head.FileCode = CommonHelper.ChangeOrder(read);
             //var str = Encoding.Default.GetString(bytes);
             //System.Windows.Forms.MessageBox.Show(str);
 
@@ -100,7 +106,8 @@ namespace GMAPTest.SHP
             read = br.ReadInt32();
             head.FileLength = CommonHelper.ChangeOrder(read);//文件长度
 
-            head.Version = br.ReadInt32();//版本号
+            //head.Version = 
+            br.ReadInt32();//版本号
 
             head.ShpType = br.ReadInt32();//几何类型
 
@@ -333,8 +340,10 @@ namespace GMAPTest.SHP
             int polyline = 0;
             int polygon = 0;
             points += Cont.Points.Count * GetPointRecordLength(true);
-            Cont.PolyLines.ForEach(s => polyline += GetPolyLineRecordLength(s, true));
-            Cont.Polygons.ForEach(s => polygon += GetPolygonRecordLength(s, true));
+            if (Cont.PolyLines != null)
+                Cont.PolyLines.ForEach(s => polyline += GetPolyLineRecordLength(s, true));
+            if (Cont.Polygons != null)
+                Cont.Polygons.ForEach(s => polygon += GetPolygonRecordLength(s, true));
             return head + points + polyline + polygon;
         }
         /// <summary>

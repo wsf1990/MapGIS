@@ -47,7 +47,7 @@ namespace GoogleMap
             //ITileSource tileSource = new TileSource();
             //SharpMap.Layers.TileLayer layer = new TileLayer(tileSource, "tile");
 
-            MapLayer = MapHelper.AddShpLayer("shp/bou2_4p.shp");
+            MapLayer = MapHelper.AddShpLayer("shp/mypoint.shp");
 
             //var layer = OSMHelper.AddOSMLayer();
             //mapBox1.Map.Layers.Add(VLayer);

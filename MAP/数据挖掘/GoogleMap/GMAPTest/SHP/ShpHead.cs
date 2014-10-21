@@ -11,9 +11,9 @@ namespace GMAPTest.SHP
     /// </summary>
     public class ShpHead
     {
-        public int FileCode { get; set; }
+        public int FileCode { get { return 9994; } }
         public int FileLength { get; set; }
-        public int Version { get; set; }
+        public int Version { get { return 1000; } }
         public int ShpType { get; set; }
         public double Xmin { get; set; }
         public double Ymin { get; set; }

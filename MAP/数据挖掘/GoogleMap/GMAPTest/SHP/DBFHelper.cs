@@ -14,7 +14,7 @@ namespace GMAPTest.SHP
     {
         public static void ImportDBFFromFile()
         {
-            using(Stream stream = File.OpenRead("shp/test.dbf"))
+            using (Stream stream = File.OpenRead("shp/bou2_4l.dbf"))
             {
                 using (BinaryReader br = new BinaryReader(stream))
                 {
@@ -67,7 +67,7 @@ namespace GMAPTest.SHP
                     //读取记录
                     while (br.BaseStream.Position != br.BaseStream.Length)
                     {
-                        br.ReadByte();//第一个字节不读
+                        var tt = br.ReadByte();//第一个字节不读
                         for (int i = 0; i < Fields.Count; i++)
                         {
                             var field = Fields[i];
@@ -81,7 +81,7 @@ namespace GMAPTest.SHP
 
         public static void WriteDBF()
         {
-            using(Stream stream = File.OpenWrite("shp/test.dbf"))
+            using (Stream stream = new FileStream("shp/test.dbf", FileMode.Create, FileAccess.Write))
             {
                 using(BinaryWriter bw = new BinaryWriter(stream))
                 {
@@ -95,15 +95,15 @@ namespace GMAPTest.SHP
                     tempBytes[2] = Convert.ToByte(20);
                     bw.Write(tempBytes);
 
-                    int rowCount = 2;
+                    int rowCount = 1000;
                     bw.Write(rowCount);
 
                     int tempInt = 33 + 2 * 32;//2列   文件头中的字节数。
                     bw.Write((Int16)tempInt);
 
                     List<DBFField> Fields = new List<DBFField>();
-                    Fields.Add(new DBFField() { FieldID = 0, FieldLength = 10, FieldMdx = 0, FieldName = "ID", FieldType = "N", FieldPricision = 0 });
-                    Fields.Add(new DBFField() { FieldID = 0, FieldLength = 8, FieldMdx = 0, FieldName = "Name", FieldType = "C", FieldPricision = 0 });
+                    Fields.Add(new DBFField() { FieldID = 0, FieldLength = (byte)10, FieldMdx = 0, FieldName = "BOU2_4M_", FieldType = "N", FieldPricision = 0 });
+                    Fields.Add(new DBFField() { FieldID = 0, FieldLength = (byte)10, FieldMdx = 0, FieldName = "BOU2_4M_ID", FieldType = "N", FieldPricision = 0 });
                     //一条记录中的字节长度。
                     int length = 0;
                     Fields.ForEach(s => length += s.FieldLength);
@@ -117,7 +117,7 @@ namespace GMAPTest.SHP
                         var bytes = ConvertStringToBytes(s.FieldName, 11);
                         bw.Write(bytes);
 
-                        bw.Write(ConvertStringToBytes(s.FieldType, 1));
+                        bw.Write((byte)(s.FieldType[0]));
 
                         bw.Write(new byte[4]);
 
@@ -132,30 +132,58 @@ namespace GMAPTest.SHP
 
                     //记录
                     List<Test> list = new List<Test>();
-                    list.Add(new Test(){ ID = 1, Name = "wsf1"});
-                    list.Add(new Test(){ ID = 2, Name = "wsf2"});
+                    for (int i = 0; i < 10000; i++)
+                    {
+                        list.Add(new Test() { BOU2_4M_ = i, BOU2_4M_ID = i });
+                    }
 
                     list.ForEach(s => 
                         {
+                            //每一行第一个字节默认为20
+                            tempByte = (byte)32;
                             bw.Write(tempByte);//记录第一个为空
-                            bw.Write(ConvertStringToBytes(s.ID.ToString(), 10));
-                            bw.Write(ConvertStringToBytes(s.Name, 8));
+                            bw.Write(ConvertStringToBytes(s.BOU2_4M_.ToString(), 10));
+                            bw.Write(ConvertStringToBytes(s.BOU2_4M_ID.ToString(), 10));
                         });
-                    
+                    //tempByte = 0x1A;
+                    //bw.Write(tempByte);
                 }
             }
         }
         static byte[] ConvertStringToBytes(string str, int length)
         {
-            var bytes = Encoding.GetEncoding("gb2312").GetBytes(str);
-            if(bytes.Length == length)
-                return bytes;
-            byte[] temp = new byte[length];
-            for (int i = 0; i < length; i++)
+            //var bytes = Encoding.GetEncoding("gb2312").GetBytes(str);
+            //if(bytes.Length == length)
+            //    return bytes;
+            //byte[] temp = new byte[length];
+            //for (int i = 0; i < length; i++)
+            //{
+            //    temp[i] = i >= bytes.Length ? (byte)0 : bytes[i];
+            //}
+            //return temp;
+            byte[] result = null;
+            byte[] tempBytes = UTF8Encoding.GetEncoding("gb2312").GetBytes(str);
+            if (tempBytes.Length == length)
             {
-                temp[i] = i >= bytes.Length ? (byte)0x00 : bytes[i];
+                result = tempBytes;
             }
-            return temp;
+            else if (tempBytes.Length > length)
+            {
+                result = new byte[length];
+                for (int i = 0; i < length; i++)
+                {
+                    result[i] = tempBytes[i];
+                }
+            }
+            else if (tempBytes.Length < length)
+            {
+                result = new byte[length];
+                for (int i = 0; i < tempBytes.Length; i++)
+                {
+                    result[i] = tempBytes[i];
+                }
+            }
+            return result;
         }
     }
     /// <summary>
@@ -163,7 +191,7 @@ namespace GMAPTest.SHP
     /// </summary>
     public class Test
     {
-        public int ID { get; set; }
-        public string Name { get; set; }
+        public int BOU2_4M_ { get; set; }
+        public int BOU2_4M_ID { get; set; }
     }
 }

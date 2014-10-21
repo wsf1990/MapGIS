@@ -25,7 +25,6 @@ namespace GoogleMap
         {
             SharpMap.Layers.VectorLayer layer = new VectorLayer("shp");
             layer.DataSource = new ShapeFile(shpFile, true);
-
             //创建大陆的样式 
             VectorStyle landStyle = new VectorStyle(); 
             landStyle.Fill = new SolidBrush(Color.FromArgb(2, 2, 2)); 

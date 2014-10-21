@@ -32,12 +32,33 @@ namespace GMAPTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            ShpFileContent Con = new ShpFileContent("shp/bou2_4p.shp");
-            SHPHelper.WriteShapeToFile(Con, "shp/1.shp");
+            ShpFileContent Con = new ShpFileContent();
+            var head = new ShpHead();
+            head.ShpType = 3;
+            head.Xmin = 100;
+            head.Xmax = 110;
+            head.Ymin = 30;
+            head.Ymax = 40;
+            Con.Head = head;
+            //var points = new List<ShpPoint>();
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    points.Add(new ShpPoint() { RecordNumber = i, Point = new PointLatLng() { Lat = 30 + i, Lng = 100 + i } });
+            //}
+            var lines = new List<ShpPolyLine>();
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    lines.Add(new ShpPolyLine() {  Box = });
+            //}
+            Con.PolyLines = lines;
+            Con.Head.FileLength = SHPHelper.GetContentLength(Con);
+            SHPHelper.WriteShapeToFile(Con, "shp/mypoint.shp");
+            //ShpFileContent Con = new ShpFileContent("shp/bou2_4p.shp");
+            //SHPHelper.WriteShapeToFile(Con, "shp/1.shp");
             //var lines = Con.PolyLines;
 
             //SHXFileContent Con = SHXHelper.ImportShxFormFile("shp/bou2_4p.shx");
-            
+
             //DBFHelper.WriteDBF();
             //DBFHelper.ImportDBFFromFile();
             helper = new GMapHelper(gMapControl1, map_Eagle);
