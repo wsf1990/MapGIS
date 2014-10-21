@@ -32,11 +32,11 @@ namespace GMAPTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //ShpFileContent Con = new ShpFileContent("shp/bou2_4p.shp");
-            //SHPHelper.WriteShapeToFile(Con, "shp/1.shp");
+            ShpFileContent Con = new ShpFileContent("shp/bou2_4p.shp");
+            SHPHelper.WriteShapeToFile(Con, "shp/1.shp");
             //var lines = Con.PolyLines;
 
-            SHXFileContent Con = SHXHelper.ImportShxFormFile("shp/bou2_4p.shx");
+            //SHXFileContent Con = SHXHelper.ImportShxFormFile("shp/bou2_4p.shx");
             
             //DBFHelper.WriteDBF();
             //DBFHelper.ImportDBFFromFile();

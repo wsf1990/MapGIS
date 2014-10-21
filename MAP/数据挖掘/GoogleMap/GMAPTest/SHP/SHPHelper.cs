@@ -242,7 +242,7 @@ namespace GMAPTest.SHP
             {
                 //一条记录
                 bw.Write(CommonHelper.ChangeOrder(index + i));
-                int contentLength = GetPointRecordLength();
+                int contentLength = GetPointRecordLength(false);
                 bw.Write(CommonHelper.ChangeOrder(contentLength));
                 bw.Write(1);
                 bw.Write(points[i].Point.Lng);
@@ -262,7 +262,7 @@ namespace GMAPTest.SHP
                 var line = lines[i];
                 //一条记录
                 bw.Write(CommonHelper.ChangeOrder(index + i));
-                int contentLength = GetPolyLineRecordLength(line);
+                int contentLength = GetPolyLineRecordLength(line, false);
                 bw.Write(CommonHelper.ChangeOrder(contentLength));
                 bw.Write(3);
                 
@@ -295,8 +295,8 @@ namespace GMAPTest.SHP
             {
                 var polygon = polygons[i];
                 //一条记录
-                bw.Write(CommonHelper.ChangeOrder(index + i));
-                int contentLength = GetPolygonRecordLength(polygon);
+                bw.Write(CommonHelper.ChangeOrder(index + i + 1));
+                int contentLength = GetPolygonRecordLength(polygon, false);
                 bw.Write(CommonHelper.ChangeOrder(contentLength));
                 bw.Write(5);
                 foreach (var item in polygon.Box)
@@ -322,45 +322,51 @@ namespace GMAPTest.SHP
         #region 3. 计算长度
         /// <summary>
         /// 获取shp字节长度
+        /// 文件头中的文件长度与记录头中的记录长度均以字( 2 字节)为单位
         /// </summary>
         /// <param name="Cont"></param>
         /// <returns></returns>
         public static int GetContentLength(ShpFileContent Cont)
         {
-            int head = 100;//头
+            int head = 100 / 2;//头
             int points = 0;
             int polyline = 0;
             int polygon = 0;
-            points += Cont.Points.Count * GetPointRecordLength();
-            Cont.PolyLines.ForEach(s => polyline += GetPolyLineRecordLength(s));
-            Cont.Polygons.ForEach(s => polygon += GetPolygonRecordLength(s));
+            points += Cont.Points.Count * GetPointRecordLength(true);
+            Cont.PolyLines.ForEach(s => polyline += GetPolyLineRecordLength(s, true));
+            Cont.Polygons.ForEach(s => polygon += GetPolygonRecordLength(s, true));
             return head + points + polyline + polygon;
         }
         /// <summary>
         /// 获取point记录长度
         /// </summary>
+        /// <param name="calcFileLength">是否是计算文件长度，计算单个长度时不需要加8</param>
         /// <returns></returns>
-        public static int GetPointRecordLength()
+        public static int GetPointRecordLength(bool calcFileLength)
         {
-            return 8 + 20;
+            return calcFileLength ? (8 + 20) / 2 : 20 / 2;
         }
         /// <summary>
         /// 获取PolyLine记录长度
         /// </summary>
         /// <param name="line"></param>
+        /// <param name="calcFileLength">是否是计算文件长度，计算单个长度时不需要加8</param>
         /// <returns></returns>
-        public static int GetPolyLineRecordLength(ShpPolyLine line)
+        public static int GetPolyLineRecordLength(ShpPolyLine line, bool calcFileLength)
         {
-            return 8 + 44 + line.NumParts * 4 + 16 * line.NumPoints;
+            int length = (44 + line.NumParts * 4 + 16 * line.NumPoints) / 2;
+            return calcFileLength ? length + 4 : length;
         }
         /// <summary>
         /// 获取Polygon记录长度
         /// </summary>
         /// <param name="polygon"></param>
+        /// <param name="calcFileLength">是否是计算文件长度，计算单个长度时不需要加8</param>
         /// <returns></returns>
-        public static int GetPolygonRecordLength(ShpPolygon polygon)
+        public static int GetPolygonRecordLength(ShpPolygon polygon, bool calcFileLength)
         {
-            return 8 + 44 + polygon.NumParts * 4 + 16 * polygon.NumPoints;
+            int length = (44 + polygon.NumParts * 4 + 16 * polygon.NumPoints) / 2;
+            return calcFileLength ? length + 4 : length;
         }
         #endregion
     }
