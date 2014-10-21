@@ -218,7 +218,7 @@ namespace GMAPTest.SHP
         {
             bw.Write(CommonHelper.ChangeOrder(head.FileCode));
             bw.Write(0); bw.Write(0); bw.Write(0); bw.Write(0); bw.Write(0);
-            bw.Write(CommonHelper.ChangeOrder(head.FileLength));
+            bw.Write(CommonHelper.ChangeOrder(head.FileLength));//文件长度
             bw.Write(head.Version);
             bw.Write(head.ShpType);
             bw.Write(head.Xmin);
@@ -242,7 +242,7 @@ namespace GMAPTest.SHP
             {
                 //一条记录
                 bw.Write(CommonHelper.ChangeOrder(index + i));
-                int contentLength = 0;
+                int contentLength = GetPointRecordLength();
                 bw.Write(CommonHelper.ChangeOrder(contentLength));
                 bw.Write(1);
                 bw.Write(points[i].Point.Lng);
@@ -259,12 +259,13 @@ namespace GMAPTest.SHP
         {
             for (int i = 0; i < lines.Count; i++)
             {
+                var line = lines[i];
                 //一条记录
                 bw.Write(CommonHelper.ChangeOrder(index + i));
-                int contentLength = 0;
+                int contentLength = GetPolyLineRecordLength(line);
                 bw.Write(CommonHelper.ChangeOrder(contentLength));
                 bw.Write(3);
-                var line = lines[i];
+                
                 foreach (var item in line.Box)
                 {
                     bw.Write(item);
@@ -292,12 +293,12 @@ namespace GMAPTest.SHP
         {
             for (int i = 0; i < polygons.Count; i++)
             {
+                var polygon = polygons[i];
                 //一条记录
                 bw.Write(CommonHelper.ChangeOrder(index + i));
-                int contentLength = 0;
+                int contentLength = GetPolygonRecordLength(polygon);
                 bw.Write(CommonHelper.ChangeOrder(contentLength));
                 bw.Write(5);
-                var polygon = polygons[i];
                 foreach (var item in polygon.Box)
                 {
                     bw.Write(item);
@@ -316,6 +317,51 @@ namespace GMAPTest.SHP
             }
         }
 
+        #endregion
+
+        #region 3. 计算长度
+        /// <summary>
+        /// 获取shp字节长度
+        /// </summary>
+        /// <param name="Cont"></param>
+        /// <returns></returns>
+        public static int GetContentLength(ShpFileContent Cont)
+        {
+            int head = 100;//头
+            int points = 0;
+            int polyline = 0;
+            int polygon = 0;
+            points += Cont.Points.Count * GetPointRecordLength();
+            Cont.PolyLines.ForEach(s => polyline += GetPolyLineRecordLength(s));
+            Cont.Polygons.ForEach(s => polygon += GetPolygonRecordLength(s));
+            return head + points + polyline + polygon;
+        }
+        /// <summary>
+        /// 获取point记录长度
+        /// </summary>
+        /// <returns></returns>
+        public static int GetPointRecordLength()
+        {
+            return 8 + 20;
+        }
+        /// <summary>
+        /// 获取PolyLine记录长度
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns></returns>
+        public static int GetPolyLineRecordLength(ShpPolyLine line)
+        {
+            return 8 + 44 + line.NumParts * 4 + 16 * line.NumPoints;
+        }
+        /// <summary>
+        /// 获取Polygon记录长度
+        /// </summary>
+        /// <param name="polygon"></param>
+        /// <returns></returns>
+        public static int GetPolygonRecordLength(ShpPolygon polygon)
+        {
+            return 8 + 44 + polygon.NumParts * 4 + 16 * polygon.NumPoints;
+        }
         #endregion
     }
 }
