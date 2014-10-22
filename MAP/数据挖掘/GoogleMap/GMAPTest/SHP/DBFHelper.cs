@@ -9,6 +9,10 @@ namespace GMAPTest.SHP
 {
     /// <summary>
     /// 读取SHP的属性文件  .dbf
+    /// The file name must have the same prefix as the shape and index file. Its suffix must be .dbf. 
+    /// The table must contain one record per shape feature.
+    /// The record order must be the same as the order of shape features in the main (*.shp)file.
+    /// The year value in the dBASE header must be the year since 1900.
     /// </summary>
     public class DBFHelper
     {
@@ -78,7 +82,9 @@ namespace GMAPTest.SHP
                 }
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public static void WriteDBF()
         {
             using (Stream stream = new FileStream("shp/test.dbf", FileMode.Create, FileAccess.Write))
@@ -90,12 +96,12 @@ namespace GMAPTest.SHP
                     bw.Write(tempByte);
 
                     tempBytes = new byte[3];
-                    tempBytes[0] = Convert.ToByte(14);
+                    tempBytes[0] = Convert.ToByte(DateTime.Now.Year - 1990);
                     tempBytes[1] = Convert.ToByte(10);
                     tempBytes[2] = Convert.ToByte(20);
                     bw.Write(tempBytes);
 
-                    int rowCount = 1000;
+                    int rowCount = 10;
                     bw.Write(rowCount);
 
                     int tempInt = 33 + 2 * 32;//2列   文件头中的字节数。
@@ -132,7 +138,7 @@ namespace GMAPTest.SHP
 
                     //记录
                     List<Test> list = new List<Test>();
-                    for (int i = 0; i < 10000; i++)
+                    for (int i = 0; i < 10; i++)
                     {
                         list.Add(new Test() { BOU2_4M_ = i, BOU2_4M_ID = i });
                     }

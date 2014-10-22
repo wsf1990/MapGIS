@@ -339,7 +339,8 @@ namespace GMAPTest.SHP
             int points = 0;
             int polyline = 0;
             int polygon = 0;
-            points += Cont.Points.Count * GetPointRecordLength(true);
+            if (Cont.Points != null)
+                points += Cont.Points.Count * GetPointRecordLength(true);
             if (Cont.PolyLines != null)
                 Cont.PolyLines.ForEach(s => polyline += GetPolyLineRecordLength(s, true));
             if (Cont.Polygons != null)
