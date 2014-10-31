@@ -32,6 +32,7 @@ namespace GMAPTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            DBFHelper.ReadDbfByOdbc();
             //ShpFileContent Con = new ShpFileContent();
             //var head = new ShpHead();
             //head.ShpType = 3;

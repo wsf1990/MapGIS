@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Odbc;
+using System.Data.OleDb;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -190,6 +193,18 @@ namespace GMAPTest.SHP
                 }
             }
             return result;
+        }
+        /// <summary>
+        /// 通过ODBC读取Dbf文件
+        /// </summary>
+        public static void ReadDbfByOdbc()
+        {
+            OleDbConnection ContactMgmt = new OleDbConnection(@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\shp;Extended Properties=dBASE IV;User ID=Admin;Password=");
+            OdbcConnection oCn = new OdbcConnection("DSN=MYDBF");
+            OdbcDataAdapter oDa = new OdbcDataAdapter(@"SELECT * FROM D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\shp\bou2_4l.dbf", oCn);
+
+            DataSet oDs = new DataSet();
+            oDa.Fill(oDs, "myTable");
         }
     }
     /// <summary>
