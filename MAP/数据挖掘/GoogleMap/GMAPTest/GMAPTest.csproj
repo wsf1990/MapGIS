@@ -75,6 +75,7 @@
     <Compile Include="MapProvider\Tencent\TencentHelper.cs" />
     <Compile Include="MapProvider\Tencent\TencentMapProvider.cs" />
     <Compile Include="MapProvider\Tencent\TencentPosition.cs" />
+    <Compile Include="MapProvider\Tian\TianHelper.cs" />
     <Compile Include="Marker\CircleMarker.cs" />
     <Compile Include="Marker\MyHomeMarker.cs" />
     <Compile Include="Marker\ToolTip\MyToolTip.cs" />

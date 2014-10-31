@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GMAPTest.MapProvider.Tian;
 using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
@@ -32,7 +33,7 @@ namespace GMAPTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            DBFHelper.ReadDbfByOdbc();
+            TianHelper.GetName();
             //ShpFileContent Con = new ShpFileContent();
             //var head = new ShpHead();
             //head.ShpType = 3;
@@ -59,7 +60,7 @@ namespace GMAPTest
             //SHPHelper.WriteShapeToFile(Con, "shp/1.shp");
             //var lines = Con.PolyLines;
 
-            SHXFileContent Con = SHXHelper.ImportShxFormFile("shp/bou2_4p.shx");
+            //SHXFileContent Con = SHXHelper.ImportShxFormFile("shp/bou2_4p.shx");
 
             //DBFHelper.WriteDBF();
             //DBFHelper.ImportDBFFromFile();
