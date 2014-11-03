@@ -1,4 +1,6 @@
-﻿using System;
+﻿using System.IO;
+using NPOI.HSSF.UserModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +13,18 @@ namespace GMAPTest.Common
     /// </summary>
     public class XLSHelper
     {
-        //public static List<> 
+        public static void Write2Xls(string path)
+        {
+            using (Stream stream = File.OpenWrite(path))
+            {
+                HSSFWorkbook book = new HSSFWorkbook();
+                var sheet = book.CreateSheet("Sheet1");
+                var row = sheet.CreateRow(0);
+
+
+                book.Write(stream);
+            }
+            
+        }
     }
 }
