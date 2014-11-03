@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace GMAPTest.Common
 {
+    #region 地址意义
     /// <summary>
     /// 谷歌查询返回地址类
     /// street_address，用于表示一个精确的街道地址。
@@ -33,7 +34,8 @@ namespace GMAPTest.Common
     /// street_number，用于表示准确的街道编号。
     /// floor，用于表示建筑物地址的楼层号。
     /// room，用于表示建筑物地址的房间编号。
-    /// </summary>
+    /// </summary> 
+    #endregion
     public class GoogleAddress
     {
         public List<Address_Component> Address_components { get; set; }
@@ -80,6 +82,38 @@ namespace GMAPTest.Common
     public enum AddressType
     {
         /// <summary>
+        /// POI
+        /// </summary>
+        point_of_interest,
+        /// <summary>
+        /// 大型十字路口
+        /// </summary>
+        intersection,
+        /// <summary>
+        /// 用于表示实体的通用别名
+        /// </summary>
+        colloquial_area,
+        /// <summary>
+        /// 用于表示合并的市镇级别政治实体
+        /// </summary>
+        locality,
+        /// <summary>
+        /// 自然景观
+        /// </summary>
+        natural_feature,
+        /// <summary>
+        /// 机构?
+        /// </summary>
+        establishment,
+        /// <summary>
+        /// 公交车站
+        /// </summary>
+        bus_station,
+        /// <summary>
+        /// 中转站
+        /// </summary>
+        transit_station,
+        /// <summary>
         /// 邮编
         /// </summary>
         postal_code,
@@ -100,8 +134,76 @@ namespace GMAPTest.Common
         /// </summary>
         administrative_area_level_2,
         /// <summary>
-        /// 县级
+        /// 
         /// </summary>
-        administrative_area_level_3
+        administrative_area_level_3,
+        /// <summary>
+        /// 仅次于地区级别的行政实体
+        /// </summary>
+        sublocality,
+        /// <summary>
+        /// 区、县
+        /// </summary>
+        sublocality_level_1,
+        /// <summary>
+        /// 乡、镇
+        /// </summary>
+        sublocality_level_2,
+        /// <summary>
+        /// 村
+        /// </summary>
+        sublocality_level_3,
+        /// <summary>
+        /// 用于表示已命名的邻近地区
+        /// </summary>
+        neighborhood,
+        /// <summary>
+        /// 用于表示已命名的位置（通常为具有常用名称的建筑物或建筑群）
+        /// </summary>
+        premise,
+        /// <summary>
+        /// 用于表示仅次于已命名位置级别的实体（通常为使用常用名称的建筑群中的某座建筑物）
+        /// </summary>
+        subpremise,
+        /// <summary>
+        /// 用于表示机场
+        /// </summary>
+        airport,
+        /// <summary>
+        /// 用于表示已命名的公园
+        /// </summary>
+        park,
+        /// <summary>
+        /// 用于表示特定邮筒
+        /// </summary>
+        post_box,
+        /// <summary>
+        /// 准确的街道编号
+        /// </summary>
+        street_number,
+        /// <summary>
+        /// 用于表示建筑物地址的楼层号
+        /// </summary>
+        floor,
+        /// <summary>
+        /// 用于表示建筑物地址的房间编号
+        /// </summary>
+        room,
+        /// <summary>
+        /// 
+        /// </summary>
+        place_of_worship,
+        /// <summary>
+        /// 路线
+        /// </summary>
+        route,
+        /// <summary>
+        /// 地铁站
+        /// </summary>
+        subway_station,
+        /// <summary>
+        /// 火车站
+        /// </summary>
+        train_station
     }
 }

@@ -34,6 +34,7 @@ namespace GMAPTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            PlaceHelper.GetPoint();
             var adds = GoogleHelper.GetAddress(new PointLatLng(57, 89));
             MessageBox.Show(adds.Count.ToString());
             //TianHelper.GetName();
@@ -68,8 +69,8 @@ namespace GMAPTest
             //DBFHelper.WriteDBF();
             //DBFHelper.ImportDBFFromFile();
             helper = new GMapHelper(gMapControl1, map_Eagle);
-            helper.InitMapBox(TianMapProvider.Instance);//GMapProviders.GoogleTerrainMap);
-            var point = helper.GetAddressPoint("天安门,北京");
+            helper.InitMapBox(TencentMapProvider.Instance);//GMapProviders.GoogleTerrainMap);
+            var point = helper.GetAddressPoint("尖吉寺");
             if (point.HasValue)
             {
                 helper.DrawAddress(point.Value);
