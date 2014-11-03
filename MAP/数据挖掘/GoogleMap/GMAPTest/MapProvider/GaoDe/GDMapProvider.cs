@@ -77,7 +77,7 @@ namespace GMAPTest
         string GetUrl(GPoint pos, int zoom)
         {
             string urlFormat = "http://webrd0{0}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=7&x={1}&y={2}&z={3}";
-            int num = (int)(pos.X + pos.Y) % 4 + 1;
+            int num = (int)GetServerNum(pos, 4) + 1;
             return string.Format(urlFormat, num, pos.X, pos.Y, zoom);
         }
     }

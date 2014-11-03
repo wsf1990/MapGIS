@@ -37,6 +37,8 @@ namespace GMAPTest
         {
             this.Control = con;
             this.Eagel = eagle;
+
+            
         }
         #region 1. 初始化
         /// <summary>

@@ -67,6 +67,11 @@ namespace GMAPTest
                 request.AllowAutoRedirect = true;
                 request.Method = method.ToUpper();
                 request.ContentType = "application/x-www-form-urlencoded";
+                request.UserAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; MALCJS; rv:11.0) like Gecko";
+                //request.Host = "ogc.tianditu.com";
+                //request.Connection = "Keep-Alive";
+                //request.ProtocolVersion = HttpVersion.Version10;
+                //request.Referer = "http://www.tianditu.com/guide/index.html";
                 if (method.ToUpper() == "POST")
                 {
                     if (!string.IsNullOrWhiteSpace(postData))

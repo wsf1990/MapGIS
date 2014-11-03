@@ -65,7 +65,7 @@ namespace GMAPTest
             //DBFHelper.WriteDBF();
             //DBFHelper.ImportDBFFromFile();
             helper = new GMapHelper(gMapControl1, map_Eagle);
-            helper.InitMapBox(TencentTransptationProvider.Instance);//GMapProviders.GoogleTerrainMap);
+            helper.InitMapBox(TianMapProvider.Instance);//GMapProviders.GoogleTerrainMap);
             var point = helper.GetAddressPoint("天安门,北京");
             if (point.HasValue)
             {
