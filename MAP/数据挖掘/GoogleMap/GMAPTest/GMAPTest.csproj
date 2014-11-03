@@ -40,9 +40,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\GMap.NET.WindowsForms.dll</HintPath>
     </Reference>
+    <Reference Include="Ionic.Zip, Version=1.9.1.5, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Ionic.Zip.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=1.2.5.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\NPOI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -60,6 +68,8 @@
     <Compile Include="Common\CommonHelper.cs" />
     <Compile Include="Common\GoogleAddress.cs" />
     <Compile Include="Common\GoogleHelper.cs" />
+    <Compile Include="Common\PlaceHelper.cs" />
+    <Compile Include="Common\XLSHelper.cs" />
     <Compile Include="ImageCache\MyTileImageProxy.cs" />
     <Compile Include="MapProvider\Baidu\BaiduMapProvider.cs" />
     <Compile Include="Form1.cs">
@@ -78,6 +88,7 @@
     <Compile Include="MapProvider\Tencent\TencentMapProvider.cs" />
     <Compile Include="MapProvider\Tencent\TencentPosition.cs" />
     <Compile Include="MapProvider\Tian\TianHelper.cs" />
+    <Compile Include="MapProvider\Tian\TianMapProvider.cs" />
     <Compile Include="Marker\CircleMarker.cs" />
     <Compile Include="Marker\MyHomeMarker.cs" />
     <Compile Include="Marker\ToolTip\MyToolTip.cs" />
@@ -127,9 +138,12 @@
     <Content Include="lib\GMap.NET.Core.xml" />
     <Content Include="lib\GMap.NET.WindowsForms.dll" />
     <Content Include="lib\GMap.NET.WindowsForms.xml" />
+    <Content Include="lib\Ionic.Zip.dll" />
     <Content Include="lib\Newtonsoft.Json.dll" />
     <Content Include="lib\Newtonsoft.Json.pdb" />
     <Content Include="lib\Newtonsoft.Json.xml" />
+    <Content Include="lib\NPOI.dll" />
+    <Content Include="lib\NPOI.XML" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

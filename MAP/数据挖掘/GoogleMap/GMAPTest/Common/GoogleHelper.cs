@@ -10,7 +10,13 @@ namespace GMAPTest.Common
 {
     public class GoogleHelper
     {
-        public static GoogleAddress GetAddress(PointLatLng point)
+        /// <summary>
+        /// 根据经纬度解析地址
+        /// Google地名解析服务
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public static List<GoogleAddress> GetAddress(PointLatLng point)
         {
             string format = "http://maps.googleapis.com/maps/api/geocode/json?latlng={0},{1}&sensor=true_or_false&language=zh-CN";
             string url = string.Format(format, point.Lat, point.Lng);
@@ -18,7 +24,24 @@ namespace GMAPTest.Common
             if(json.ToUpper().Contains("\"OK\""))
             {
                 json = CommonHelper.GetGoogleJson(json);
-                return CommonHelper.GetObjectByJson<GoogleAddress>(json);
+                return CommonHelper.GetObjectByJson<List<GoogleAddress>>(json);
+            }
+            return null;
+        }
+        /// <summary>
+        /// 根据地址解析
+        /// </summary>
+        /// <param name="address"></param>
+        /// <returns></returns>
+        public static List<GoogleAddress> GetPoint(string address)
+        {
+            string format = "http://maps.googleapis.com/maps/api/geocode/json?address={0}&sensor=true_or_false&language=zh-CN";
+            string url = string.Format(format, address);
+            string json = CommonHelper.GetUrl("GET", url);
+            if (json.ToUpper().Contains("\"OK\""))
+            {
+                json = CommonHelper.GetGoogleJson(json);
+                return CommonHelper.GetObjectByJson<List<GoogleAddress>>(json);
             }
             return null;
         }
