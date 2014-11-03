@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GMap.NET;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,11 +38,70 @@ namespace GMAPTest.Common
     {
         public List<Address_Component> Address_components { get; set; }
 
+        public string Formatted_address { get; set; }
 
+        public Geometry Geometry { get; set; }
+
+        public List<AddressType> Types { get; set; }
     }
-
+    /// <summary>
+    /// 地址信息
+    /// </summary>
     public class Address_Component
     {
+        public string Long_name{get;set;}
+        public string short_name{get;set;}
+        public List<AddressType> Types { get; set; }
+    }
+    /// <summary>
+    /// 地理信息
+    /// </summary>
+    public class Geometry
+    {
+        public Bounds Bounds { get; set; }
 
+        public PointLatLng Location { get; set; }
+
+        public string Location_type { get; set; }
+
+        public Bounds Viewport { get; set; }
+    }
+    /// <summary>
+    /// 范围
+    /// </summary>
+    public class Bounds
+    {
+        public PointLatLng Northeast { get; set; }
+        public PointLatLng Southwest { get; set; }
+    }
+    /// <summary>
+    /// 地址类型
+    /// </summary>
+    public enum AddressType
+    {
+        /// <summary>
+        /// 邮编
+        /// </summary>
+        postal_code,
+        /// <summary>
+        /// 政治实体
+        /// </summary>
+        political,
+        /// <summary>
+        /// 国家
+        /// </summary>
+        country,
+        /// <summary>
+        /// 省州级
+        /// </summary>
+        administrative_area_level_1,
+        /// <summary>
+        /// 市级
+        /// </summary>
+        administrative_area_level_2,
+        /// <summary>
+        /// 县级
+        /// </summary>
+        administrative_area_level_3
     }
 }
