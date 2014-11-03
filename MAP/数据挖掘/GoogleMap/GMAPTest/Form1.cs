@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GMAPTest.Common;
 using GMAPTest.MapProvider.Tian;
 using GMap.NET;
 using GMap.NET.MapProviders;
@@ -33,7 +34,8 @@ namespace GMAPTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            TianHelper.GetName();
+            var str = GoogleHelper.GetAddress(new PointLatLng(57, 89));
+            //TianHelper.GetName();
             //ShpFileContent Con = new ShpFileContent();
             //var head = new ShpHead();
             //head.ShpType = 3;

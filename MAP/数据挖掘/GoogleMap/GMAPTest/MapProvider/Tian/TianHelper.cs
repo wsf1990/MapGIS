@@ -11,20 +11,18 @@ namespace GMAPTest.MapProvider.Tian
         public static void GetName()
         {
             string url = "http://ogc.tianditu.com/wfssearch.shtml";
-            //var xmlPara = "<?xml version='1.0' encoding='UTF-8'?>"
-            //+ "<wfs:GetFeature maxFeatures='100' service='WFS' version='1.1.0' "
-            //+ "xmlns:wfs='http://www.opengis.net/wfs' "
-            //+ "xmlns:gml='http://www.opengis.net/gml' "
-            //+ "xmlns:ogc='http://www.opengis.net/ogc' "
-            //+ "xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' "
-            //+ "xsi:schemaLocation='http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.0.0/wfs.xsd'>"
-            //+ "<wfs:Query typeName='iso19112:SI_Gazetteer' srsName='EPSG:4326'>"
-            //+ "<ogc:Filter xmlns:ogc='http://www.opengis.net/ogc'>"
-            //+ "<ogc:And><ogc:PropertyIsLike wildCard='*' singleChar='.' escape='!'>"
-            //+ "<ogc:PropertyName>STANDARDNAME</ogc:PropertyName>"
-            //+ "<ogc:Literal>beijing</ogc:Literal>"
-            //+ "</ogc:PropertyIsLike></ogc:And></ogc:Filter>"
-            //+ "</wfs:Query></wfs:GetFeature>";
+            String strQuest = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+                    + "<wfs:GetFeature maxFeatures=\"100\" service=\"WFS\" version=\"1.0.0\" xsi:schemaLocation=\"http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.0.0/wfs.xsd\" xmlns:wfs=\"http://www.opengis.net/wfs\" xmlns:gml=\"http://www.opengis.net/gml\" xmlns:ogc=\"http://www.opengis.net/ogc\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"> "
+                    + "<wfs:Query typeName=\"DOMAIN_POI_NEW\" srsName=\"EPSG:4326\">"
+                    + "<ogc:Filter>"
+                    + "<ogc:And> "
+                    + "<ogc:PropertyIsLike wildCard=\"*\" singleChar=\".\" escape=\"!\"> "
+                    + "<ogc:PropertyName>the_geom</ogc:PropertyName>"
+                    + "<ogc:Literal>***北京***</ogc:Literal> "
+                    + // 请求的时候仅需要替换 超市 这个关键词就好,如果指定城市搜索，搜索关键词为指定城市的名称  加上空格要搜索的关键字就可以 
+                    "</ogc:PropertyIsLike>" + " </ogc:And>" + "</ogc:Filter>"
+                    + "</wfs:Query>" + "</wfs:GetFeature>";
+
             var xmlPara =
                 "<ogc:Filter>" +
                 "<ogc:DWithin>" +
@@ -35,7 +33,7 @@ namespace GMAPTest.MapProvider.Tian
                 "<ogc:Distance unit=\"m\">600</ogc:Distance>" +
                 "</ogc:DWithin>" +
                 "</ogc:Filter>";
-            var str = CommonHelper.GetUrl("POST", url, xmlPara);
+            var str = CommonHelper.GetUrl("POST", url, strQuest);
         }
 
     }

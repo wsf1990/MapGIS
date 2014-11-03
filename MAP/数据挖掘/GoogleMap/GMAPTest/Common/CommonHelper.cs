@@ -67,6 +67,8 @@ namespace GMAPTest
                 request.AllowAutoRedirect = true;
                 request.Method = method.ToUpper();
                 request.ContentType = "application/x-www-form-urlencoded";
+                request.UserAgent = "Mozilla/5.0 (Windows NT 5.1; rv:5.0.1) Gecko/20100101 Firefox/5.0.1";
+                request.Headers.Add("x-requested-with", "XMLHttpRequest"); 
                 if (method.ToUpper() == "POST")
                 {
                     if (!string.IsNullOrWhiteSpace(postData))
@@ -95,7 +97,7 @@ namespace GMAPTest
             catch (Exception ex)
             {
                 string err = ex.Message;
-                return string.Empty;
+                return err;
             }
         } 
         #endregion
@@ -119,6 +121,15 @@ namespace GMAPTest
         {
             json = json.Substring(json.IndexOf("{")).Trim(')');
             return JObject.Parse(json).Properties().Select(s => s.Value.ToString()).ToArray()[index];
+        }
+        /// <summary>
+        /// google地名解析返回json
+        /// </summary>
+        /// <param name="json"></param>
+        /// <returns></returns>
+        public static string GetGoogleJson(string json)
+        {
+            return GetResultJson(json, 0);
         }
         /// <summary>
         /// 根据Dictionary获取JSON数据
