@@ -8,6 +8,12 @@ using Newtonsoft.Json.Linq;
 
 namespace GMAPTest.Common
 {
+    /// <summary>
+    /// Google地名解析
+    /// 解析时可以设置地区偏向Region = cn  uk等
+    /// 还可以设置bounds=34.172684,-118.604794|34.236144,-118.500938
+    /// 两种方式时都会优先解析该地区地名
+    /// </summary>
     public class GoogleHelper
     {
         /// <summary>

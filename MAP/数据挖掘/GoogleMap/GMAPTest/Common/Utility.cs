@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 
 namespace GMAPTest
 {
-   public class Utility
+    public class Utility
     {
         #region 1. 两点之间距离
+
         /// <summary>
         /// 获取两点之间距离，单位为米
         /// </summary>
@@ -29,20 +30,21 @@ namespace GMAPTest
             //s = Math.Round(s * 10000) / 10000;
             //return s;
         }
+
         /// <summary>
         /// 弧度
         /// </summary>
         /// <param name="d"></param>
         /// <returns></returns>
-        static double Rad(double d)
+        private static double Rad(double d)
         {
-            return d * Math.PI / 180;
-        } 
-        #endregion
+            return d*Math.PI/180;
+        }
 
+        #endregion
     }
 
-   /// <summary>
+    /// <summary>
    /// 高斯投影中所选用的参考椭球
    /// </summary>
    public enum GaussSphere

@@ -38,14 +38,28 @@ namespace GMAPTest.Common
     #endregion
     public class GoogleAddress
     {
+        /// <summary>
+        /// 地址组成
+        /// </summary>
         public List<Address_Component> Address_components { get; set; }
-
+        /// <summary>
+        /// 格式化地址输出（通信地址）
+        /// </summary>
         public string Formatted_address { get; set; }
-
+        /// <summary>
+        /// 地理位置
+        /// </summary>
         public Geometry Geometry { get; set; }
-
+        /// <summary>
+        /// 表示地址解析器未传回原始请求的完全匹配项，但与请求地址的一部分匹配
+        /// </summary>
+        public bool Partial_match { get; set; }
+        /// <summary>
+        /// 实体类型
+        /// </summary>
         public List<AddressType> Types { get; set; }
     }
+
     /// <summary>
     /// 地址信息
     /// </summary>
@@ -55,19 +69,33 @@ namespace GMAPTest.Common
         public string short_name{get;set;}
         public List<AddressType> Types { get; set; }
     }
+
     /// <summary>
     /// 地理信息
     /// </summary>
     public class Geometry
     {
+        /// <summary>
+        /// （可选择传回）存储可完全包含传回结果的边框。请注意，这些边界可能与建议的可视区域不相符。
+        /// （例如，旧金山包含费拉隆岛。该岛实际上是旧金山市的一部分，但不应该在可视区域内传回。）
+        /// </summary>
         public Bounds Bounds { get; set; }
-
+        /// <summary>
+        /// 返回的坐标信息
+        /// </summary>
         public PointLatLng Location { get; set; }
-
-        public string Location_type { get; set; }
-
+        /// <summary>
+        /// 返回的坐标经度以及类型
+        /// </summary>
+        public LocationType Location_type { get; set; }
+        /// <summary>
+        /// viewport 包含用于显示传回结果的建议可视区域，
+        /// 并被指定为两个纬度/经度值，分别定义可视区域边框的 southwest 和 northeast 角。
+        /// 通常，该可视区域用于在将结果显示给用户时作为结果的框架
+        /// </summary>
         public Bounds Viewport { get; set; }
     }
+
     /// <summary>
     /// 范围
     /// </summary>
@@ -78,14 +106,42 @@ namespace GMAPTest.Common
 
         public override string ToString()
         {
-            return string.Format("{0},{1},{2},{3}", Southwest.Lat, Southwest.Lng, Northeast.Lat, Northeast.Lng);
+            return string.Format("{0},{1}|{2},{3}", Southwest.Lat, Southwest.Lng, Northeast.Lat, Northeast.Lng);
         }
     }
+
+    /// <summary>
+    /// location的精确程度或者说是类型
+    /// </summary>
+    public enum LocationType
+    {
+        /// <summary>
+        /// "ROOFTOP" 表示传回的结果是一个精确的地址解析值，我们可获得精确到街道地址的位置信息。
+        /// </summary>
+        ROOFTOP,
+        /// <summary>
+        /// "RANGE_INTERPOLATED" 表示返回的结果是一个近似值（通常表示某条道路上的地址），该地址处于两个精确点（如十字路口）之间。当无法对街道地址进行精确的地址解析时，通常会返回近似结果。
+        /// </summary>
+        RANGE_INTERPOLATED,
+        /// <summary>
+        /// "GEOMETRIC_CENTER" 表示返回的结果是折线（如街道）或多边形（区域）等内容的几何中心。
+        /// </summary>
+        GEOMETRIC_CENTER,
+        /// <summary>
+        /// "APPROXIMATE" 表示返回的结果是一个近似值。
+        /// </summary>
+        APPROXIMATE
+    }
+
     /// <summary>
     /// 地址类型
     /// </summary>
     public enum AddressType
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        street_address,
         /// <summary>
         /// POI
         /// </summary>

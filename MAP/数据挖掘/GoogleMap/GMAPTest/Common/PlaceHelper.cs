@@ -15,14 +15,26 @@ namespace GMAPTest.Common
     {
         public static void GetPoint()
         {
-            var list = File.ReadAllLines("D:\\simiao.txt");
+            var list = File.ReadAllLines("D:\\simiao.txt").ToList();
             List<string> lines = new List<string>();
             var lists = GetPoints(list.ToList());
-            foreach (var s in lists)
+            //foreach (var s in lists)
+            //{
+            //    lines.Add(s.Geometry.Location.Lat + "," + s.Geometry.Location.Lng);
+            //}
+            XLSHelper.Write2Xls("D:\\1.xls", lists, list, false);
+            //File.WriteAllLines("D:\\res.txt", lines);
+        }
+
+        public static void GetAddress()
+        {
+            List<PointLatLng> list = new List<PointLatLng>();
+            for (int i = 0; i < 20; i++)
             {
-                lines.Add(s.Geometry.Location.Lat + "," + s.Geometry.Location.Lng);
+                list.Add(new PointLatLng(30 + i, 40 + i));     
             }
-            File.WriteAllLines("D:\\res.txt", lines);
+            var adds = GetAddresses(list);
+            XLSHelper.Write2Xls("D:\\2.xls", adds, list, true);
         }
         /// <summary>
         /// 根据地址返回匹配的目标
@@ -56,11 +68,11 @@ namespace GMAPTest.Common
             var addresses = new List<GoogleAddress>();
             foreach (var item in points)
             {
-                var add = GoogleHelper.GetAddress(item).FirstOrDefault();
-                if (add == null)
+                var add = GoogleHelper.GetAddress(item);
+                if (add == null || add.Count <= 0)
                     addresses.Add(new GoogleAddress());
                 else
-                    addresses.Add(add);
+                    addresses.Add(add.FirstOrDefault());
             }
             return addresses;
         }

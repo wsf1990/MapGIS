@@ -68,6 +68,7 @@
     <Compile Include="Common\CommonHelper.cs" />
     <Compile Include="Common\GoogleAddress.cs" />
     <Compile Include="Common\GoogleHelper.cs" />
+    <Compile Include="Common\MethodEXT.cs" />
     <Compile Include="Common\PlaceHelper.cs" />
     <Compile Include="Common\XLSHelper.cs" />
     <Compile Include="ImageCache\MyTileImageProxy.cs" />
