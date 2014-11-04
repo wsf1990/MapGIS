@@ -75,6 +75,11 @@ namespace GMAPTest.Common
     {
         public PointLatLng Northeast { get; set; }
         public PointLatLng Southwest { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("{0},{1},{2},{3}", Southwest.Lat, Southwest.Lng, Northeast.Lat, Northeast.Lng);
+        }
     }
     /// <summary>
     /// 地址类型
