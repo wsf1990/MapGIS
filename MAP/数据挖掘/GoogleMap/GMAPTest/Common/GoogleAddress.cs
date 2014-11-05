@@ -50,10 +50,12 @@ namespace GMAPTest.Common
         /// 地理位置
         /// </summary>
         public Geometry Geometry { get; set; }
+
         /// <summary>
         /// 表示地址解析器未传回原始请求的完全匹配项，但与请求地址的一部分匹配
         /// </summary>
         public bool Partial_match { get; set; }
+
         /// <summary>
         /// 实体类型
         /// </summary>

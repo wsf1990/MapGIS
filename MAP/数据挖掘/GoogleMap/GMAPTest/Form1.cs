@@ -34,7 +34,7 @@ namespace GMAPTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            PlaceHelper.GetPoint();
+            PlaceHelper.GetAddress();
             var adds = GoogleHelper.GetAddress(new PointLatLng(57, 89));
             MessageBox.Show(adds.Count.ToString());
             //TianHelper.GetName();

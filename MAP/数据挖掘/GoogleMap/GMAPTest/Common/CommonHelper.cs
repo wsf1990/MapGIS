@@ -129,6 +129,7 @@ namespace GMAPTest
         /// <returns></returns>
         public static string GetGoogleJson(string json)
         {
+            //json = json.Replace("true", "false").Replace("TRUE", "false");
             return GetResultJson(json, 0);
         }
         /// <summary>
