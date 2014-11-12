@@ -33,11 +33,26 @@ namespace GMAPTest
             PgSQLHelper.Update();
         }
 
+        private void btn_Delete_Click(object sender, EventArgs e)
+        {
+            PgSQLHelper.Delete();
+        }
+
+        private void btn_Query_Click(object sender, EventArgs e)
+        {
+            var query = PgSQLHelper.Query();
+            query.ForEach(s=>MessageBox.Show(s));
+        }
+
         private void btn_GetAllTable_Click(object sender, EventArgs e)
         {
             var tables = PgSQLHelper.GetTableList();
             tables.ForEach(s=>MessageBox.Show(s));
         }
+
+        
+
+        
 
 
     }
