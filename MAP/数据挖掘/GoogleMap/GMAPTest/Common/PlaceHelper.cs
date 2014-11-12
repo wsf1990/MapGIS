@@ -13,29 +13,6 @@ namespace GMAPTest.Common
     /// </summary>
     public class PlaceHelper
     {
-        public static void GetPoint()
-        {
-            var list = File.ReadAllLines("D:\\simiao.txt").ToList();
-            List<string> lines = new List<string>();
-            var lists = GetPoints(list.ToList());
-            //foreach (var s in lists)
-            //{
-            //    lines.Add(s.Geometry.Location.Lat + "," + s.Geometry.Location.Lng);
-            //}
-            XLSHelper.Write2Xls("D:\\1.xls", lists, list, false);
-            //File.WriteAllLines("D:\\res.txt", lines);
-        }
-
-        public static void GetAddress()
-        {
-            List<PointLatLng> list = new List<PointLatLng>();
-            for (int i = 0; i < 20; i++)
-            {
-                list.Add(new PointLatLng(30 + i, 40 + i));     
-            }
-            var adds = GetAddresses(list);
-            XLSHelper.Write2Xls("D:\\2.xls", adds, list, true);
-        }
         /// <summary>
         /// 根据地址返回匹配的目标
         /// </summary>

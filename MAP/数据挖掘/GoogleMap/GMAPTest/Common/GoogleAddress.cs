@@ -181,6 +181,14 @@ namespace GMAPTest.Common
         /// </summary>
         postal_code,
         /// <summary>
+        /// 
+        /// </summary>
+        postal_code_prefix,
+        /// <summary>
+        /// 
+        /// </summary>
+        health,
+        /// <summary>
         /// 政治实体
         /// </summary>
         political,
@@ -201,6 +209,34 @@ namespace GMAPTest.Common
         /// </summary>
         administrative_area_level_3,
         /// <summary>
+        /// 
+        /// </summary>
+        administrative_area_level_4,
+        /// <summary>
+        /// 
+        /// </summary>
+        administrative_area_level_5,
+        /// <summary>
+        /// 
+        /// </summary>
+        cemetery,
+        /// <summary>
+        /// 清真寺
+        /// </summary>
+        mosque,
+        /// <summary>
+        /// 药店
+        /// </summary>
+        pharmacy,
+        /// <summary>
+        /// 
+        /// </summary>
+        store,
+        /// <summary>
+        /// 
+        /// </summary>
+        postal_town,
+        /// <summary>
         /// 仅次于地区级别的行政实体
         /// </summary>
         sublocality,
@@ -216,6 +252,18 @@ namespace GMAPTest.Common
         /// 村
         /// </summary>
         sublocality_level_3,
+        /// <summary>
+        /// 
+        /// </summary>
+        sublocality_level_4,
+        /// <summary>
+        /// 
+        /// </summary>
+        sublocality_level_5,
+        /// <summary>
+        /// 
+        /// </summary>
+        ward,
         /// <summary>
         /// 用于表示已命名的邻近地区
         /// </summary>
@@ -236,6 +284,26 @@ namespace GMAPTest.Common
         /// 用于表示已命名的公园
         /// </summary>
         park,
+        /// <summary>
+        /// 
+        /// </summary>
+        parking,
+        /// <summary>
+        /// 
+        /// </summary>
+        library,
+        /// <summary>
+        /// 
+        /// </summary>
+        school,
+        /// <summary>
+        /// 教堂
+        /// </summary>
+        church,
+        /// <summary>
+        /// 
+        /// </summary>
+        police,
         /// <summary>
         /// 用于表示特定邮筒
         /// </summary>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using GMap.NET;
 using Newtonsoft.Json.Linq;
 
@@ -27,6 +28,11 @@ namespace GMAPTest.Common
             string format = "http://maps.googleapis.com/maps/api/geocode/json?latlng={0},{1}&sensor=true_or_false&language=zh-CN";
             string url = string.Format(format, point.Lat, point.Lng);
             string json = CommonHelper.GetUrl("GET", url);
+            //You have exceeded your daily request quota for this API.  API次数已经用完
+            if (json.Contains("OVER_QUERY_LIMIT"))
+            {
+                MessageBox.Show("API用完");
+            }
             if(json.ToUpper().Contains("\"OK\""))
             {
                 json = CommonHelper.GetGoogleJson(json);

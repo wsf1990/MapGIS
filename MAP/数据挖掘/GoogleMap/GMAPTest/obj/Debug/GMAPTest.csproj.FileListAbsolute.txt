@@ -36,3 +36,8 @@ D:\MapGIS\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\NPOI.xml
 D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\Ionic.Zip.dll
 D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\NPOI.dll
 D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\NPOI.xml
+D:\MapGIS\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\Npgsql.dll
+D:\MapGIS\MAP\数据挖掘\GoogleMap\GMAPTest\obj\Debug\GMAPTest.Form_PGSQL.resources
+D:\MapGIS\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\Mono.Security.dll
+D:\MapGIS\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\Npgsql.pdb
+D:\MapGIS\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\Npgsql.xml

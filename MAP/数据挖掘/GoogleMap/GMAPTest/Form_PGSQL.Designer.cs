@@ -1,0 +1,111 @@
+﻿namespace GMAPTest
+{
+    partial class Form_PGSQL
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.btn_Add = new System.Windows.Forms.Button();
+            this.btn_Update = new System.Windows.Forms.Button();
+            this.btn_Delete = new System.Windows.Forms.Button();
+            this.btn_Query = new System.Windows.Forms.Button();
+            this.btn_GetAllTable = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // btn_Add
+            // 
+            this.btn_Add.Location = new System.Drawing.Point(22, 22);
+            this.btn_Add.Name = "btn_Add";
+            this.btn_Add.Size = new System.Drawing.Size(75, 23);
+            this.btn_Add.TabIndex = 0;
+            this.btn_Add.Text = "插入数据";
+            this.btn_Add.UseVisualStyleBackColor = true;
+            this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
+            // 
+            // btn_Update
+            // 
+            this.btn_Update.Location = new System.Drawing.Point(115, 22);
+            this.btn_Update.Name = "btn_Update";
+            this.btn_Update.Size = new System.Drawing.Size(75, 23);
+            this.btn_Update.TabIndex = 1;
+            this.btn_Update.Text = "更新数据";
+            this.btn_Update.UseVisualStyleBackColor = true;
+            this.btn_Update.Click += new System.EventHandler(this.btn_Update_Click);
+            // 
+            // btn_Delete
+            // 
+            this.btn_Delete.Location = new System.Drawing.Point(209, 22);
+            this.btn_Delete.Name = "btn_Delete";
+            this.btn_Delete.Size = new System.Drawing.Size(75, 23);
+            this.btn_Delete.TabIndex = 2;
+            this.btn_Delete.Text = "删除数据";
+            this.btn_Delete.UseVisualStyleBackColor = true;
+            // 
+            // btn_Query
+            // 
+            this.btn_Query.Location = new System.Drawing.Point(311, 22);
+            this.btn_Query.Name = "btn_Query";
+            this.btn_Query.Size = new System.Drawing.Size(75, 23);
+            this.btn_Query.TabIndex = 3;
+            this.btn_Query.Text = "查询数据";
+            this.btn_Query.UseVisualStyleBackColor = true;
+            // 
+            // btn_GetAllTable
+            // 
+            this.btn_GetAllTable.Location = new System.Drawing.Point(22, 76);
+            this.btn_GetAllTable.Name = "btn_GetAllTable";
+            this.btn_GetAllTable.Size = new System.Drawing.Size(75, 23);
+            this.btn_GetAllTable.TabIndex = 4;
+            this.btn_GetAllTable.Text = "获取所有表";
+            this.btn_GetAllTable.UseVisualStyleBackColor = true;
+            this.btn_GetAllTable.Click += new System.EventHandler(this.btn_GetAllTable_Click);
+            // 
+            // Form_PGSQL
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(456, 352);
+            this.Controls.Add(this.btn_GetAllTable);
+            this.Controls.Add(this.btn_Query);
+            this.Controls.Add(this.btn_Delete);
+            this.Controls.Add(this.btn_Update);
+            this.Controls.Add(this.btn_Add);
+            this.Name = "Form_PGSQL";
+            this.Text = "Form_PGSQL";
+            this.Load += new System.EventHandler(this.Form_PGSQL_Load);
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Button btn_Add;
+        private System.Windows.Forms.Button btn_Update;
+        private System.Windows.Forms.Button btn_Delete;
+        private System.Windows.Forms.Button btn_Query;
+        private System.Windows.Forms.Button btn_GetAllTable;
+    }
+}
