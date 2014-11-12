@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GMAPTest.PgSQL;
+using Npgsql;
 
 namespace GMAPTest
 {
@@ -41,19 +42,13 @@ namespace GMAPTest
         private void btn_Query_Click(object sender, EventArgs e)
         {
             var query = PgSQLHelper.Query();
-            query.ForEach(s=>MessageBox.Show(s));
+            query.ForEach(s => MessageBox.Show(s));
         }
 
         private void btn_GetAllTable_Click(object sender, EventArgs e)
         {
             var tables = PgSQLHelper.GetTableList();
-            tables.ForEach(s=>MessageBox.Show(s));
+            tables.ForEach(s => MessageBox.Show(s));
         }
-
-        
-
-        
-
-
     }
 }
