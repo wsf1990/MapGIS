@@ -33,6 +33,7 @@
             this.btn_Delete = new System.Windows.Forms.Button();
             this.btn_Query = new System.Windows.Forms.Button();
             this.btn_GetAllTable = new System.Windows.Forms.Button();
+            this.btn_QueryOne = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_Add
@@ -85,11 +86,22 @@
             this.btn_GetAllTable.UseVisualStyleBackColor = true;
             this.btn_GetAllTable.Click += new System.EventHandler(this.btn_GetAllTable_Click);
             // 
+            // btn_QueryOne
+            // 
+            this.btn_QueryOne.Location = new System.Drawing.Point(115, 76);
+            this.btn_QueryOne.Name = "btn_QueryOne";
+            this.btn_QueryOne.Size = new System.Drawing.Size(94, 23);
+            this.btn_QueryOne.TabIndex = 5;
+            this.btn_QueryOne.Text = "查询某条数据";
+            this.btn_QueryOne.UseVisualStyleBackColor = true;
+            this.btn_QueryOne.Click += new System.EventHandler(this.btn_QueryOne_Click);
+            // 
             // Form_PGSQL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(456, 352);
+            this.Controls.Add(this.btn_QueryOne);
             this.Controls.Add(this.btn_GetAllTable);
             this.Controls.Add(this.btn_Query);
             this.Controls.Add(this.btn_Delete);
@@ -109,5 +121,6 @@
         private System.Windows.Forms.Button btn_Delete;
         private System.Windows.Forms.Button btn_Query;
         private System.Windows.Forms.Button btn_GetAllTable;
+        private System.Windows.Forms.Button btn_QueryOne;
     }
 }

@@ -12,7 +12,7 @@ namespace GMAPTest.PgSQL
 {
     /// <summary>
     /// PGSQL帮助类
-    /// 注意字段均需要加双引号
+    /// 注意字段均需要加双引号(包含大写时，小写不需要加双引号)
     /// 注意大小写
     /// </summary>
     public class PgSQLHelper
@@ -97,50 +97,9 @@ namespace GMAPTest.PgSQL
                 using (var cmd = new NpgsqlCommand(sql, Conn))
                 {
                     cmd.Parameters.AddRange(parameters);
-                    return cmd.ExecuteReader();
+                    return cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 }
             }
-        }
-
-        private static string tableName = "\"Test\".\"Table1\"";
-        public static void Insert()
-        {
-            var maxID = ExecuteScalar("select max(\"ID\") from " + tableName);
-
-            var sql = "insert into " + tableName + " values (@ID,@Name)";
-            var parameter1 = new NpgsqlParameter("@ID", Convert.ToInt32(maxID) + 1);
-            var parameter2 = new NpgsqlParameter("Name", "npgsqltest");
-            ExecuteNonQuery(sql, parameter1, parameter2);
-        }
-
-        public static void Update()
-        {
-            string sql = "update " + tableName + " set \"Name\" = @name where \"ID\" = @ID";
-            var parameter1 = new NpgsqlParameter("@ID", 11);
-            var parameter2 = new NpgsqlParameter("Name", "update");
-            ExecuteNonQuery(sql, parameter1, parameter2);
-        }
-
-        public static void Delete()
-        {
-            string sql = "delete from " + tableName + " where \"ID\" = @ID";
-            var par = new NpgsqlParameter("@ID", 12);
-            ExecuteNonQuery(sql, par);
-        }
-
-        public static List<string> Query()
-        {
-            string sql = "select \"Name\" from " + tableName + " where \"ID\" = @ID";
-            var parameter1 = new NpgsqlParameter("@ID", 10);
-            List<string> list = new List<string>();
-            using (var reader = ExecuteReader(sql, parameter1)) //此处注意PostgreSQL中模式的使用  \"Test\".\"Table1\"
-            {
-                while (reader.Read())
-                {
-                    list.Add(reader[0].ToString());
-                }
-            }
-            return list;
         }
 
         public static List<string> GetTableList()
