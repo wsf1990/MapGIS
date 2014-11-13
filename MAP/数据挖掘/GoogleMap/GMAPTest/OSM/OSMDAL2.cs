@@ -45,7 +45,7 @@ namespace GMAPTest.OSM
             OSM osm = new OSM();
             if (dt.Rows.Count >= 1)
             {
-                osm = osm.GetOSMByDateRow(dt.Rows[0]);
+                osm = osm.GetOSMByDataRow(dt.Rows[0]);
             }
             return osm;
         }

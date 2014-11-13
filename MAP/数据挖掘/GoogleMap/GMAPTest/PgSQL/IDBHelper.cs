@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace GMAPTest.PgSQL
 {
+    /// <summary>
+    /// PostgreSQL的ExecuteDateReader连接时有问题，建议使用DataTable
+    /// </summary>
     public interface IDBHelper
     {
         #region 1. ExecteNonQuery方法

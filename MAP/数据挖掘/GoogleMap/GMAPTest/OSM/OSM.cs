@@ -12,7 +12,7 @@ namespace GMAPTest.OSM
         public int ID { get; set; }
         public string Name { get; set; }
 
-        public OSM GetOSMByDateRow(DataRow row)
+        public OSM GetOSMByDataRow(DataRow row)
         {
             return new OSM() {ID = Convert.ToInt32(row[0]), Name = row[1].ToString()};
         }
