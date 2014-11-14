@@ -55,14 +55,15 @@ namespace GMAPTest.OSM
             string sql = "update " + tableName + " set \"Name\" = @name where \"ID\" = @ID";
             var parameter1 = new NpgsqlParameter("@ID", osm.ID);
             var parameter2 = new NpgsqlParameter("Name", osm.Name);
-            return PgSQLHelper.ExecuteNonQuery(sql, parameter1, parameter2) >= 1;
+            return helper.ExecuteNonQueryText(sql, parameter1, parameter2) >= 1;
         }
 
         public bool Delete(int id)
         {
             string sql = "delete from " + tableName + " where \"ID\" = @ID";
             var par = new NpgsqlParameter("@ID", id);
-            return PgSQLHelper.ExecuteNonQuery(sql, par) >= 1;
+            return helper.ExecuteNonQueryText(sql, par) >= 1;
         }
+
     }
 }

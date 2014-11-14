@@ -17,7 +17,7 @@ namespace GMAPTest.PgSQL
         {
             get
             {
-                return System.Configuration.ConfigurationManager.ConnectionStrings["pgsqlConn"].ConnectionString;
+                return System.Configuration.ConfigurationManager.ConnectionStrings["241"].ConnectionString;
             }
         }
 
@@ -306,5 +306,33 @@ namespace GMAPTest.PgSQL
         } 
         #endregion
 
+        #region 6. 数据库和表操作
+        /// <summary>
+        /// 创建表
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <returns></returns>
+        public bool CreateTable(string schemaName, string tableName)
+        {
+
+            return true;
+        }
+        /// <summary>
+        /// 获取所有表的列表
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetTableList()
+        {
+            string sql = "select tablename from pg_tables where schemaname='Test'";
+            var dt = GetTableText(sql)[0];
+            var tablenames = new List<string>();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                tablenames.Add(dt.Rows[i][0].ToString());
+            }
+            return tablenames;
+        }
+
+        #endregion
     }
 }

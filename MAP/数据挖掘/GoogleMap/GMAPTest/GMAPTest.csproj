@@ -71,6 +71,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -118,10 +119,13 @@
     <Compile Include="Marker\MyHomeMarker.cs" />
     <Compile Include="Marker\ToolTip\MyToolTip.cs" />
     <Compile Include="ImageCache\MyImageCache.cs" />
-    <Compile Include="OSM\OSM.cs" />
-    <Compile Include="OSM\OSMBLL.cs" />
-    <Compile Include="OSM\OSMDAL.cs" />
-    <Compile Include="OSM\OSMDAL2.cs" />
+    <Compile Include="OSM-Test243\OSM.cs" />
+    <Compile Include="OSM-Test243\OSMBLL.cs" />
+    <Compile Include="OSM-Test243\OSMDAL.cs" />
+    <Compile Include="OSM-Test243\OSMDAL2.cs" />
+    <Compile Include="OSM_Name241\BLL\PlanetNameBLL.cs" />
+    <Compile Include="OSM_Name241\DAL\PlanetNameDAL.cs" />
+    <Compile Include="OSM_Name241\PlanetName.cs" />
     <Compile Include="PgSQL\DBHelper.cs" />
     <Compile Include="PgSQL\IDBHelper.cs" />
     <Compile Include="PgSQL\PGHelper.cs" />
