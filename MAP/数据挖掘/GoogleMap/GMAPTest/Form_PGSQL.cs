@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using GMAPTest.OSM;
 using GMAPTest.PgSQL;
 using Npgsql;
+using GMAPTest.OSM_Name241.BLL;
 
 namespace GMAPTest
 {
@@ -35,7 +36,7 @@ namespace GMAPTest
 
         private void btn_Update_Click(object sender, EventArgs e)
         {
-            var osm = new OSM.OSM() { ID = 14, Name = "wsf" };
+            var osm = new OSM.OSM() { ID = 15, Name = "wsf" };
             bll.Update(osm);
         }
 
@@ -53,7 +54,7 @@ namespace GMAPTest
 
         private void btn_GetAllTable_Click(object sender, EventArgs e)
         {
-            var tables = PgSQLHelper.GetTableList();
+            var tables = new PGHelper().GetTableList();
             tables.ForEach(s => MessageBox.Show(s));
         }
 
@@ -61,6 +62,19 @@ namespace GMAPTest
         {
             var osm = bll.GetByID(23);
             MessageBox.Show("查询到的数据为：" + osm.ID + osm.Name);
+        }
+
+        private void btn_DoSQL_Click(object sender, EventArgs e)
+        {
+            string sql = txt_sql.Text;
+            if(string.IsNullOrWhiteSpace(sql))
+                return;
+            new PGHelper().ExecuteNonQueryText(sql);
+        }
+
+        private void btn_PlanetName_Query_Click(object sender, EventArgs e)
+        {
+            var list = new PlanetNameBLL().GetPageData(3, 2);
         }
     }
 }

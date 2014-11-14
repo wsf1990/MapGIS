@@ -34,6 +34,11 @@
             this.btn_Query = new System.Windows.Forms.Button();
             this.btn_GetAllTable = new System.Windows.Forms.Button();
             this.btn_QueryOne = new System.Windows.Forms.Button();
+            this.txt_sql = new System.Windows.Forms.TextBox();
+            this.btn_DoSQL = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btn_PlanetName_Query = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btn_Add
@@ -96,11 +101,62 @@
             this.btn_QueryOne.UseVisualStyleBackColor = true;
             this.btn_QueryOne.Click += new System.EventHandler(this.btn_QueryOne_Click);
             // 
+            // txt_sql
+            // 
+            this.txt_sql.Location = new System.Drawing.Point(22, 128);
+            this.txt_sql.Multiline = true;
+            this.txt_sql.Name = "txt_sql";
+            this.txt_sql.Size = new System.Drawing.Size(422, 105);
+            this.txt_sql.TabIndex = 6;
+            // 
+            // btn_DoSQL
+            // 
+            this.btn_DoSQL.Location = new System.Drawing.Point(373, 239);
+            this.btn_DoSQL.Name = "btn_DoSQL";
+            this.btn_DoSQL.Size = new System.Drawing.Size(71, 23);
+            this.btn_DoSQL.TabIndex = 7;
+            this.btn_DoSQL.Text = "执行";
+            this.btn_DoSQL.UseVisualStyleBackColor = true;
+            this.btn_DoSQL.Click += new System.EventHandler(this.btn_DoSQL_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(20, 113);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "SQL语句:";
+            // 
+            // btn_PlanetName_Query
+            // 
+            this.btn_PlanetName_Query.Location = new System.Drawing.Point(22, 287);
+            this.btn_PlanetName_Query.Name = "btn_PlanetName_Query";
+            this.btn_PlanetName_Query.Size = new System.Drawing.Size(71, 23);
+            this.btn_PlanetName_Query.TabIndex = 9;
+            this.btn_PlanetName_Query.Text = "查询";
+            this.btn_PlanetName_Query.UseVisualStyleBackColor = true;
+            this.btn_PlanetName_Query.Click += new System.EventHandler(this.btn_PlanetName_Query_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(20, 260);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(47, 12);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "地名表:";
+            // 
             // Form_PGSQL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(456, 352);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.btn_PlanetName_Query);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btn_DoSQL);
+            this.Controls.Add(this.txt_sql);
             this.Controls.Add(this.btn_QueryOne);
             this.Controls.Add(this.btn_GetAllTable);
             this.Controls.Add(this.btn_Query);
@@ -111,6 +167,7 @@
             this.Text = "Form_PGSQL";
             this.Load += new System.EventHandler(this.Form_PGSQL_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -122,5 +179,10 @@
         private System.Windows.Forms.Button btn_Query;
         private System.Windows.Forms.Button btn_GetAllTable;
         private System.Windows.Forms.Button btn_QueryOne;
+        private System.Windows.Forms.TextBox txt_sql;
+        private System.Windows.Forms.Button btn_DoSQL;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btn_PlanetName_Query;
+        private System.Windows.Forms.Label label2;
     }
 }
