@@ -16,7 +16,7 @@ namespace GMAPTest
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form_PGSQL());
+            Application.Run(new Form_KML());
         }
     }
 }

@@ -1,0 +1,46 @@
+<kml xmlns="http://earth.google.com/kml/2.0">
+	<Document>
+		<name>Simple Icon Rollover</name>
+		<open>1</open>
+		<Style id="normalPlacemark">
+			<IconStyle>
+				<Icon>
+					<href>C:/green_icon.jpg</href>
+				</Icon>
+			</IconStyle>
+		</Style>
+		<Style id="highlightPlacemark">
+			<IconStyle>
+				<Icon>
+					<href>C:/red_icon.jpg</href>
+				</Icon>
+			</IconStyle>
+		</Style>
+		<StyleMap id="exampleStyleMap">
+			<Pair>
+				<key>normal</key>
+				<styleUrl>#normalPlacemark</styleUrl>
+			</Pair>
+			<Pair>
+				<key>highlight</key>
+				<styleUrl>#highlightPlacemark</styleUrl>
+			</Pair>
+		</StyleMap>
+		<Placemark>
+			<description>
+				<![CDATA[<a href="http://www.google.com.honeycomb.cs.cornell.edu:8888/">Google Search!</a>]]>
+			</description>
+			<name>Google Headquarters</name>
+			<LookAt>
+				<longitude>-122.0839</longitude>
+				<latitude>37.4219</latitude>
+				<range>540.68</range>
+				<tilt>0</tilt>
+				<heading>3</heading>
+			</LookAt>
+			<Point>
+				<coordinates>-122.0839,37.4219,0</coordinates>
+			</Point>
+		</Placemark>
+	</Document>
+</kml>

@@ -90,6 +90,12 @@
     <Compile Include="Common\PlaceHelper.cs" />
     <Compile Include="Common\TestGoogleAPI.cs" />
     <Compile Include="Common\XLSHelper.cs" />
+    <Compile Include="Form_KML.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_KML.Designer.cs">
+      <DependentUpon>Form_KML.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_PGSQL.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +103,8 @@
       <DependentUpon>Form_PGSQL.cs</DependentUpon>
     </Compile>
     <Compile Include="ImageCache\MyTileImageProxy.cs" />
+    <Compile Include="KML\KML.cs" />
+    <Compile Include="KML\KMLHelper.cs" />
     <Compile Include="MapProvider\Baidu\BaiduMapProvider.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -146,6 +154,9 @@
     <Compile Include="SHP\SHXHelper.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_KML.resx">
+      <DependentUpon>Form_KML.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_PGSQL.resx">
       <DependentUpon>Form_PGSQL.cs</DependentUpon>

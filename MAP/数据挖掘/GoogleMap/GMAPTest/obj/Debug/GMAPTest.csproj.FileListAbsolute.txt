@@ -47,3 +47,15 @@ D:\MapGIS\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\Npgsql.EntityFramework.p
 D:\MapGIS\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\Npgsql.EntityFramework.xml
 D:\MapGIS\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\Npgsql.EntityFrameworkLegacy.pdb
 D:\MapGIS\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\Npgsql.EntityFrameworkLegacy.xml
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\Mono.Security.dll
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\Npgsql.dll
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\Npgsql.EntityFramework.dll
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\Npgsql.EntityFrameworkLegacy.dll
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\Npgsql.pdb
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\Npgsql.xml
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\Npgsql.EntityFramework.pdb
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\Npgsql.EntityFramework.xml
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\Npgsql.EntityFrameworkLegacy.pdb
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\bin\Debug\Npgsql.EntityFrameworkLegacy.xml
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\obj\Debug\GMAPTest.Form_PGSQL.resources
+D:\地理信息系统\GMAP\MAP\数据挖掘\GoogleMap\GMAPTest\obj\Debug\GMAPTest.Form_KML.resources
