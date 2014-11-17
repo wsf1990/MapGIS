@@ -39,6 +39,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btn_PlanetName_Query = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.btn_Translate = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_Add
@@ -147,11 +148,22 @@
             this.label2.TabIndex = 10;
             this.label2.Text = "地名表:";
             // 
+            // btn_Translate
+            // 
+            this.btn_Translate.Location = new System.Drawing.Point(115, 287);
+            this.btn_Translate.Name = "btn_Translate";
+            this.btn_Translate.Size = new System.Drawing.Size(71, 23);
+            this.btn_Translate.TabIndex = 11;
+            this.btn_Translate.Text = "逐条翻译";
+            this.btn_Translate.UseVisualStyleBackColor = true;
+            this.btn_Translate.Click += new System.EventHandler(this.btn_Translate_Click);
+            // 
             // Form_PGSQL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(456, 352);
+            this.Controls.Add(this.btn_Translate);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btn_PlanetName_Query);
             this.Controls.Add(this.label1);
@@ -184,5 +196,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_PlanetName_Query;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btn_Translate;
     }
 }

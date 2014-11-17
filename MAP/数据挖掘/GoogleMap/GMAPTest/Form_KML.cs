@@ -1,4 +1,5 @@
-﻿using GMAPTest.KML;
+﻿using GMAPTest.Common;
+using GMAPTest.KML;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,14 +21,17 @@ namespace GMAPTest
         string path = "kml/test.kml";
         private void button1_Click(object sender, EventArgs e)
         {
+            ProcessHelper.OpenP3(@"D:\360安全浏览器下载\psiphon3.exe");
             //string 
-            var kml = KMLHelper.ReadKMLFile(path);
+            //var kml = KMLHelper.ReadKMLFile(path);
         }
 
         private void btn_WriteKML_Click(object sender, EventArgs e)
         {
-            var kml = KMLHelper.ReadKMLFile(path);
-            KMLHelper.WriteKML("kml/write.kml", kml);
+            //var kml = KMLHelper.ReadKMLFile(path);
+            //KMLHelper.WriteKML("kml/write.kml", kml);
+
+            ProcessHelper.CheckAndClose360();
         }
     }
 }

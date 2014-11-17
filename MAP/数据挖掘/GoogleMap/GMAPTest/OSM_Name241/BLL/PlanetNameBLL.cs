@@ -20,5 +20,20 @@ namespace GMAPTest.OSM_Name241.BLL
         {
             return dal.GetPageData(pageIndex, pageCount);
         }
+
+        public PlanetName GetOneWithNoCH(int index)
+        {
+            return dal.GetOneWithNoCH(index);
+        }
+
+        public int GetCount()
+        {
+            return dal.GetCount();
+        }
+
+        public bool UpdateNameCH(PlanetName name)
+        {
+            return dal.UpdateNameCH(name);
+        }
     }
 }

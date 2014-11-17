@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ChnCharInfo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=18f031bd02e5e291, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\ChnCharInfo.dll</HintPath>
+    </Reference>
     <Reference Include="GMap.NET.Core, Version=1.7.0.0, Culture=neutral, PublicKeyToken=b85b9027b614afef, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\GMap.NET.Core.dll</HintPath>
@@ -83,11 +87,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ChineseHelper.cs" />
     <Compile Include="Common\CommonHelper.cs" />
     <Compile Include="Common\GoogleAddress.cs" />
     <Compile Include="Common\GoogleHelper.cs" />
     <Compile Include="Common\MethodEXT.cs" />
     <Compile Include="Common\PlaceHelper.cs" />
+    <Compile Include="Common\ProcessHelper.cs" />
     <Compile Include="Common\TestGoogleAPI.cs" />
     <Compile Include="Common\XLSHelper.cs" />
     <Compile Include="Form_KML.cs">
@@ -187,6 +193,8 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="lib\ChnCharInfo.dll" />
+    <Content Include="lib\ChnCharInfo.xml" />
     <Content Include="lib\GMap.NET.Core.dll" />
     <Content Include="lib\GMap.NET.Core.xml" />
     <Content Include="lib\GMap.NET.WindowsForms.dll" />

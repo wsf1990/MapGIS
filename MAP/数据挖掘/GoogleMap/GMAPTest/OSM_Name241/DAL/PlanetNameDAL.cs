@@ -85,11 +85,11 @@ namespace GMAPTest.OSM_Name241.DAL
             return list;
         }
 
-        public bool Update(PlanetName planetName)
+        public bool UpdateNameCH(PlanetName planetName)
         {
-            string sql = "update " + tableName + " set \"Name\" = @name where \"ID\" = @ID";
+            string sql = "update " + tableName + " set name_ch = @NameCH where id = @ID";
             var parameter1 = new NpgsqlParameter("@ID", planetName.ID);
-            var parameter2 = new NpgsqlParameter("Name", planetName.Name);
+            var parameter2 = new NpgsqlParameter("NameCH", planetName.NameCH);
             return helper.ExecuteNonQueryText(sql, parameter1, parameter2) >= 1;
         }
 
@@ -102,11 +102,27 @@ namespace GMAPTest.OSM_Name241.DAL
 
         public List<PlanetName> GetPageData(int pageIndex, int pageCount)
         {
-            string sql = "select * from " + tableName + " where(id not in (select id from "+ tableName + " limit @start)) limit @count";
+            string sql = "select * from " + tableName + " where id not in (select id from " + tableName + " order by id limit @start)  order by id limit @count";
             var par1 = new NpgsqlParameter("@start", (pageIndex - 1) * pageCount);
             var par2 = new NpgsqlParameter("@count", pageCount);
             var dts = helper.GetTableText(sql, par1, par2);
             return GetListByTable(dts[0]);
+        }
+
+        public PlanetName GetOneWithNoCH(int index)
+        {
+            var name = GetPageData(index, 1).FirstOrDefault();
+            if (string.IsNullOrWhiteSpace(name.NameCH))
+            {
+                return name;
+            }
+            return null;
+        }
+
+        public int GetCount()
+        {
+            string sql = "select count(*) from " + tableName;
+            return Convert.ToInt32(helper.ExecuteScalarText(sql));
         }
     }
 }

@@ -7,8 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GMAPTest.Common;
 using GMAPTest.OSM;
 using GMAPTest.PgSQL;
+using GMap.NET;
 using Npgsql;
 using GMAPTest.OSM_Name241.BLL;
 
@@ -72,9 +74,31 @@ namespace GMAPTest
             new PGHelper().ExecuteNonQueryText(sql);
         }
 
+        private PlanetNameBLL bll2 = new PlanetNameBLL();
         private void btn_PlanetName_Query_Click(object sender, EventArgs e)
         {
-            var list = new PlanetNameBLL().GetPageData(3, 2);
+            var list = bll2.GetPageData(3, 2);
         }
+
+        private void btn_Translate_Click(object sender, EventArgs e)
+        {
+            var count = bll2.GetCount();
+            for (int i = 1; i <= count; i++)
+            {
+                var name = new PlanetNameBLL().GetOneWithNoCH(i);
+                if (name != null)
+                {
+                    var addresses = GoogleHelper.GetAddress(new PointLatLng(name.Latitude, name.Longitude));
+                    if (addresses != null && addresses.Count > 0)
+                    {
+                        var address = addresses.FirstOrDefault();
+                        name.NameCH = address.Address_components.FirstOrDefault().Long_name; //翻译
+                        bll2.UpdateNameCH(name);
+                    }
+                }
+            }
+            
+        }
+
     }
 }
