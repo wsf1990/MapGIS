@@ -21,9 +21,20 @@ namespace GMAPTest.Common
             return chineseChar.Pinyins;
         }
 
-        public bool CheckContainChinese(string word)
+        /// <summary>
+        /// 判断字符串是否包含中文
+        /// </summary>
+        /// <param name="word"></param>
+        /// <returns></returns>
+        public static bool CheckContainChinese(string word)
         {
-            
+            bool ch = false;
+            word.ToList().ForEach(s =>
+                {
+                    if (ChineseChar.IsValidChar(s))
+                        ch = true;
+                });
+            return ch;
         }
     }
 }

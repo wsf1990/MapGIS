@@ -238,9 +238,9 @@ namespace GMAPTest
         /// <returns></returns>
         public static byte[] GetBytesFormBM(string fileName)
         {
-            using (Bitmap bm = new Bitmap(fileName))
+            using (var bm = new Bitmap(fileName))
             {
-                using (MemoryStream ms = new MemoryStream())
+                using (var ms = new MemoryStream())
                 {
                     bm.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
                     return ms.ToArray();

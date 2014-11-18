@@ -1,4 +1,5 @@
-﻿using GMap.NET;
+﻿using System.Windows.Forms;
+using GMap.NET;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,9 +21,14 @@ namespace GMAPTest.Common
         public static List<GoogleAddress> GetPoints(List<string> addresses)
         {
             var list = new List<GoogleAddress>();
+            bool isAPIUseUp;
             for (int i = 0; i < addresses.Count; i++)
             {
-                var ps = GoogleHelper.GetPoint(addresses[i]);
+                var ps = GoogleHelper.GetPoint(addresses[i], out isAPIUseUp);
+                if (isAPIUseUp)
+                {
+                    MessageBox.Show("API Use Up!");
+                }
                 if (ps == null || ps.Count <= 0)
                 {
                     list.Add(new GoogleAddress());
@@ -43,9 +49,14 @@ namespace GMAPTest.Common
         public static List<GoogleAddress> GetAddresses(List<PointLatLng> points)
         {
             var addresses = new List<GoogleAddress>();
+            bool isAPIUseUp;
             foreach (var item in points)
             {
-                var add = GoogleHelper.GetAddress(item);
+                var add = GoogleHelper.GetAddress(item, out isAPIUseUp);
+                if (isAPIUseUp)
+                {
+                    MessageBox.Show("API Use Up!");
+                }
                 if (add == null || add.Count <= 0)
                     addresses.Add(new GoogleAddress());
                 else

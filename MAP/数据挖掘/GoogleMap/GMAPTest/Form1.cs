@@ -35,8 +35,8 @@ namespace GMAPTest
         private void Form1_Load(object sender, EventArgs e)
         {
             TestGoogleAPI.GetPoint();
-            var adds = GoogleHelper.GetAddress(new PointLatLng(57, 89));
-            MessageBox.Show(adds.Count.ToString());
+            //var adds = GoogleHelper.GetAddress(new PointLatLng(57, 89));
+            //MessageBox.Show(adds.Count.ToString());
             //TianHelper.GetName();
             //ShpFileContent Con = new ShpFileContent();
             //var head = new ShpHead();

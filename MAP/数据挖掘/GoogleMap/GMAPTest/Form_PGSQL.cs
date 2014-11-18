@@ -28,6 +28,7 @@ namespace GMAPTest
         private void Form_PGSQL_Load(object sender, EventArgs e)
         {
             //PgSQLHelper.GetTableList();
+            GoogleHelper.DoAPI();
         }
 
         private void btn_Add_Click(object sender, EventArgs e)
@@ -88,12 +89,27 @@ namespace GMAPTest
                 var name = new PlanetNameBLL().GetOneWithNoCH(i);
                 if (name != null)
                 {
-                    var addresses = GoogleHelper.GetAddress(new PointLatLng(name.Latitude, name.Longitude));
+                    bool isAPIUseUp;
+                    var addresses = GoogleHelper.GetPoint(name.Name, out isAPIUseUp);
+                    while (isAPIUseUp)
+                    {
+                        GoogleHelper.DoAPI();
+                        addresses = GoogleHelper.GetPoint(name.Name, out isAPIUseUp);
+                    }
+                    //var addresses = GoogleHelper.GetAddress(new PointLatLng(name.Latitude, name.Longitude));
                     if (addresses != null && addresses.Count > 0)
                     {
                         var address = addresses.FirstOrDefault();
-                        name.NameCH = address.Address_components.FirstOrDefault().Long_name; //翻译
-                        bll2.UpdateNameCH(name);
+                        for (int j = 0; j < address.Address_components.Count; j++)
+                        {
+                            string tran = address.Address_components[j].Long_name;
+                            if (ChineseHelper.CheckContainChinese(tran))
+                            {
+                                name.NameCH = tran; //翻译
+                                bll2.UpdateNameCH(name);
+                                break;
+                            }
+                        }
                     }
                 }
             }
