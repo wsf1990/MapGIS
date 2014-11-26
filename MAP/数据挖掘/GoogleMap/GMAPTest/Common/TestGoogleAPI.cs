@@ -14,51 +14,53 @@ namespace GMAPTest.Common
         public static void GetPoint()
         {
             //var list = File.ReadAllLines("D:\\simiao.txt").ToList();
-            List<string> l1 = new List<string>();
-            List<string> l2 = new List<string>();
-            string path = @"C:\Users\JSJZX\Desktop\宗教\伊斯兰教\宗教场所_按地市州查询_临夏\宗教场所_按县区查询_临夏永靖_20140528185316.xls";
+            var l1 = new List<string>();
+            var l2 = new List<string>();
+            string path = @"C:\Users\JSJZX\Desktop\宗教\藏传佛教\宗教场所_按地市州查询_定西_20140528144843.xls";
             ReadXLS(path, 2, 6, out l1, out l2);
             var line1 = GetLatLngList(l1);
             var line2 = GetLatLngList(l2);
-            //XLSHelper.Write2Xls("D:\\1.xls", lists, list, false);
-            //File.WriteAllLines("D:\\res.txt", lines);
             WriteXLS(path, line1, line2);
         }
 
-        static List<string> GetLatLngList(List<string> list)
+        static List<double[]> GetLatLngList(List<string> list)
         {
-            List<string> lines = new List<string>();
+            List<double[]> lines = new List<double[]>();
             var lists = PlaceHelper.GetPoints(list.ToList());
             foreach (var s in lists)
             {
                 if (s == null || s.Geometry == null)
-                    lines.Add("NO");
+                    lines.Add(new double[] {0, 0});
                 else
-                    lines.Add(s.Geometry.Location.Lat + "," + s.Geometry.Location.Lng);
+                    lines.Add(new double[] {s.Geometry.Location.Lat, s.Geometry.Location.Lng});
             }
             return lines;
         }
 
-        private static void WriteXLS(string path, List<string> l1, List<string> l2)
+        private static void WriteXLS(string path, List<double[]> l1, List<double[]> l2)
         {
-            HSSFWorkbook bookwrite = new HSSFWorkbook();
+            HSSFWorkbook book;
             using(Stream stream = File.Open(path, FileMode.Open))
             {
-                HSSFWorkbook book = new HSSFWorkbook(stream);
+                book = new HSSFWorkbook(stream);
                 var sheet = book.GetSheetAt(0);
                 for (int i = 0; i <= sheet.LastRowNum; i++)
                 {
                     var row = sheet.GetRow(i);
                     var cell = row.CreateCell(0);
-                    cell.SetCellValue(l1[i]);
+                    cell.SetCellValue(l1[i][0]);
                     cell = row.CreateCell(1);
-                    cell.SetCellValue(l2[i]);
+                    cell.SetCellValue(l1[i][1]);
+
+                    cell = row.CreateCell(2);
+                    cell.SetCellValue(l2[i][0]);
+                    cell = row.CreateCell(3);
+                    cell.SetCellValue(l2[i][1]);
                 }
-                bookwrite = book;
             }
             using (Stream stream2 = File.OpenWrite(path))
             {
-                bookwrite.Write(stream2);
+                book.Write(stream2);
             }
         }
 

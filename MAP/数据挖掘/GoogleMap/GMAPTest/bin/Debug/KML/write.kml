@@ -1,1 +1,11 @@
-<kml xmlns="http://earth.google.com/kml/2.0"><Placemark><description><![CDATA[<a href="http://www.google.com.honeycomb.cs.cornell.edu:8888/">Google Search!</a>]]></description><name>Google Headquarters</name><Point><coordinates>-122.0839,37.4219,0</coordinates></Point></Placemark></kml>
+<?xml version="1.0" encoding="GB2312"?>
+<kml xmlns="http://earth.google.com/kml/2.0\">
+  <Placemark xmlns="">
+    <name>Google Headquarters</name>
+    <styleUrl>
+    </styleUrl>
+    <Point>
+      <coordinates>-122.0839,37.4219,0</coordinates>
+    </Point>
+  </Placemark>
+</kml>

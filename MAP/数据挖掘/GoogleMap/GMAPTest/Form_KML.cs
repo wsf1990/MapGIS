@@ -18,20 +18,19 @@ namespace GMAPTest
         {
             InitializeComponent();
         }
-        string path = "kml/test.kml";
+        string path = @"C:\Users\JSJZX\Desktop\kmz\全球十大航天发射基地.kmz";
         private void button1_Click(object sender, EventArgs e)
         {
-            ProcessHelper.OpenP3(@"D:\360安全浏览器下载\psiphon3.exe");
-            //string 
-            //var kml = KMLHelper.ReadKMLFile(path);
+            //ZipHelper.ZipFile(@"C:\Users\JSJZX\Desktop\123", @"C:\Users\JSJZX\Desktop\123.zip");
+            //ZipHelper.UnZip(@"C:\Users\JSJZX\Desktop\kmz\美国空军机场.kmz", @"C:\Users\JSJZX\Desktop\kmz");
+            var kml = KMLHelper.ReadKMZ(path);
         }
 
         private void btn_WriteKML_Click(object sender, EventArgs e)
         {
-            //var kml = KMLHelper.ReadKMLFile(path);
-            //KMLHelper.WriteKML("kml/write.kml", kml);
+            var kml = KMLHelper.ReadKMLFile(path);
+            KMLHelper.WriteKML("kml/write.kml", kml);
 
-            ProcessHelper.CheckAndClose360();
         }
     }
 }

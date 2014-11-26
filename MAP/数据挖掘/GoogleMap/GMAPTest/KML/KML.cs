@@ -13,22 +13,30 @@ namespace GMAPTest.KML
     /// </summary>
     public class KML
     {
-        public PlaceMark Marker { get; set; }
+        public List<PlaceMark> Marker { get; set; }
     }
 
     public class PlaceMark
     {
-        public string Description{get;set;}
-        public string Name{get;set;}
-            //<LookAt>
-            //    <longitude>-122.0839</longitude>
-            //    <latitude>37.4219</latitude>
-            //    <range>540.68</range>
-            //    <tilt>0</tilt>
-            //    <heading>3</heading>
-            //</LookAt>
-		public KMLPoint Point{get;set;}
+        public string Description { get; set; }
+        public string Name { get; set; }
+        public string Visibility { get; set; }
+        public LookAt LookAt { get; set; }
+        public KMLPoint Point { get; set; }
+        public string StyleUrl { get; set; }
     }
+
+    public class LookAt
+    {
+        public double Longitude { get; set; }
+        public double Latitude { get; set; }
+        public double Altitude { get; set; }
+        public double Range { get; set; }
+        public double Tilt { get; set; }
+        public double Heading { get; set; }
+
+    }
+
     /// <summary>
     /// KML中的Point类
     /// </summary>
