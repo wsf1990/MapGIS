@@ -18,19 +18,18 @@ namespace GMAPTest
         {
             InitializeComponent();
         }
-        string path = @"C:\Users\JSJZX\Desktop\kmz\全球十大航天发射基地.kmz";
+        string path = @"C:\Users\JSJZX\Desktop\kmz\123.kmz";
         private void button1_Click(object sender, EventArgs e)
         {
-            //ZipHelper.ZipFile(@"C:\Users\JSJZX\Desktop\123", @"C:\Users\JSJZX\Desktop\123.zip");
+            //ZipHelper.Zip(@"C:\Users\JSJZX\Desktop\kmz\123", @"C:\Users\JSJZX\Desktop\kmz\123.zip");
             //ZipHelper.UnZip(@"C:\Users\JSJZX\Desktop\kmz\美国空军机场.kmz", @"C:\Users\JSJZX\Desktop\kmz");
             var kml = KMLHelper.ReadKMZ(path);
         }
 
         private void btn_WriteKML_Click(object sender, EventArgs e)
         {
-            var kml = KMLHelper.ReadKMLFile(path);
-            KMLHelper.WriteKML("kml/write.kml", kml);
-
+            var kml = KMLHelper.ReadKMZ(@"C:\Users\JSJZX\Desktop\kmz\全球十大航天发射基地.kmz");
+            KMLHelper.WriteKMZ(@"C:\Users\JSJZX\Desktop\kmz\123.kmz", kml);
         }
     }
 }

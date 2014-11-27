@@ -14,19 +14,29 @@ namespace GMAPTest.Common
     /// </summary>
     public class ZipHelper
     {
+        #region 1. 压缩文件
         /// <summary>
-        /// 
+        /// 压缩文件
         /// </summary>
         /// <param name="strFile"></param>
         /// <param name="strZip"></param>
-        public static void ZipFile(string strFile, string strZip)
+        public static void Zip(string strFile, string strZip)
         {
-            if (strFile[strFile.Length - 1] != Path.DirectorySeparatorChar)
-                strFile += Path.DirectorySeparatorChar;
             using (var s = new ZipOutputStream(File.Create(strZip)))
             {
-                s.SetLevel(6); // 0 - store only to 9 - means best compression
-                Zip(strFile, s, strFile);
+                //如果是文件直接压缩
+                if (File.Exists(strFile))
+                {
+                    ZipFile(strFile, strFile, s);
+                }
+                else//文件夹则递归压缩
+                {
+                    if (strFile[strFile.Length - 1] != Path.DirectorySeparatorChar)
+                        strFile += Path.DirectorySeparatorChar;
+
+                    s.SetLevel(6); // 0 - store only to 9 - means best compression
+                    Zip(strFile, s, strFile);
+                }
             }
         }
 
@@ -40,7 +50,7 @@ namespace GMAPTest.Common
         {
             if (strFile[strFile.Length - 1] != Path.DirectorySeparatorChar)
                 strFile += Path.DirectorySeparatorChar;
-            Crc32 crc = new Crc32();
+
             string[] filenames = Directory.GetFileSystemEntries(strFile);
             foreach (string file in filenames)
             {
@@ -51,23 +61,37 @@ namespace GMAPTest.Common
                 }
                 else // 否则直接压缩文件
                 {
-                    //打开压缩文件
-                    using (FileStream fs = File.OpenRead(file))
-                    {
-                        byte[] buffer = new byte[fs.Length];
-                        fs.Read(buffer, 0, buffer.Length);
-                        string tempfile = file.Substring(staticFile.LastIndexOf("\\") + 1);
-                        crc.Reset();
-                        crc.Update(buffer);
-                        var entry = new ZipEntry(tempfile) { DateTime = DateTime.Now, Size = fs.Length, Crc = crc.Value };
-                        s.PutNextEntry(entry);
-
-                        s.Write(buffer, 0, buffer.Length);
-                    }
+                    ZipFile(file, staticFile, s);
                 }
             }
         }
+        /// <summary>
+        /// 压缩单个文件
+        /// </summary>
+        /// <param name="strFile"></param>
+        /// <param name="staticFile"></param>
+        /// <param name="s"></param>
+        static void ZipFile(string strFile, string staticFile, ZipOutputStream s)
+        {
+            Crc32 crc = new Crc32();
+            //打开压缩文件
+            using (FileStream fs = File.OpenRead(strFile))
+            {
+                byte[] buffer = new byte[fs.Length];
+                fs.Read(buffer, 0, buffer.Length);
+                string tempfile = strFile.Substring(staticFile.LastIndexOf("\\") + 1);
+                crc.Reset();
+                crc.Update(buffer);
+                var entry = new ZipEntry(tempfile) { DateTime = DateTime.Now, Size = fs.Length, Crc = crc.Value };
+                s.PutNextEntry(entry);
 
+                s.Write(buffer, 0, buffer.Length);
+            }
+        }
+        
+        #endregion
+
+        #region 2. 解压文件
         /// <summary>
         /// 解压缩文件
         /// </summary>
@@ -122,10 +146,11 @@ namespace GMAPTest.Common
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                
+                throw;
             }
-        }
+        } 
+        #endregion
     }
 }

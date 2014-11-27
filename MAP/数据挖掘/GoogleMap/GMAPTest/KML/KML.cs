@@ -49,13 +49,6 @@ namespace GMAPTest.KML
         {
             return string.Format("{0},{1},{2}", Point.Lng, Point.Lat, Height);
         }
-
-        public KMLPoint(XmlNode placemark)
-        {
-            string[] temp = placemark["Point"]["coordinates"].InnerText.Split(',');
-            Point = new GMap.NET.PointLatLng(Convert.ToDouble(temp[1]), Convert.ToDouble(temp[0]));
-            Height = (float)Convert.ToDouble(temp[2]);
-        }
     }
 
 }
